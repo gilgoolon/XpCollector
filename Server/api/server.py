@@ -1,3 +1,4 @@
+import json
 import uuid
 
 from api.protocol.requests import BaseRequest
@@ -17,7 +18,7 @@ class Server:
         :return: the id of the request and response - to look for
         """
         identifier = uuid.uuid4().hex
-        self._command_writer.write(identifier, request)
+        self._command_writer.write(identifier, json.dumps(request.model_dump()))
         return identifier
 
     def wait_for_response(self, identifier: str) -> BasicResponse:

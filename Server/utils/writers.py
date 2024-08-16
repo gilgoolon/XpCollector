@@ -12,7 +12,7 @@ class Writer(abc.ABC):
     """
 
     @abc.abstractmethod
-    def write(self, name: str, data: BaseModel) -> None:
+    def write(self, name: str, data: str) -> None:
         """
         Write a model to some output method
         :param name: name of the product to write
@@ -26,7 +26,7 @@ class FileWriter(Writer):
     def __init__(self, folder: Path) -> None:
         self._folder = folder
 
-    def write(self, name: str, data: BaseModel) -> None:
-        os.makedirs(self._folder, exist_ok=True)
+    def write(self, name: str, data: str) -> None:
         path = self._folder / name
-        path.write_text(json.dumps(data.model_dump()))
+        os.makedirs(path.parent, exist_ok=True)
+        path.write_text(data)

@@ -3,7 +3,7 @@ import glob
 import json
 import time
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Iterable, Generator
 
 
 class Reader(abc.ABC):
@@ -12,7 +12,7 @@ class Reader(abc.ABC):
     """
 
     @abc.abstractmethod
-    def read(self, pattern: Optional[str] = None) -> dict:
+    def read(self, pattern: Optional[str] = None) -> Generator[dict, None, None]:
         """
         Read data from the input method
         Should be a generator function returning all matching items
@@ -31,7 +31,7 @@ class FolderWatcher(Reader):
     def __init__(self, folder: Path) -> None:
         self._folder = folder
 
-    def read(self, pattern: Optional[str] = None) -> dict:
+    def read(self, pattern: Optional[str] = None) -> Generator[dict, None, None]:
         full_pattern = str(self._folder / pattern if pattern is not None else self._folder / "**")
         while True:
             for path in glob.glob(full_pattern):
@@ -47,7 +47,7 @@ class FolderScanner(Reader):
     def __init__(self, folder: Path) -> None:
         self._folder = folder
 
-    def read(self, pattern: Optional[str] = None) -> dict:
+    def read(self, pattern: Optional[str] = None) -> Generator[dict, None, None]:
         full_pattern = str(self._folder / pattern if pattern is not None else self._folder / "**")
         for path in glob.glob(full_pattern):
             text = Path(path).read_text()
