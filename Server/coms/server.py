@@ -27,8 +27,12 @@ class Server:
             return self._handle_install_client()
 
     def _handle_get_command(self, request: BasicRequest) -> GetCommandResponse:
-        found = next(self._command_reader.read(pattern=request.header.client_id + "/**"))
-        exists = found is not None
+        exists = True
+        found = None
+        try:
+            found = next(self._command_reader.read(pattern=request.header.client_id + "/**"))
+        except StopIteration:
+            exists = False
         return GetCommandResponse(
             header=ResponseHeader(status=ResponseType.Success),
             content=GetCommandContent(

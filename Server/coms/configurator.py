@@ -16,5 +16,5 @@ def parse(path: Path) -> Server:
     config = Config(**json.loads(path.read_text()))
     return Server(
         writer=writers.FileWriter(config.products_path),
-        reader=readers.FolderScanner(config.commands_path)
+        reader=readers.FolderScannerConsumer(config.commands_path)
     )
