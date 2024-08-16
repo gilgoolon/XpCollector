@@ -38,3 +38,18 @@ class FolderWatcher(Reader):
                 text = Path(path).read_text()
                 yield json.loads(text)
             time.sleep(self.TIMEOUT)
+
+
+class FolderScanner(Reader):
+    """
+    Scan a folder for existing files
+    """
+    def __init__(self, folder: Path) -> None:
+        self._folder = folder
+
+    def read(self, pattern: Optional[str] = None) -> dict:
+        full_pattern = str(self._folder / pattern if pattern is not None else self._folder / "**")
+        for path in glob.glob(full_pattern):
+            text = Path(path).read_text()
+            yield json.loads(text)
+
