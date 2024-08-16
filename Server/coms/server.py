@@ -1,6 +1,6 @@
 import uuid
 
-from coms.commands import BasicCommand
+from commands import BasicCommand
 from coms.protocol.requests import BasicRequest, RequestType, ReturnProductRequest
 from protocol.responses import BasicResponse, InstallClientResponse, GetCommandResponse, InstallClientContent, \
     ResponseHeader, ResponseType, GetCommandContent

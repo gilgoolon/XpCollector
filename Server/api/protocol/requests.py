@@ -1,12 +1,13 @@
-import abc
 from enum import Enum
 
 from pydantic import BaseModel
 
+from commands import BasicCommand
+
 
 class RequestType(str, Enum):
     IsAlive = "IsAlive"
-    Popup = "Popup"
+    SendCommand = "SendCommand"
 
 
 class RequestHeader(BaseModel):
@@ -14,19 +15,14 @@ class RequestHeader(BaseModel):
     request_type: RequestType
 
 
-class BaseRequest(BaseModel, abc.ABC):
-    pass
-
-
-class BasicRequest(BaseRequest):
+class BasicRequest(BaseModel):
     header: RequestHeader
     content: dict
 
 
-class PopupContent(BaseModel):
-    message: str
+class SendCommandContent(BaseModel):
+    command: BasicCommand
 
 
-class PopupRequest(BaseRequest):
-    header: RequestHeader
-    content: PopupContent
+class SendCommandRequest(BasicRequest):
+    content: SendCommandContent

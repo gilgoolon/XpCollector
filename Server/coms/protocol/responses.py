@@ -3,7 +3,7 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-from coms.commands import BasicCommand
+from commands import BasicCommand
 
 
 class ResponseType(str, Enum):
