@@ -11,6 +11,7 @@ from coms.protocol.responses import BasicResponse, GetCommandResponse, InstallCl
 
 argument_parser = argparse.ArgumentParser()
 argument_parser.add_argument("-c", "--config", default="../conf.json", type=Path, help="Path to config file")
+argument_parser.add_argument("-p", "--port", default="../conf.json", type=int, help="Port to listen for clients on")
 args = argument_parser.parse_args()
 
 app = FastAPI()
@@ -68,4 +69,4 @@ def install_client() -> InstallClientResponse:
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, host="localhost", port=8000)
+    uvicorn.run(app, host="localhost", port=args.port)

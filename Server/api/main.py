@@ -11,6 +11,8 @@ from protocol.responses import BasicResponse
 
 argument_parser = argparse.ArgumentParser()
 argument_parser.add_argument("-c", "--config", default="../conf.json", type=Path, help="Path to config file")
+argument_parser.add_argument("-p", "--port", default="../conf.json", type=int,
+                             help="Port to listen for api requests on")
 args = argument_parser.parse_args()
 
 app = FastAPI()
@@ -48,4 +50,4 @@ def is_alive(client_id: str) -> BasicResponse:
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, host="localhost", port=8000)
+    uvicorn.run(app, host="localhost", port=args.port)
