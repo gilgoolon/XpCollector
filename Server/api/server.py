@@ -2,7 +2,7 @@ import json
 import uuid
 
 from api.protocol.requests import SendCommandRequest
-from protocol.responses import BasicResponse, ResponseHeader, ResponseType
+from protocol.responses import BasicResponse, ResponseHeader, ResponseType, SendCommandContent, SendCommandResponse
 from utils import readers, writers
 
 
@@ -30,6 +30,9 @@ class Server:
             content={}
         )
 
-    def wait_for_response(self, identifier: str) -> BasicResponse:
-        for item in self._product_reader.read(identifier):
-            return BasicResponse(**item)
+    def wait_for_product(self, client_id: str, identifier: str) -> SendCommandResponse:
+        for content in self._product_reader.read(client_id + "/" + identifier):
+            return SendCommandResponse(
+                header=ResponseHeader(status=ResponseType.Success),
+                content=SendCommandContent(product=content)
+            )

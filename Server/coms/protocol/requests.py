@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Optional
 
 from pydantic import BaseModel
 
@@ -16,7 +17,7 @@ class RequestHeader(BaseModel):
 
 class BasicRequest(BaseModel):
     header: RequestHeader
-    content: dict = {}
+    content: Optional[dict] = {}
 
 
 class ReturnProductContent(BaseModel):

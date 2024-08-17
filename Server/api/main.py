@@ -7,7 +7,7 @@ from fastapi import FastAPI
 import configurator
 from commands import PopupCommand, PopupParameters
 from protocol.requests import RequestHeader, RequestType, SendCommandRequest, SendCommandContent
-from protocol.responses import BasicResponse
+from protocol.responses import BasicResponse, SendCommandResponse
 
 argument_parser = argparse.ArgumentParser()
 argument_parser.add_argument("-c", "--config", default="../conf.json", type=Path, help="Path to config file")
@@ -20,9 +20,9 @@ server = configurator.parse(args.config)
 
 
 @app.get("/")
-def make_command_request(request: SendCommandRequest) -> BasicResponse:
+def make_command_request(request: SendCommandRequest) -> SendCommandResponse:
     request_id = server.send_command(request)
-    return server.wait_for_response(request_id)
+    return server.wait_for_product(request.header.client_id, request_id)
 
 
 @app.get("/popup")

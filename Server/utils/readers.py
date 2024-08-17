@@ -34,6 +34,7 @@ class FolderWatcher(Reader):
 
     def read(self, pattern: Optional[str] = None) -> Generator[dict, None, None]:
         full_pattern = str(self._folder / pattern if pattern is not None else self._folder / "**")
+        print(f"Searching for files in pattern: {full_pattern}")
         while True:
             for path in glob.glob(full_pattern):
                 text = Path(path).read_text()
