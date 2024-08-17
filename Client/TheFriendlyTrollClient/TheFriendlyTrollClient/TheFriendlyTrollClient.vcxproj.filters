@@ -49,6 +49,12 @@
     <Filter Include="Source Files\Products">
       <UniqueIdentifier>{cf024f86-5f8f-4c27-81fb-286eea7502cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Loggers">
+      <UniqueIdentifier>{1e888d1b-9565-41ac-90ba-570b2342d08a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loggers">
+      <UniqueIdentifier>{cf906a3e-cec9-4d0e-9833-f1b56da0aa44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="conf.json">
@@ -134,6 +140,15 @@
     <ClCompile Include="CommandHandlerFactory.cpp">
       <Filter>Source Files\CommandHandlers</Filter>
     </ClCompile>
+    <ClCompile Include="ILogger.cpp">
+      <Filter>Source Files\Loggers</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleLogger.cpp">
+      <Filter>Source Files\Loggers</Filter>
+    </ClCompile>
+    <ClCompile Include="FileLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Configurator.h">
@@ -213,6 +228,15 @@
     </ClInclude>
     <ClInclude Include="CommandHandlerFactory.h">
       <Filter>Header Files\CommandHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogger.h">
+      <Filter>Header Files\Loggers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleLogger.h">
+      <Filter>Header Files\Loggers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileLogger.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

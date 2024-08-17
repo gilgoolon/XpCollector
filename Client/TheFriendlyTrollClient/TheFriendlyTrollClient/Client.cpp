@@ -13,19 +13,26 @@
 #include "PopupCommand.h"
 #include "CommandHandlerFactory.h"
 
-Client::Client(std::unique_ptr<ICommunicator> communicator, std::unique_ptr<IClientStorage> storage)
+Client::Client(std::unique_ptr<ICommunicator> communicator, std::unique_ptr<IClientStorage> storage, std::unique_ptr<ILogger> logger)
 	: m_communicator(std::move(communicator))
 	, m_storage(std::move(storage))
+	, m_logger(std::move(logger))
 {
 }
 
 void Client::run()
 {
 	if (!is_installed()) {
-		install();
+		try {
+			install();
+		}
+		catch (const std::exception& ex) {
+			m_logger->log(std::string("Couldn't install, exitting... Error: ") + ex.what());
+			return;
+		}
 	}
 
-	std::cout << "Client ID: " << m_client_id << std::endl;
+	m_logger->log("Running with client ID: " + m_client_id);
 
 	execute_commands_loop();
 }
@@ -36,8 +43,8 @@ void Client::install()
 
 	const ResponseInfo res = m_communicator->send_request(request.pack());
 	if (httplib::OK_200 != res.get_status()) {
-		std::cout << res.get_body() << std::endl;
-		throw std::runtime_error("Couldn't install properly. Status code: " + std::to_string(res.get_status()));
+		m_logger->log("Error sending InstallClient. Response: " + res.get_body());
+		throw std::runtime_error("Couldn't InstallClient properly. Status code: " + std::to_string(res.get_status()));
 	}
 	m_client_id = InstallClientResponse().unpack(res).get_client_id();
 	m_storage->store(CLIENT_ID_STORAGE_NAME, m_client_id);
@@ -50,44 +57,54 @@ bool Client::is_installed()
 
 void Client::execute_commands_loop()
 {
+	m_logger->log("Starting main loop of command fetching");
 	while (true) {
-		auto command = get_command();
+		m_logger->log("Sleeping for " + std::to_string(MAIN_LOOP_SLEEP_DURATION) + " seconds...");
+		std::this_thread::sleep_for(std::chrono::seconds(MAIN_LOOP_SLEEP_DURATION));
+
+		std::shared_ptr<BasicCommand> command = nullptr;
+		try {
+			command = get_command();
+		}
+		catch (const std::exception& ex) {
+			m_logger->log(std::string("Couldn't get command. Error: ") + ex.what());
+			continue;
+		}
 		if (nullptr == command) {
-			std::cout << "No new commands..." << std::endl;
+			m_logger->log("No new commands...");
 		}
 		else {
-			std::cout << "New command: " << command->get_command_id() + " " << to_string(command->get_command_type()) << std::endl;
+			m_logger->log("New command: " + command->get_command_id() + " " + to_string(command->get_command_type()));
 			std::thread handling_thread(&Client::handle_command, this, std::move(command));
 			handling_thread.detach();
 		}
-		std::this_thread::sleep_for(std::chrono::seconds(MAIN_LOOP_SLEEP_DURATION));
 	}
 }
 
 void Client::handle_command(std::shared_ptr<BasicCommand> command)
 {
-	std::cout << "Handling '" << to_string(command->get_command_type()) << "' command with id " << command->get_command_id() << " in a different thread!" << std::endl;
-	const auto handler = CommandHandlerFactory::create(*command, m_client_id);
+	m_logger->log("Handling '" + to_string(command->get_command_type()) + "' command with id " + command->get_command_id() + " in a different thread!");
 
+	const auto handler = CommandHandlerFactory::create(*command, m_client_id);
 	const auto request_to_make = handler->handle(command); // should usually be a ReturnProduct request
 	const auto res = m_communicator->send_request(request_to_make->pack()); // expect 200 from ReturnProduct
 	if (httplib::OK_200 != res.get_status()) {
-		std::cout << res.get_body() << std::endl;
-		throw std::runtime_error("Couldn't request from handler properly. Status code: " + std::to_string(res.get_status()));
+		m_logger->log("Error sending ReturnProduct. Response: " + res.get_body());
+		throw std::runtime_error("Couldn't ReturnProduct. Status code: " + std::to_string(res.get_status()));
 	}
 }
 
 std::shared_ptr<BasicCommand> Client::get_command()
 {
-	BasicRequest request({ RequestType::GetCommand, m_client_id });
+	m_logger->log("Sending GetCommand request to server");
 
+	BasicRequest request({ RequestType::GetCommand, m_client_id });
 	const auto res = m_communicator->send_request(request.pack());
 	if (httplib::OK_200 != res.get_status()) {
-		std::cout << res.get_body() << std::endl;
+		m_logger->log("Error sending GetCommand. Response: " + res.get_body());
 		throw std::runtime_error("Couldn't GetCommand. Status code: " + std::to_string(res.get_status()));
 	}
-	auto response = GetCommandResponse();
-	response.unpack(res);
+	auto response = GetCommandResponse().unpack(res);
 	if (!response.has_command()) {
 		return nullptr;
 	}

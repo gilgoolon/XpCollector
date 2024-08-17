@@ -140,10 +140,13 @@
     <ClCompile Include="CommandFactory.cpp" />
     <ClCompile Include="CommandHandlerFactory.cpp" />
     <ClCompile Include="Configurator.cpp" />
+    <ClCompile Include="ConsoleLogger.cpp" />
+    <ClCompile Include="FileLogger.cpp" />
     <ClCompile Include="GetCommandResponse.cpp" />
     <ClCompile Include="HttpCommunicator.cpp" />
     <ClCompile Include="ICommandHandler.cpp" />
     <ClCompile Include="ICommunicator.cpp" />
+    <ClCompile Include="ILogger.cpp" />
     <ClCompile Include="InstallClientResponse.cpp" />
     <ClCompile Include="IProduct.cpp" />
     <ClCompile Include="IRequest.cpp" />
@@ -168,9 +171,12 @@
     <ClInclude Include="CommandFactory.h" />
     <ClInclude Include="CommandHandlerFactory.h" />
     <ClInclude Include="Configurator.h" />
+    <ClInclude Include="ConsoleLogger.h" />
+    <ClInclude Include="FileLogger.h" />
     <ClInclude Include="GetCommandResponse.h" />
     <ClInclude Include="HttpCommunicator.h" />
     <ClInclude Include="ICommandHandler.h" />
+    <ClInclude Include="ILogger.h" />
     <ClInclude Include="InstallClientResponse.h" />
     <ClInclude Include="IProduct.h" />
     <ClInclude Include="IRequest.h" />

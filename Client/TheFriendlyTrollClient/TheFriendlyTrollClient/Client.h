@@ -2,14 +2,15 @@
 #include "ICommunicator.h"
 #include "IClientStorage.h"
 #include "BasicCommand.h"
+#include "ILogger.h"
 
 constexpr auto CLIENT_ID_STORAGE_NAME = "client_id";
-constexpr size_t MAIN_LOOP_SLEEP_DURATION = 1;  // Seconds
+constexpr size_t MAIN_LOOP_SLEEP_DURATION = 10;  // Seconds
 
 class Client
 {
 public:
-	explicit Client(std::unique_ptr<ICommunicator> communicator, std::unique_ptr<IClientStorage> storage);
+	explicit Client(std::unique_ptr<ICommunicator> communicator, std::unique_ptr<IClientStorage> storage, std::unique_ptr<ILogger> logger);
 
 	void run();
 
@@ -27,6 +28,7 @@ private:
 
 	std::unique_ptr<ICommunicator> m_communicator;
 	std::unique_ptr<IClientStorage> m_storage;
+	std::unique_ptr<ILogger> m_logger;
 	std::string m_client_id;
 };
 
