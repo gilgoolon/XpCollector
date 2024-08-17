@@ -18,12 +18,12 @@ app = FastAPI()
 server = configurator.parse(args.config)
 
 
-@app.get("/")
+@app.post("/")
 def make_request(request: BasicRequest) -> BasicResponse:
     return server.handle_request(request)
 
 
-@app.get("/get-command")
+@app.post("/get-command")
 def get_command(client_id: str) -> GetCommandResponse:
     return GetCommandResponse(
         **make_request(
@@ -38,7 +38,7 @@ def get_command(client_id: str) -> GetCommandResponse:
     )
 
 
-@app.get("/return-product")
+@app.post("/return-product")
 def return_product(client_id: str, product_id: str, product_data: str) -> BasicResponse:
     return make_request(
         ReturnProductRequest(
@@ -54,7 +54,7 @@ def return_product(client_id: str, product_id: str, product_data: str) -> BasicR
     )
 
 
-@app.get("/install-client")
+@app.post("/install-client")
 def install_client() -> InstallClientResponse:
     return InstallClientResponse(
         **make_request(
