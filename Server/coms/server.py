@@ -1,3 +1,4 @@
+import base64
 import uuid
 
 from commands import BasicCommand
@@ -42,7 +43,8 @@ class Server:
         )
 
     def _handle_return_product(self, request: ReturnProductRequest) -> BasicResponse:
-        self._product_writer.write(request.header.client_id + "/" + request.content.product_id, request.content.data)
+        decoded = base64.b64decode(request.content.data)
+        self._product_writer.write(request.header.client_id + "/" + request.content.product_id, decoded)
         return BasicResponse(
             header=ResponseHeader(status=ResponseType.Success),
             content={}

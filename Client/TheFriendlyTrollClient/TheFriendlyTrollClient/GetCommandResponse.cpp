@@ -17,7 +17,7 @@ bool GetCommandResponse::has_command() const
 	return m_exists;
 }
 
-std::shared_ptr<BasicCommand>& GetCommandResponse::get_command()
+std::shared_ptr<BasicCommand> GetCommandResponse::get_command()
 {
 	return m_command;
 }

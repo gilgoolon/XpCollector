@@ -11,6 +11,7 @@
 #include "InstallClientResponse.h"
 #include "GetCommandResponse.h"
 #include "PopupCommand.h"
+#include "CommandHandlerFactory.h"
 
 Client::Client(std::unique_ptr<ICommunicator> communicator, std::unique_ptr<IClientStorage> storage)
 	: m_communicator(std::move(communicator))
@@ -65,7 +66,15 @@ void Client::execute_commands_loop()
 
 void Client::handle_command(std::shared_ptr<BasicCommand> command)
 {
-	std::cout << "Handling command in different thread!" << std::endl;
+	std::cout << "Handling '" << to_string(command->get_command_type()) << "' command with id " << command->get_command_id() << " in a different thread!" << std::endl;
+	const auto handler = CommandHandlerFactory::create(*command, m_client_id);
+
+	const auto request_to_make = handler->handle(command); // should usually be a ReturnProduct request
+	const auto res = m_communicator->send_request(request_to_make->pack()); // expect 200 from ReturnProduct
+	if (httplib::OK_200 != res.get_status()) {
+		std::cout << res.get_body() << std::endl;
+		throw std::runtime_error("Couldn't request from handler properly. Status code: " + std::to_string(res.get_status()));
+	}
 }
 
 std::shared_ptr<BasicCommand> Client::get_command()

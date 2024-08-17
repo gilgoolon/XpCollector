@@ -104,7 +104,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\json-3.11.2</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,45 +133,59 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicCommand.cpp" />
+    <ClCompile Include="BasicProduct.cpp" />
     <ClCompile Include="BasicRequest.cpp" />
     <ClCompile Include="BasicResponse.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="CommandFactory.cpp" />
+    <ClCompile Include="CommandHandlerFactory.cpp" />
     <ClCompile Include="Configurator.cpp" />
     <ClCompile Include="GetCommandResponse.cpp" />
     <ClCompile Include="HttpCommunicator.cpp" />
+    <ClCompile Include="ICommandHandler.cpp" />
     <ClCompile Include="ICommunicator.cpp" />
     <ClCompile Include="InstallClientResponse.cpp" />
+    <ClCompile Include="IProduct.cpp" />
     <ClCompile Include="IRequest.cpp" />
     <ClCompile Include="IResponse.cpp" />
     <ClCompile Include="IStorage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PopupCommand.cpp" />
+    <ClCompile Include="PopupHandler.cpp" />
+    <ClCompile Include="PopupProduct.cpp" />
     <ClCompile Include="RamStorage.cpp" />
     <ClCompile Include="RegistryStorage.cpp" />
     <ClCompile Include="RequestInfo.cpp" />
     <ClCompile Include="ResponseInfo.cpp" />
+    <ClCompile Include="ReturnProductRequest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicCommand.h" />
+    <ClInclude Include="BasicProduct.h" />
     <ClInclude Include="BasicRequest.h" />
     <ClInclude Include="BasicResponse.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommandFactory.h" />
+    <ClInclude Include="CommandHandlerFactory.h" />
     <ClInclude Include="Configurator.h" />
     <ClInclude Include="GetCommandResponse.h" />
     <ClInclude Include="HttpCommunicator.h" />
+    <ClInclude Include="ICommandHandler.h" />
     <ClInclude Include="InstallClientResponse.h" />
+    <ClInclude Include="IProduct.h" />
     <ClInclude Include="IRequest.h" />
     <ClInclude Include="IClientStorage.h" />
     <ClInclude Include="IResponse.h" />
     <ClInclude Include="JSON.h" />
     <ClInclude Include="ICommunicator.h" />
     <ClInclude Include="PopupCommand.h" />
+    <ClInclude Include="PopupHandler.h" />
+    <ClInclude Include="PopupProduct.h" />
     <ClInclude Include="RamStorage.h" />
     <ClInclude Include="RegistryStorage.h" />
     <ClInclude Include="RequestInfo.h" />
     <ClInclude Include="ResponseInfo.h" />
+    <ClInclude Include="ReturnProductRequest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

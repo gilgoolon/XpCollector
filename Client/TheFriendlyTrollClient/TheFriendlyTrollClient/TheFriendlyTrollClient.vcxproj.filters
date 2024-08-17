@@ -37,6 +37,18 @@
     <Filter Include="Source Files\Commands">
       <UniqueIdentifier>{b0a43e15-779c-4a0d-95e7-c04576f82251}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\CommandHandlers">
+      <UniqueIdentifier>{f9d48df0-6c2f-4b3f-a724-a1e721abf656}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CommandHandlers">
+      <UniqueIdentifier>{ef492891-a477-45f4-a7d2-7e95929d7718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Products">
+      <UniqueIdentifier>{a1b68904-c8f2-4309-a589-9eef15dfac4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Products">
+      <UniqueIdentifier>{cf024f86-5f8f-4c27-81fb-286eea7502cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="conf.json">
@@ -101,6 +113,27 @@
     <ClCompile Include="CommandFactory.cpp">
       <Filter>Source Files\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="ICommandHandler.cpp">
+      <Filter>Source Files\CommandHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="PopupHandler.cpp">
+      <Filter>Source Files\CommandHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlerFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReturnProductRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IProduct.cpp">
+      <Filter>Source Files\Products</Filter>
+    </ClCompile>
+    <ClCompile Include="PopupProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Configurator.h">
@@ -159,6 +192,27 @@
     </ClInclude>
     <ClInclude Include="CommandFactory.h">
       <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommandHandler.h">
+      <Filter>Header Files\CommandHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="PopupHandler.h">
+      <Filter>Header Files\CommandHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlerFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReturnProductRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IProduct.h">
+      <Filter>Header Files\Products</Filter>
+    </ClInclude>
+    <ClInclude Include="PopupProduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicProduct.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

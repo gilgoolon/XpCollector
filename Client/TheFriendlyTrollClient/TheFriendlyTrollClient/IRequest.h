@@ -19,7 +19,7 @@ inline std::string to_string(RequestType val)
 	{
 	case RequestType::InstallClient:   return "InstallClient";
 	case RequestType::GetCommand:   return "GetCommand";
-	case RequestType::ReturnProduct: return "WindowsReturnProduct";
+	case RequestType::ReturnProduct: return "ReturnProduct";
 	default: throw std::invalid_argument("Unmapped to_string enum in RequestType");
 	}
 }

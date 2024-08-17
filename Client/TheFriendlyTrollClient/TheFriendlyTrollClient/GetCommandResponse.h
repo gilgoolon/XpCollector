@@ -10,7 +10,7 @@ public:
 
     bool has_command() const;
 
-    std::shared_ptr<BasicCommand>& get_command();
+    std::shared_ptr<BasicCommand> get_command();
 
 private:
     bool m_exists;
