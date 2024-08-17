@@ -119,20 +119,20 @@
     <ClCompile Include="PopupHandler.cpp">
       <Filter>Source Files\CommandHandlers</Filter>
     </ClCompile>
-    <ClCompile Include="CommandHandlerFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ReturnProductRequest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="IProduct.cpp">
       <Filter>Source Files\Products</Filter>
     </ClCompile>
     <ClCompile Include="PopupProduct.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Products</Filter>
+    </ClCompile>
+    <ClCompile Include="ReturnProductRequest.cpp">
+      <Filter>Source Files\Protocol</Filter>
     </ClCompile>
     <ClCompile Include="BasicProduct.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Products</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlerFactory.cpp">
+      <Filter>Source Files\CommandHandlers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,20 +199,20 @@
     <ClInclude Include="PopupHandler.h">
       <Filter>Header Files\CommandHandlers</Filter>
     </ClInclude>
-    <ClInclude Include="CommandHandlerFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ReturnProductRequest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IProduct.h">
       <Filter>Header Files\Products</Filter>
     </ClInclude>
-    <ClInclude Include="PopupProduct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BasicProduct.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Products</Filter>
+    </ClInclude>
+    <ClInclude Include="PopupProduct.h">
+      <Filter>Header Files\Products</Filter>
+    </ClInclude>
+    <ClInclude Include="ReturnProductRequest.h">
+      <Filter>Header Files\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlerFactory.h">
+      <Filter>Header Files\CommandHandlers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
