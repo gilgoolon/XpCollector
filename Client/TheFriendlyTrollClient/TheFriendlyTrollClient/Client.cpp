@@ -23,12 +23,16 @@ Client::Client(std::unique_ptr<ICommunicator> communicator, std::unique_ptr<ICli
 void Client::run()
 {
 	if (!is_installed()) {
-		try {
-			install();
-		}
-		catch (const std::exception& ex) {
-			m_logger->log(std::string("Couldn't install, exitting... Error: ") + ex.what());
-			return;
+		while (true) {
+			try {
+				install();
+				break;
+			}
+			catch (const std::exception& ex) {
+				// TODO: Differentiate between exceptions, should fail and exit for some...
+				m_logger->log(std::string("Couldn't install, sleeping for " + std::to_string(INSTALLATION_RETRY_SLEEP_DURATION) + " seconds and trying again... Error: ") + ex.what());
+			}
+			std::this_thread::sleep_for(std::chrono::seconds(INSTALLATION_RETRY_SLEEP_DURATION));
 		}
 	}
 

@@ -6,6 +6,7 @@
 
 constexpr auto CLIENT_ID_STORAGE_NAME = "client_id";
 constexpr size_t MAIN_LOOP_SLEEP_DURATION = 10;  // Seconds
+constexpr size_t INSTALLATION_RETRY_SLEEP_DURATION = 30;  // Seconds
 
 class Client
 {
