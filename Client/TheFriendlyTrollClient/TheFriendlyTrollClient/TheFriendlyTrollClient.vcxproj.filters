@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Communication">
       <UniqueIdentifier>{b231a22d-a164-403f-97a9-0811736ad7d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Commands">
+      <UniqueIdentifier>{98d270fa-a01b-4bf5-ab6f-bb5132523f39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Commands">
+      <UniqueIdentifier>{b0a43e15-779c-4a0d-95e7-c04576f82251}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="conf.json">
@@ -80,8 +86,20 @@
     <ClCompile Include="BasicResponse.cpp">
       <Filter>Source Files\Protocol</Filter>
     </ClCompile>
+    <ClCompile Include="BasicCommand.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
     <ClCompile Include="InstallClientResponse.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="PopupCommand.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="GetCommandResponse.cpp">
+      <Filter>Source Files\Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandFactory.cpp">
+      <Filter>Source Files\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,8 +145,20 @@
     <ClInclude Include="BasicResponse.h">
       <Filter>Header Files\Protocol</Filter>
     </ClInclude>
+    <ClInclude Include="BasicCommand.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="PopupCommand.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
     <ClInclude Include="InstallClientResponse.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="GetCommandResponse.h">
+      <Filter>Header Files\Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandFactory.h">
+      <Filter>Header Files\Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

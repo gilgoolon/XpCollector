@@ -2,12 +2,15 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
+#include <thread>
 
 #include <httplib.h>
 
 #include "Client.h"
 #include "BasicRequest.h"
 #include "InstallClientResponse.h"
+#include "GetCommandResponse.h"
+#include "PopupCommand.h"
 
 Client::Client(std::unique_ptr<ICommunicator> communicator, std::unique_ptr<IClientStorage> storage)
 	: m_communicator(std::move(communicator))
@@ -21,7 +24,7 @@ void Client::run()
 		install();
 	}
 
-	std::cout << m_client_id << std::endl;
+	std::cout << "Client ID: " << m_client_id << std::endl;
 
 	execute_commands_loop();
 }
@@ -36,7 +39,7 @@ void Client::install()
 		throw std::runtime_error("Couldn't install properly. Status code: " + std::to_string(res.get_status()));
 	}
 	m_client_id = InstallClientResponse().unpack(res).get_client_id();
-	m_storage->store(CLIENT_ID_STORAGE_NAME, m_client_id); // should make an install request here
+	m_storage->store(CLIENT_ID_STORAGE_NAME, m_client_id);
 }
 
 bool Client::is_installed()
@@ -47,13 +50,37 @@ bool Client::is_installed()
 void Client::execute_commands_loop()
 {
 	while (true) {
-		get_command();
-
+		auto command = get_command();
+		if (nullptr == command) {
+			std::cout << "No new commands..." << std::endl;
+		}
+		else {
+			std::cout << "New command: " << command->get_command_id() + " " << to_string(command->get_command_type()) << std::endl;
+			std::thread handling_thread(&Client::handle_command, this, std::move(command));
+			handling_thread.detach();
+		}
 		std::this_thread::sleep_for(std::chrono::seconds(MAIN_LOOP_SLEEP_DURATION));
 	}
 }
 
-void Client::get_command()
+void Client::handle_command(std::shared_ptr<BasicCommand> command)
 {
-	std::cout << "Processing Commands..." << std::endl;
+	std::cout << "Handling command in different thread!" << std::endl;
+}
+
+std::shared_ptr<BasicCommand> Client::get_command()
+{
+	BasicRequest request({ RequestType::GetCommand, m_client_id });
+
+	const auto res = m_communicator->send_request(request.pack());
+	if (httplib::OK_200 != res.get_status()) {
+		std::cout << res.get_body() << std::endl;
+		throw std::runtime_error("Couldn't GetCommand. Status code: " + std::to_string(res.get_status()));
+	}
+	auto response = GetCommandResponse();
+	response.unpack(res);
+	if (!response.has_command()) {
+		return nullptr;
+	}
+	return response.get_command();
 }
