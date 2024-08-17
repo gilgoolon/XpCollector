@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Optional
+from typing import Union, Any
 
 from pydantic import BaseModel
 
@@ -15,7 +15,7 @@ class ResponseHeader(BaseModel):
 
 class BasicResponse(BaseModel):
     header: ResponseHeader
-    content: Optional[dict] = {}
+    content: Union[dict, Any] = {}
 
 
 class SendCommandContent(BaseModel):

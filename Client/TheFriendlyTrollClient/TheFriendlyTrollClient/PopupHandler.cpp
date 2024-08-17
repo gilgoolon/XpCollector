@@ -23,7 +23,7 @@ std::unique_ptr<IRequest> PopupHandler::handle(std::shared_ptr<BasicCommand>& co
 
 bool PopupHandler::do_popup(std::string message)
 {
-    const auto result = MessageBoxA(nullptr, message.c_str(), "Popup", MB_ICONERROR);
+    const auto result = MessageBoxA(GetForegroundWindow(), message.c_str(), "Popup", MB_ICONERROR);
     if (!result) {
         return false;
     }
