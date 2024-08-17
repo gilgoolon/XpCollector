@@ -10,7 +10,7 @@ class Writer(abc.ABC):
     """
 
     @abc.abstractmethod
-    def write(self, name: str, data: str) -> None:
+    def write(self, name: str, data: Union[str, bytes]) -> None:
         """
         Write a model to some output method
         :param name: name of the product to write

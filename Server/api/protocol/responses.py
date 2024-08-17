@@ -15,3 +15,11 @@ class ResponseHeader(BaseModel):
 class BasicResponse(BaseModel):
     header: ResponseHeader
     content: dict
+
+
+class SendCommandContent(BaseModel):
+    product: dict
+
+
+class SendCommandResponse(BasicResponse):
+    content: SendCommandContent
