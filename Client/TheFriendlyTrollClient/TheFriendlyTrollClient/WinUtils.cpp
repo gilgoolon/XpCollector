@@ -23,7 +23,7 @@ void win_utils::do_popups(const size_t count, const std::string& window_name, co
     int screenWidth = GetSystemMetrics(SM_CXSCREEN);
     int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 
-    for (int i = 0; i < count; ++i) {
+    for (size_t i = 0; i < count; ++i) {
         // Generate random positions for the message box
         int x_pos = std::rand() % (screenWidth - 200); // 200 is an arbitrary width of the MessageBox
         int y_pos = std::rand() % (screenHeight - 100); // 100 is an arbitrary height of the MessageBox
