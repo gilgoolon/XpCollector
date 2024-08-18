@@ -155,6 +155,9 @@
     <ClCompile Include="ScreenshotProduct.cpp">
       <Filter>Source Files\Products</Filter>
     </ClCompile>
+    <ClCompile Include="WinUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Configurator.h">
@@ -249,6 +252,9 @@
     </ClInclude>
     <ClInclude Include="ScreenshotProduct.h">
       <Filter>Header Files\Products</Filter>
+    </ClInclude>
+    <ClInclude Include="WinUtils.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

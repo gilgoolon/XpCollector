@@ -11,8 +11,5 @@ public:
     explicit ScreenshotHandler(std::string client_id);
 
     virtual std::unique_ptr<IRequest> handle(std::shared_ptr<BasicCommand>& command) override;
-
-private:
-    static std::string take_screenshot();
 };
 

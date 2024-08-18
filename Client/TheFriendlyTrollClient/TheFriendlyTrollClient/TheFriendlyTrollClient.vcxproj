@@ -163,6 +163,7 @@
     <ClCompile Include="ReturnProductRequest.cpp" />
     <ClCompile Include="ScreenshotHandler.cpp" />
     <ClCompile Include="ScreenshotProduct.cpp" />
+    <ClCompile Include="WinUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicCommand.h" />
@@ -196,6 +197,7 @@
     <ClInclude Include="ReturnProductRequest.h" />
     <ClInclude Include="ScreenshotHandler.h" />
     <ClInclude Include="ScreenshotProduct.h" />
+    <ClInclude Include="WinUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
