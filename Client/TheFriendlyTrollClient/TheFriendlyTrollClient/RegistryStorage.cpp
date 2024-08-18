@@ -58,5 +58,5 @@ std::string RegistryStorage::fetch(std::string name)
         throw std::runtime_error("Failed reading registry value. Error code: " + std::to_string(error));
     }
     RegCloseKey(h_key);
-    return std::string(result, result_size);
+    return std::string(result, result_size - 1); // remove null terminator
 }

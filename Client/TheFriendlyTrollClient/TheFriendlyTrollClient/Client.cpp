@@ -29,7 +29,6 @@ void Client::run()
 				break;
 			}
 			catch (const std::exception& ex) {
-				// TODO: Differentiate between exceptions, should fail and exit for some...
 				m_logger->log(std::string("Couldn't install, sleeping for " + std::to_string(INSTALLATION_RETRY_SLEEP_DURATION) + " seconds and trying again... Error: ") + ex.what());
 			}
 			std::this_thread::sleep_for(std::chrono::seconds(INSTALLATION_RETRY_SLEEP_DURATION));
