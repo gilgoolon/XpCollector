@@ -116,3 +116,5 @@ std::string win_utils::take_screenshot()
     // Convert the buffer to a string
     return bmp_buffer;
 }
+
+

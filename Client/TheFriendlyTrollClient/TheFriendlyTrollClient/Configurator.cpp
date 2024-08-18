@@ -6,6 +6,7 @@
 #include "RamStorage.h"
 #include "ConsoleLogger.h"
 #include "FileLogger.h"
+#include "RegistryStorage.h"
 
 using json = nlohmann::json;
 
@@ -25,7 +26,7 @@ std::unique_ptr<Client> configurator::parse(std::string conf_path)
 	}
 	return std::make_unique<Client>(
 		std::make_unique<HttpCommunicator>(server_url),
-		std::make_unique<RamStorage>(),
+		std::make_unique<RegistryStorage>(conf["registry_storage_key"]),
 		std::move(logger)
 	);
 }

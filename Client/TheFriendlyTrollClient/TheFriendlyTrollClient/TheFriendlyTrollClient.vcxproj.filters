@@ -159,7 +159,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PopupSpamHandler.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\CommandHandlers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,7 +260,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PopupSpamHandler.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\CommandHandlers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

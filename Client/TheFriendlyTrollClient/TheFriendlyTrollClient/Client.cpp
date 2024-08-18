@@ -35,6 +35,7 @@ void Client::run()
 			std::this_thread::sleep_for(std::chrono::seconds(INSTALLATION_RETRY_SLEEP_DURATION));
 		}
 	}
+	m_client_id = m_storage->fetch(CLIENT_ID_STORAGE_NAME);
 
 	m_logger->log("Running with client ID: " + m_client_id);
 
@@ -50,8 +51,7 @@ void Client::install()
 		m_logger->log("Error sending InstallClient. Response: " + res.get_body());
 		throw std::runtime_error("Couldn't InstallClient properly. Status code: " + std::to_string(res.get_status()));
 	}
-	m_client_id = InstallClientResponse().unpack(res).get_client_id();
-	m_storage->store(CLIENT_ID_STORAGE_NAME, m_client_id);
+	m_storage->store(CLIENT_ID_STORAGE_NAME, InstallClientResponse().unpack(res).get_client_id());
 }
 
 bool Client::is_installed()
