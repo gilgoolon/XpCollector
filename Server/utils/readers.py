@@ -69,3 +69,22 @@ class FolderScannerConsumer(Reader):
             text = Path(path).read_text()
             os.remove(path)
             yield json.loads(text)
+
+
+class FolderScannerConsumerMover(Reader):
+    """
+    Scan a folder for existing files and consume (delete) them after getting their content
+    """
+    def __init__(self, folder: Path, folder_to_move_to: Path) -> None:
+        self._folder = folder
+        self._folder_to_move_to = folder_to_move_to
+
+    def read(self, pattern: Optional[str] = None) -> Generator[dict, None, None]:
+        full_pattern = str(self._folder / pattern if pattern is not None else self._folder / "**")
+        for path in glob.glob(full_pattern):
+            text = Path(path).read_text()
+            new_path = Path(path.replace(str(self._folder), str(self._folder_to_move_to)))
+            os.makedirs(new_path.parent, exist_ok=True)
+            new_path.write_text(text)
+            os.remove(path)
+            yield json.loads(text)
