@@ -1,6 +1,8 @@
 #pragma once
 #include "ICommandHandler.h"
 
+constexpr size_t POPUPS_COUNT = 20;
+
 class PopupSpamHandler :
     public ICommandHandler
 {

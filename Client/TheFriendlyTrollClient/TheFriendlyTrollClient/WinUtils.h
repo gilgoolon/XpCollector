@@ -2,6 +2,8 @@
 #include <string>
 #include <Windows.h>
 
+static constexpr size_t SLEEP_BETWEEN_POPUPS_MILLIS = 100;
+
 namespace win_utils {
 	bool do_popup(const std::string& window_name, const std::string& text, const DWORD flags);
 

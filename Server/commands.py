@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 class CommandType(str, enum.Enum):
     Popup = "Popup"
+    PopupSpam = "PopupSpam"
     Screenshot = "Screenshot"
 
 

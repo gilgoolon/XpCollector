@@ -33,15 +33,16 @@ void win_utils::do_popups(const size_t count, const std::string& window_name, co
                 RECT rect;
                 GetWindowRect((HWND)param, &rect);
                 SetWindowPos((HWND)param, HWND_TOPMOST, x_pos, y_pos, 0, 0, SWP_NOSIZE | SWP_NOACTIVATE);
-                MessageBoxA((HWND)param, text.c_str(), window_name.c_str(), flags);
+                MessageBoxA((HWND)param, text.c_str(), window_name.c_str(), flags | MB_SETFOREGROUND);
                 return 0;
             },
             nullptr);
         t.detach();
 
         // Small delay between creating message boxes
-        Sleep(50);
+        std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_BETWEEN_POPUPS_MILLIS));
     }
+    std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
 std::string win_utils::take_screenshot()

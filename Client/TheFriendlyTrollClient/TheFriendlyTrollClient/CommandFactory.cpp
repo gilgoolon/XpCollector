@@ -8,6 +8,7 @@ std::unique_ptr<BasicCommand> CommandFactory::create(const json& command)
     auto basic = std::make_unique<BasicCommand>(command_id, command_type);
     switch (basic->get_command_type()) {
     case CommandType::Popup:
+    case CommandType::PopupSpam:
         return std::make_unique<PopupCommand>(command_id, command_type, command["parameters"]["message"]);
     default:
         return std::move(basic);

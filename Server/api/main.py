@@ -44,6 +44,26 @@ def send_popup_command(client_id: str, message: str) -> BasicResponse:
     )
 
 
+@app.get("/popup-spam")
+def send_popup_spam_command(client_id: str, message: str) -> BasicResponse:
+    return make_command_request(
+        SendCommandRequest(
+            header=RequestHeader(
+                client_id=client_id,
+                request_type=RequestType.SendCommand
+            ),
+            content=SendCommandContent(
+                command=PopupCommand(
+                    command_type=CommandType.PopupSpam,
+                    parameters=PopupParameters(
+                        message=message
+                    )
+                )
+            )
+        )
+    )
+
+
 @app.get("/screenshot")
 def send_popup_command(client_id: str) -> BasicResponse:
     return make_command_request(
