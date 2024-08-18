@@ -69,4 +69,4 @@ def install_client() -> InstallClientResponse:
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, host="localhost", port=args.port)
+    uvicorn.run(app, host="0.0.0.0", port=args.port)
