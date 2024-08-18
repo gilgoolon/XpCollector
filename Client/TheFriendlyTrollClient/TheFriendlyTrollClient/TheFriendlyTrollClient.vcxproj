@@ -161,6 +161,8 @@
     <ClCompile Include="RequestInfo.cpp" />
     <ClCompile Include="ResponseInfo.cpp" />
     <ClCompile Include="ReturnProductRequest.cpp" />
+    <ClCompile Include="ScreenshotHandler.cpp" />
+    <ClCompile Include="ScreenshotProduct.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicCommand.h" />
@@ -192,6 +194,8 @@
     <ClInclude Include="RequestInfo.h" />
     <ClInclude Include="ResponseInfo.h" />
     <ClInclude Include="ReturnProductRequest.h" />
+    <ClInclude Include="ScreenshotHandler.h" />
+    <ClInclude Include="ScreenshotProduct.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

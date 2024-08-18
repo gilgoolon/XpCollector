@@ -3,13 +3,15 @@
 #include <stdexcept>
 
 enum class CommandType {
-	Popup
+	Popup,
+	Screenshot
 };
 
 inline std::string to_string(CommandType val)
 {
 	switch (val) {
 	case CommandType::Popup: return "Popup";
+	case CommandType::Screenshot: return "Screenshot";
 	default: throw std::invalid_argument("Unmapped to_string enum in CommandType");
 	}
 }
@@ -17,6 +19,7 @@ inline std::string to_string(CommandType val)
 inline CommandType from_string(const std::string& val)
 {
 	if ("Popup" == val) return CommandType::Popup;
+	if ("Screenshot" == val) return CommandType::Screenshot;
 	throw std::invalid_argument("Invalid argument '" + val + "' when trying to parse CommandType enum");
 }
 

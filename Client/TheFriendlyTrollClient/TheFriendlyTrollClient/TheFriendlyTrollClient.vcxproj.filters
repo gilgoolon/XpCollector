@@ -147,7 +147,13 @@
       <Filter>Source Files\Loggers</Filter>
     </ClCompile>
     <ClCompile Include="FileLogger.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Loggers</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenshotHandler.cpp">
+      <Filter>Source Files\CommandHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenshotProduct.cpp">
+      <Filter>Source Files\Products</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,7 +242,13 @@
       <Filter>Header Files\Loggers</Filter>
     </ClInclude>
     <ClInclude Include="FileLogger.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Loggers</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenshotHandler.h">
+      <Filter>Header Files\CommandHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenshotProduct.h">
+      <Filter>Header Files\Products</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
