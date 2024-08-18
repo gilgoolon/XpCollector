@@ -134,6 +134,7 @@
     <None Include="conf.json" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AlwaysEvent.cpp" />
     <ClCompile Include="BasicCommand.cpp" />
     <ClCompile Include="BasicProduct.cpp" />
     <ClCompile Include="BasicRequest.cpp" />
@@ -148,12 +149,15 @@
     <ClCompile Include="HttpCommunicator.cpp" />
     <ClCompile Include="ICommandHandler.cpp" />
     <ClCompile Include="ICommunicator.cpp" />
+    <ClCompile Include="IEvent.cpp" />
+    <ClCompile Include="IEventHandler.cpp" />
     <ClCompile Include="ILogger.cpp" />
     <ClCompile Include="InstallClientResponse.cpp" />
     <ClCompile Include="IProduct.cpp" />
     <ClCompile Include="IRequest.cpp" />
     <ClCompile Include="IResponse.cpp" />
     <ClCompile Include="IStorage.cpp" />
+    <ClCompile Include="LocalLogEventHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PopupCommand.cpp" />
     <ClCompile Include="PopupHandler.cpp" />
@@ -169,6 +173,7 @@
     <ClCompile Include="WinUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlwaysEvent.h" />
     <ClInclude Include="BasicCommand.h" />
     <ClInclude Include="BasicProduct.h" />
     <ClInclude Include="BasicRequest.h" />
@@ -182,6 +187,8 @@
     <ClInclude Include="GetCommandResponse.h" />
     <ClInclude Include="HttpCommunicator.h" />
     <ClInclude Include="ICommandHandler.h" />
+    <ClInclude Include="IEvent.h" />
+    <ClInclude Include="IEventHandler.h" />
     <ClInclude Include="ILogger.h" />
     <ClInclude Include="InstallClientResponse.h" />
     <ClInclude Include="IProduct.h" />
@@ -190,6 +197,7 @@
     <ClInclude Include="IResponse.h" />
     <ClInclude Include="JSON.h" />
     <ClInclude Include="ICommunicator.h" />
+    <ClInclude Include="LocalLogEventHandler.h" />
     <ClInclude Include="PopupCommand.h" />
     <ClInclude Include="PopupHandler.h" />
     <ClInclude Include="PopupProduct.h" />

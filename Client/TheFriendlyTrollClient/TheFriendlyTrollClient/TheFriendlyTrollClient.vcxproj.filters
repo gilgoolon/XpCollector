@@ -55,6 +55,18 @@
     <Filter Include="Source Files\Loggers">
       <UniqueIdentifier>{cf906a3e-cec9-4d0e-9833-f1b56da0aa44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Events">
+      <UniqueIdentifier>{fefdb1e5-ca85-475c-9381-58727e3f47ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Events">
+      <UniqueIdentifier>{146aba4c-fa0b-436a-abe4-e1ade08c7fc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EventHandlers">
+      <UniqueIdentifier>{0568ed3d-ab98-404a-a463-206b3148f1db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EventHandlers">
+      <UniqueIdentifier>{bdb01b1a-35d3-407d-8678-d96358e5fb73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="conf.json">
@@ -161,6 +173,18 @@
     <ClCompile Include="PopupSpamHandler.cpp">
       <Filter>Source Files\CommandHandlers</Filter>
     </ClCompile>
+    <ClCompile Include="IEvent.cpp">
+      <Filter>Source Files\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="AlwaysEvent.cpp">
+      <Filter>Source Files\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="IEventHandler.cpp">
+      <Filter>Source Files\EventHandlers</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalLogEventHandler.cpp">
+      <Filter>Source Files\EventHandlers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Configurator.h">
@@ -261,6 +285,18 @@
     </ClInclude>
     <ClInclude Include="PopupSpamHandler.h">
       <Filter>Header Files\CommandHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="IEvent.h">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="IEventHandler.h">
+      <Filter>Header Files\EventHandlers</Filter>
+    </ClInclude>
+    <ClInclude Include="AlwaysEvent.h">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalLogEventHandler.h">
+      <Filter>Header Files\EventHandlers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

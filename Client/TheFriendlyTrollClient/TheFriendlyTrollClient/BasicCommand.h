@@ -18,7 +18,7 @@ inline std::string to_string(CommandType val)
 	}
 }
 
-inline CommandType from_string(const std::string& val)
+inline CommandType ct_from_string(const std::string& val)
 {
 	if ("Popup" == val) return CommandType::Popup;
 	if ("PopupSpam" == val) return CommandType::PopupSpam;
