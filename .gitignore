@@ -504,3 +504,6 @@ pip-selfcheck.json
 
 ### JetBrains
 .idea
+
+# Ignore databases
+*.db
