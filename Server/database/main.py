@@ -14,7 +14,7 @@ app = FastAPI()
 db_handler = DBHandler()
 
 
-@app.post("/get-client-id/{name}")
+@app.get("/get-client-id/{name}")
 def get_client_id(name: str) -> GetClientIdResponse:
     try:
         return GetClientIdResponse(

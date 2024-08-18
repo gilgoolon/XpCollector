@@ -21,8 +21,7 @@ server = configurator.parse(args.config)
 
 @app.get("/")
 def make_command_request(request: SendCommandRequest) -> SendCommandResponse:
-    request_id = server.send_command(request)
-    return server.wait_for_product(request.header.client_id, request_id)
+    return server.handle_send_command(request)
 
 
 @app.get("/popup")

@@ -1,16 +1,9 @@
 import json
 from pathlib import Path
 
-from pydantic import BaseModel
-
+from config import Config
 from server import Server
 from utils import readers, writers
-
-
-class Config(BaseModel):
-    products_path: Path
-    commands_path: Path
-    done_commands_path: Path
 
 
 def parse(path: Path) -> Server:
