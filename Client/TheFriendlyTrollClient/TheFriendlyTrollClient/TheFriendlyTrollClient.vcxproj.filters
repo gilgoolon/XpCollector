@@ -158,6 +158,9 @@
     <ClCompile Include="WinUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PopupSpamHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Configurator.h">
@@ -254,6 +257,9 @@
       <Filter>Header Files\Products</Filter>
     </ClInclude>
     <ClInclude Include="WinUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PopupSpamHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

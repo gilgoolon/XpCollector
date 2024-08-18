@@ -156,6 +156,7 @@
     <ClCompile Include="PopupCommand.cpp" />
     <ClCompile Include="PopupHandler.cpp" />
     <ClCompile Include="PopupProduct.cpp" />
+    <ClCompile Include="PopupSpamHandler.cpp" />
     <ClCompile Include="RamStorage.cpp" />
     <ClCompile Include="RegistryStorage.cpp" />
     <ClCompile Include="RequestInfo.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="PopupCommand.h" />
     <ClInclude Include="PopupHandler.h" />
     <ClInclude Include="PopupProduct.h" />
+    <ClInclude Include="PopupSpamHandler.h" />
     <ClInclude Include="RamStorage.h" />
     <ClInclude Include="RegistryStorage.h" />
     <ClInclude Include="RequestInfo.h" />

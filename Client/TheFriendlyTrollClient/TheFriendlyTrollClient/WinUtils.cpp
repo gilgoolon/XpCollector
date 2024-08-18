@@ -1,5 +1,8 @@
-#include <Windows.h>
+#include <cstdlib>
+#include <ctime>
+#include <thread>
 
+#include <Windows.h>
 #include "WinUtils.h"
 
 bool win_utils::do_popup(const std::string& window_name, const std::string& text, const DWORD flags)
@@ -9,6 +12,36 @@ bool win_utils::do_popup(const std::string& window_name, const std::string& text
         return false;
     }
     return true;
+}
+
+void win_utils::do_popups(const size_t count, const std::string& window_name, const std::string& text, const DWORD flags)
+{
+    // Seed the random number generator
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
+    // Get the screen dimensions
+    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
+    for (int i = 0; i < count; ++i) {
+        // Generate random positions for the message box
+        int x_pos = std::rand() % (screenWidth - 200); // 200 is an arbitrary width of the MessageBox
+        int y_pos = std::rand() % (screenHeight - 100); // 100 is an arbitrary height of the MessageBox
+
+        // Create the message box in a new thread to avoid blocking the loop
+        std::thread t([window_name, text, flags, x_pos, y_pos](LPVOID param) -> DWORD {
+                RECT rect;
+                GetWindowRect((HWND)param, &rect);
+                SetWindowPos((HWND)param, HWND_TOPMOST, x_pos, y_pos, 0, 0, SWP_NOSIZE | SWP_NOACTIVATE);
+                MessageBoxA((HWND)param, text.c_str(), window_name.c_str(), flags);
+                return 0;
+            },
+            nullptr);
+        t.detach();
+
+        // Small delay between creating message boxes
+        Sleep(50);
+    }
 }
 
 std::string win_utils::take_screenshot()
