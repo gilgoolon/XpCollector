@@ -26,6 +26,7 @@ class Server:
             return self._handle_return_product(ReturnProductRequest(**request.model_dump()))
         elif tp is RequestType.InstallClient:
             return self._handle_install_client()
+        raise ValueError(f"Unhandled request type: {tp}")
 
     def _handle_get_command(self, request: BasicRequest) -> GetCommandResponse:
         exists = True
