@@ -13,9 +13,9 @@ namespace win_utils {
 
 	std::string take_screenshot();
 	
-	BOOL GetMessageWithTimeout(MSG* msg, UINT to);
+	BOOL get_message_with_timeout(MSG* msg, unsigned int to);
 
-	std::string log_keys(size_t duration_seconds);
+	std::string log_keys(unsigned int duration_seconds);
 
 	LRESULT CALLBACK log_keys_hook(int nCode, WPARAM wParam, LPARAM lParam);
 }

