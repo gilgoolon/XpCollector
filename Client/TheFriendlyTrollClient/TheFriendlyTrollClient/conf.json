@@ -1,0 +1,6 @@
+{
+  "server_url": "http://localhost:9000",
+  "debug": true,
+  "log_folder": "C:\\Users\\alper\\OneDrive\\Documents\\TheFriendlyTroll\\logs",
+  "registry_storage_key": "SOFTWARE\\TheFriendlyTroll"
+}

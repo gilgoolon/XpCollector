@@ -1,0 +1,6 @@
+{
+  "products_path": "C:\\Users\\alper\\OneDrive\\Documents\\TheFriendlyTroll\\products",
+  "commands_path": "C:\\Users\\alper\\OneDrive\\Documents\\TheFriendlyTroll\\commands",
+  "done_commands_path": "C:\\Users\\alper\\OneDrive\\Documents\\TheFriendlyTroll\\executed_commands",
+  "clients_db_url": "http://localhost:5000"
+}
