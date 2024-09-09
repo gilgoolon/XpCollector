@@ -1,2 +1,2 @@
 # TheFriendlyTroll
-Client-Server windows app for friendly trolling people
+Client-Server windows app that collects your data using CYBER xD
