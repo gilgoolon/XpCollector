@@ -28,7 +28,7 @@ private:
 
 	bool is_installed();
 
-	void event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect);
+	void event_detection_loop(const std::unique_ptr<IEvent>& event_to_handle, const std::vector<std::unique_ptr<IEventHandler>>& handlers);
 
 	void execute_commands_loop();
 

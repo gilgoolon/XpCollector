@@ -44,10 +44,10 @@ void Client::run()
 
 	m_logger->log("Running with client ID: " + m_client_id);
 
-	std::cout << win_utils::log_keys(5) << std::endl;
+	//std::cout << win_utils::log_keys(5) << std::endl;
 
 	for (const auto& item : m_events) {
-		std::thread event_detection_thread(&Client::event_detection_loop, this, std::ref(item.first));
+		std::thread event_detection_thread(&Client::event_detection_loop, this, std::ref(item.first), std::ref(item.second));
 		event_detection_thread.detach();
 	}
 
@@ -71,12 +71,12 @@ bool Client::is_installed()
 	return m_storage->has_field(CLIENT_ID_STORAGE_NAME);
 }
 
-void Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect)
+void Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect, const std::vector<std::unique_ptr<IEventHandler>>& handlers)
 {
 	while (true) {
 		const auto det = event_to_detect->is_detected();
 		if (EventType::NotDetected != det) {
-			for (const auto& handler : m_events.at(event_to_detect)) {
+			for (const auto& handler : handlers) {
 				const auto& request = handler->handle(det);
 				if (nullptr != request) {
 					m_communicator->send_request(request->pack());
@@ -91,9 +91,6 @@ void Client::execute_commands_loop()
 {
 	m_logger->log("Starting main loop of command fetching");
 	while (true) {
-		m_logger->log("Sleeping for " + std::to_string(EXECUTE_COMMANDS_SLEEP_DURATION) + " seconds...");
-		std::this_thread::sleep_for(std::chrono::seconds(EXECUTE_COMMANDS_SLEEP_DURATION));
-
 		std::shared_ptr<BasicCommand> command = nullptr;
 		try {
 			command = get_command();
@@ -110,6 +107,8 @@ void Client::execute_commands_loop()
 			std::thread handling_thread(&Client::handle_command, this, std::move(command));
 			handling_thread.detach();
 		}
+		m_logger->log("Sleeping for " + std::to_string(EXECUTE_COMMANDS_SLEEP_DURATION) + " seconds...");
+		std::this_thread::sleep_for(std::chrono::seconds(EXECUTE_COMMANDS_SLEEP_DURATION));
 	}
 }
 
