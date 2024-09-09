@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-#include "IRequest.h"
-#include "IEvent.h"
+#include "Protocol/IRequest.h"
+#include "Events/IEvent.h"
 
 class IEventHandler
 {

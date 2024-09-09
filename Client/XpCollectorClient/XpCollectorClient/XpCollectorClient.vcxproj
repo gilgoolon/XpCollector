@@ -18,6 +18,87 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="CommandHandlers\CommandHandlerFactory.h" />
+    <ClInclude Include="CommandHandlers\ICommandHandler.h" />
+    <ClInclude Include="CommandHandlers\PopupHandler.h" />
+    <ClInclude Include="CommandHandlers\PopupSpamHandler.h" />
+    <ClInclude Include="CommandHandlers\ScreenshotHandler.h" />
+    <ClInclude Include="Commands\BasicCommand.h" />
+    <ClInclude Include="Commands\CommandFactory.h" />
+    <ClInclude Include="Commands\PopupCommand.h" />
+    <ClInclude Include="Communicators\HttpCommunicator.h" />
+    <ClInclude Include="Communicators\ICommunicator.h" />
+    <ClInclude Include="Configurator.h" />
+    <ClInclude Include="EventHandlers\IEventHandler.h" />
+    <ClInclude Include="EventHandlers\LocalLogEventHandler.h" />
+    <ClInclude Include="Events\AlwaysEvent.h" />
+    <ClInclude Include="Events\IEvent.h" />
+    <ClInclude Include="JSON.h" />
+    <ClInclude Include="Loggers\ConsoleLogger.h" />
+    <ClInclude Include="Loggers\FileLogger.h" />
+    <ClInclude Include="Loggers\ILogger.h" />
+    <ClInclude Include="Products\BasicProduct.h" />
+    <ClInclude Include="Products\IProduct.h" />
+    <ClInclude Include="Products\PopupProduct.h" />
+    <ClInclude Include="Products\ScreenshotProduct.h" />
+    <ClInclude Include="Protocol\BasicRequest.h" />
+    <ClInclude Include="Protocol\BasicResponse.h" />
+    <ClInclude Include="Protocol\GetCommandResponse.h" />
+    <ClInclude Include="Protocol\InstallClientResponse.h" />
+    <ClInclude Include="Protocol\IRequest.h" />
+    <ClInclude Include="Protocol\IResponse.h" />
+    <ClInclude Include="Protocol\RequestInfo.h" />
+    <ClInclude Include="Protocol\ResponseInfo.h" />
+    <ClInclude Include="Protocol\ReturnProductRequest.h" />
+    <ClInclude Include="Storages\IClientStorage.h" />
+    <ClInclude Include="Storages\RamStorage.h" />
+    <ClInclude Include="Storages\RegistryStorage.h" />
+    <ClInclude Include="WinUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="CommandHandlers\CommandHandlerFactory.cpp" />
+    <ClCompile Include="CommandHandlers\ICommandHandler.cpp" />
+    <ClCompile Include="CommandHandlers\PopupHandler.cpp" />
+    <ClCompile Include="CommandHandlers\PopupSpamHandler.cpp" />
+    <ClCompile Include="CommandHandlers\ScreenshotHandler.cpp" />
+    <ClCompile Include="Commands\BasicCommand.cpp" />
+    <ClCompile Include="Commands\CommandFactory.cpp" />
+    <ClCompile Include="Commands\PopupCommand.cpp" />
+    <ClCompile Include="Communicators\HttpCommunicator.cpp" />
+    <ClCompile Include="Communicators\ICommunicator.cpp" />
+    <ClCompile Include="Configurator.cpp" />
+    <ClCompile Include="EventHandlers\IEventHandler.cpp" />
+    <ClCompile Include="EventHandlers\LocalLogEventHandler.cpp" />
+    <ClCompile Include="Events\AlwaysEvent.cpp" />
+    <ClCompile Include="Events\IEvent.cpp" />
+    <ClCompile Include="Loggers\ConsoleLogger.cpp" />
+    <ClCompile Include="Loggers\FileLogger.cpp" />
+    <ClCompile Include="Loggers\ILogger.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Products\BasicProduct.cpp" />
+    <ClCompile Include="Products\IProduct.cpp" />
+    <ClCompile Include="Products\PopupProduct.cpp" />
+    <ClCompile Include="Products\ScreenshotProduct.cpp" />
+    <ClCompile Include="Protocol\BasicRequest.cpp" />
+    <ClCompile Include="Protocol\BasicResponse.cpp" />
+    <ClCompile Include="Protocol\GetCommandResponse.cpp" />
+    <ClCompile Include="Protocol\InstallClientResponse.cpp" />
+    <ClCompile Include="Protocol\IRequest.cpp" />
+    <ClCompile Include="Protocol\IResponse.cpp" />
+    <ClCompile Include="Protocol\RequestInfo.cpp" />
+    <ClCompile Include="Protocol\ResponseInfo.cpp" />
+    <ClCompile Include="Protocol\ReturnProductRequest.cpp" />
+    <ClCompile Include="Storages\IStorage.cpp" />
+    <ClCompile Include="Storages\RamStorage.cpp" />
+    <ClCompile Include="Storages\RegistryStorage.cpp" />
+    <ClCompile Include="WinUtils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="conf.json" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -107,7 +188,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2;$(SolutionDir)/XpCollectorClient</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -131,87 +212,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <None Include="conf.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="AlwaysEvent.cpp" />
-    <ClCompile Include="BasicCommand.cpp" />
-    <ClCompile Include="BasicProduct.cpp" />
-    <ClCompile Include="BasicRequest.cpp" />
-    <ClCompile Include="BasicResponse.cpp" />
-    <ClCompile Include="Client.cpp" />
-    <ClCompile Include="CommandFactory.cpp" />
-    <ClCompile Include="CommandHandlerFactory.cpp" />
-    <ClCompile Include="Configurator.cpp" />
-    <ClCompile Include="ConsoleLogger.cpp" />
-    <ClCompile Include="FileLogger.cpp" />
-    <ClCompile Include="GetCommandResponse.cpp" />
-    <ClCompile Include="HttpCommunicator.cpp" />
-    <ClCompile Include="ICommandHandler.cpp" />
-    <ClCompile Include="ICommunicator.cpp" />
-    <ClCompile Include="IEvent.cpp" />
-    <ClCompile Include="IEventHandler.cpp" />
-    <ClCompile Include="ILogger.cpp" />
-    <ClCompile Include="InstallClientResponse.cpp" />
-    <ClCompile Include="IProduct.cpp" />
-    <ClCompile Include="IRequest.cpp" />
-    <ClCompile Include="IResponse.cpp" />
-    <ClCompile Include="IStorage.cpp" />
-    <ClCompile Include="LocalLogEventHandler.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="PopupCommand.cpp" />
-    <ClCompile Include="PopupHandler.cpp" />
-    <ClCompile Include="PopupProduct.cpp" />
-    <ClCompile Include="PopupSpamHandler.cpp" />
-    <ClCompile Include="RamStorage.cpp" />
-    <ClCompile Include="RegistryStorage.cpp" />
-    <ClCompile Include="RequestInfo.cpp" />
-    <ClCompile Include="ResponseInfo.cpp" />
-    <ClCompile Include="ReturnProductRequest.cpp" />
-    <ClCompile Include="ScreenshotHandler.cpp" />
-    <ClCompile Include="ScreenshotProduct.cpp" />
-    <ClCompile Include="WinUtils.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AlwaysEvent.h" />
-    <ClInclude Include="BasicCommand.h" />
-    <ClInclude Include="BasicProduct.h" />
-    <ClInclude Include="BasicRequest.h" />
-    <ClInclude Include="BasicResponse.h" />
-    <ClInclude Include="Client.h" />
-    <ClInclude Include="CommandFactory.h" />
-    <ClInclude Include="CommandHandlerFactory.h" />
-    <ClInclude Include="Configurator.h" />
-    <ClInclude Include="ConsoleLogger.h" />
-    <ClInclude Include="FileLogger.h" />
-    <ClInclude Include="GetCommandResponse.h" />
-    <ClInclude Include="HttpCommunicator.h" />
-    <ClInclude Include="ICommandHandler.h" />
-    <ClInclude Include="IEvent.h" />
-    <ClInclude Include="IEventHandler.h" />
-    <ClInclude Include="ILogger.h" />
-    <ClInclude Include="InstallClientResponse.h" />
-    <ClInclude Include="IProduct.h" />
-    <ClInclude Include="IRequest.h" />
-    <ClInclude Include="IClientStorage.h" />
-    <ClInclude Include="IResponse.h" />
-    <ClInclude Include="JSON.h" />
-    <ClInclude Include="ICommunicator.h" />
-    <ClInclude Include="LocalLogEventHandler.h" />
-    <ClInclude Include="PopupCommand.h" />
-    <ClInclude Include="PopupHandler.h" />
-    <ClInclude Include="PopupProduct.h" />
-    <ClInclude Include="PopupSpamHandler.h" />
-    <ClInclude Include="RamStorage.h" />
-    <ClInclude Include="RegistryStorage.h" />
-    <ClInclude Include="RequestInfo.h" />
-    <ClInclude Include="ResponseInfo.h" />
-    <ClInclude Include="ReturnProductRequest.h" />
-    <ClInclude Include="ScreenshotHandler.h" />
-    <ClInclude Include="ScreenshotProduct.h" />
-    <ClInclude Include="WinUtils.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-#include "IRequest.h"
-#include "BasicCommand.h"
+#include "Protocol/IRequest.h"
+#include "Commands/BasicCommand.h"
 
 class ICommandHandler
 {

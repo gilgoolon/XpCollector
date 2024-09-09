@@ -1,6 +1,6 @@
 #pragma once
-#include "RequestInfo.h"
-#include "ResponseInfo.h"
+#include "Protocol/RequestInfo.h"
+#include "Protocol/ResponseInfo.h"
 
 
 class ICommunicator

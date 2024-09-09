@@ -1,6 +1,6 @@
 #pragma once
-#include "BasicResponse.h"
-#include "BasicCommand.h"
+#include "Protocol/BasicResponse.h"
+#include "Commands/BasicCommand.h"
 
 class GetCommandResponse :
     public BasicResponse

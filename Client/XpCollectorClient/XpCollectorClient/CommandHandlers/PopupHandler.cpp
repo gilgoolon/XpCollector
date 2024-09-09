@@ -1,8 +1,9 @@
-#include "PopupHandler.h"
-#include "ReturnProductRequest.h"
-#include "PopupProduct.h"
 #include <Windows.h>
-#include "PopupCommand.h"
+
+#include "CommandHandlers/PopupHandler.h"
+#include "Protocol/ReturnProductRequest.h"
+#include "Products/PopupProduct.h"
+#include "Commands/PopupCommand.h"
 #include "WinUtils.h"
 
 PopupHandler::PopupHandler(std::string client_id)

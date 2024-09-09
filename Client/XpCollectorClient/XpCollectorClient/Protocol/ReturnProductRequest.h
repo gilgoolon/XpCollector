@@ -1,5 +1,5 @@
 #pragma once
-#include "BasicRequest.h"
+#include "Protocol/BasicRequest.h"
 
 constexpr size_t PRODUCT_JSON_INDENT_SPACES_COUNT = 4;
 
