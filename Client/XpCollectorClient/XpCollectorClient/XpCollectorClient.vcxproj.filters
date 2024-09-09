@@ -221,9 +221,6 @@
     <ClCompile Include="Protocol\ReturnProductRequest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Storages\IStorage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Storages\RamStorage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -231,9 +228,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Products\BasicProduct.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Products\IProduct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Products\PopupProduct.cpp">
@@ -248,25 +242,13 @@
     <ClCompile Include="Loggers\FileLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Loggers\ILogger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Events\AlwaysEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Events\IEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EventHandlers\IEventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EventHandlers\LocalLogEventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Communicators\HttpCommunicator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Communicators\ICommunicator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Commands\BasicCommand.cpp">

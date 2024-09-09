@@ -2,13 +2,13 @@
 #include <chrono>
 #include <format>
 
-BasicProduct::BasicProduct(std::string product_id, CommandType product_type)
+xp_collector::BasicProduct::BasicProduct(std::string product_id, CommandType product_type)
     : m_product_id(product_id)
     , m_product_type(product_type)
 {
 }
 
-json BasicProduct::serialize()
+json xp_collector::BasicProduct::serialize()
 {
     const auto now = std::chrono::system_clock::now();
     const auto local_time = std::chrono::current_zone()->to_local(now);

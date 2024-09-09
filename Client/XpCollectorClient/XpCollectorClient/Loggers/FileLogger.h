@@ -3,6 +3,8 @@
 
 #include "ILogger.h"
 
+namespace xp_collector {
+
 class FileLogger :
     public ILogger
 {
@@ -20,3 +22,4 @@ private:
     std::streambuf* m_cerr_old_buff;
 };
 
+}

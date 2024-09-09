@@ -3,6 +3,8 @@
 
 #include "IClientStorage.h"
 
+namespace xp_collector {
+
 class RamStorage :
     public IClientStorage
 {
@@ -14,3 +16,4 @@ private:
     std::unordered_map<std::string, std::string> m_items;
 };
 
+}

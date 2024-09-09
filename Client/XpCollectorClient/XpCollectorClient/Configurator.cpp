@@ -12,7 +12,7 @@
 
 using json = nlohmann::json;
 
-std::unique_ptr<Client> configurator::parse(std::string conf_path)
+std::unique_ptr<xp_collector::Client> xp_collector::parse(std::string conf_path)
 {
 	std::ifstream conf_file(conf_path);
 	std::string contents;

@@ -2,6 +2,8 @@
 #include "Protocol/BasicResponse.h"
 #include "Commands/BasicCommand.h"
 
+namespace xp_collector {
+
 class GetCommandResponse :
     public BasicResponse
 {
@@ -17,3 +19,4 @@ private:
     std::shared_ptr<BasicCommand> m_command;
 };
 
+}

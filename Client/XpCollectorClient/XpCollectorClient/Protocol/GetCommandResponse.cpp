@@ -1,7 +1,8 @@
 #include "Protocol/GetCommandResponse.h"
 #include "Commands/CommandFactory.h"
+using namespace xp_collector;
 
-GetCommandResponse& GetCommandResponse::unpack(const ResponseInfo& response)
+GetCommandResponse& xp_collector::GetCommandResponse::unpack(const ResponseInfo& response)
 {
 	BasicResponse::unpack(response);
 	const auto content = response.get_body()["content"];
@@ -12,12 +13,12 @@ GetCommandResponse& GetCommandResponse::unpack(const ResponseInfo& response)
 	return *this;
 }
 
-bool GetCommandResponse::has_command() const
+bool xp_collector::GetCommandResponse::has_command() const
 {
 	return m_exists;
 }
 
-std::shared_ptr<BasicCommand> GetCommandResponse::get_command()
+std::shared_ptr<BasicCommand> xp_collector::GetCommandResponse::get_command()
 {
 	return m_command;
 }

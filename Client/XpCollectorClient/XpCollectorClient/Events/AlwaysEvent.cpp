@@ -1,6 +1,7 @@
 #include "AlwaysEvent.h"
+using namespace xp_collector;
 
-EventType AlwaysEvent::is_detected()
+EventType xp_collector::AlwaysEvent::is_detected()
 {
     return EventType::AlwaysEvent;
 }

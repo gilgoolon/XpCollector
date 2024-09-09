@@ -6,6 +6,8 @@
 #include "Events/IEvent.h"
 #include "EventHandlers/IEventHandler.h"
 
+namespace xp_collector {
+
 constexpr auto CLIENT_ID_STORAGE_NAME = "client_id";
 constexpr size_t EXECUTE_COMMANDS_SLEEP_DURATION = 10;  // Seconds
 constexpr size_t EVENT_DETECTION_SLEEP_DURATION = 5;  // Seconds
@@ -43,3 +45,4 @@ private:
 		std::string m_client_id;
 };
 
+}

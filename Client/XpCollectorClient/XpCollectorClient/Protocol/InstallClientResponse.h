@@ -1,5 +1,8 @@
 #pragma once
 #include "BasicResponse.h"
+
+namespace xp_collector {
+
 class InstallClientResponse :
     public BasicResponse
 {
@@ -11,3 +14,4 @@ private:
     std::string m_client_id;
 };
 
+}

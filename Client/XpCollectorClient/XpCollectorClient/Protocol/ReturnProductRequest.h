@@ -3,6 +3,8 @@
 
 constexpr size_t PRODUCT_JSON_INDENT_SPACES_COUNT = 4;
 
+namespace xp_collector {
+
 class ReturnProductRequest :
     public BasicRequest
 {
@@ -16,3 +18,4 @@ private:
     json m_data;
 };
 
+}

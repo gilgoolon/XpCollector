@@ -3,7 +3,7 @@
 #include "CommandHandlers/PopupSpamHandler.h"
 #include "CommandHandlers/ScreenshotHandler.h"
 
-std::unique_ptr<ICommandHandler> CommandHandlerFactory::create(const BasicCommand& command, const std::string& command_id)
+std::unique_ptr<xp_collector::ICommandHandler> xp_collector::CommandHandlerFactory::create(const BasicCommand& command, const std::string& command_id)
 {
 	switch (command.get_command_type())
 	{

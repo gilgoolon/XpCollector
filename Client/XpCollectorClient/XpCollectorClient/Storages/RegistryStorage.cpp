@@ -3,12 +3,12 @@
 #include "RegistryStorage.h"
 #include <stdexcept>
 
-RegistryStorage::RegistryStorage(std::string key)
+xp_collector::RegistryStorage::RegistryStorage(std::string key)
     : m_key(key)
 {
 }
 
-void RegistryStorage::store(std::string name, std::string value)
+void xp_collector::RegistryStorage::store(std::string name, std::string value)
 {
     HKEY h_key;
     DWORD error = RegCreateKeyExA(HKEY_CURRENT_USER, m_key.c_str(), 0, nullptr, 0, KEY_WRITE, nullptr, &h_key, nullptr);
@@ -23,7 +23,7 @@ void RegistryStorage::store(std::string name, std::string value)
     RegCloseKey(h_key);
 }
 
-bool RegistryStorage::has_field(std::string name)
+bool xp_collector::RegistryStorage::has_field(std::string name)
 {
     try {
         fetch(name);
@@ -34,7 +34,7 @@ bool RegistryStorage::has_field(std::string name)
     }
 }
 
-std::string RegistryStorage::fetch(std::string name)
+std::string xp_collector::RegistryStorage::fetch(std::string name)
 {
     HKEY h_key;
     DWORD result_size = MAX_FIELD_SIZE;

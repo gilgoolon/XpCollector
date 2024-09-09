@@ -1,6 +1,8 @@
 #pragma once
 #include "Commands/BasicCommand.h"
 
+namespace xp_collector {
+
 class PopupCommand :
     public BasicCommand
 {
@@ -13,3 +15,4 @@ private:
 	std::string m_message;
 };
 
+}

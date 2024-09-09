@@ -1,7 +1,10 @@
+
 #pragma once
 
 #include <string>
 #include <stdexcept>
+
+namespace xp_collector {
 
 enum class EventType {
 	NotDetected,
@@ -30,3 +33,5 @@ class IEvent
 public:
 	virtual EventType is_detected() = 0;
 };
+
+}

@@ -1,6 +1,8 @@
 #pragma once
 #include "BasicProduct.h"
 
+namespace xp_collector {
+
 class ScreenshotProduct :
     public BasicProduct
 {
@@ -13,3 +15,4 @@ private:
     std::string m_bitmap_data;
 };
 
+}

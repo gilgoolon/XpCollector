@@ -1,6 +1,8 @@
 #pragma once
 #include "JSON.h"
 
+namespace xp_collector {
+
 class ResponseInfo
 {
 public:
@@ -15,3 +17,4 @@ private:
 	std::string m_body;
 };
 
+}

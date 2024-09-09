@@ -68,18 +68,13 @@
     <ClCompile Include="Commands\CommandFactory.cpp" />
     <ClCompile Include="Commands\PopupCommand.cpp" />
     <ClCompile Include="Communicators\HttpCommunicator.cpp" />
-    <ClCompile Include="Communicators\ICommunicator.cpp" />
     <ClCompile Include="Configurator.cpp" />
-    <ClCompile Include="EventHandlers\IEventHandler.cpp" />
     <ClCompile Include="EventHandlers\LocalLogEventHandler.cpp" />
     <ClCompile Include="Events\AlwaysEvent.cpp" />
-    <ClCompile Include="Events\IEvent.cpp" />
     <ClCompile Include="Loggers\ConsoleLogger.cpp" />
     <ClCompile Include="Loggers\FileLogger.cpp" />
-    <ClCompile Include="Loggers\ILogger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Products\BasicProduct.cpp" />
-    <ClCompile Include="Products\IProduct.cpp" />
     <ClCompile Include="Products\PopupProduct.cpp" />
     <ClCompile Include="Products\ScreenshotProduct.cpp" />
     <ClCompile Include="Protocol\BasicRequest.cpp" />
@@ -91,7 +86,6 @@
     <ClCompile Include="Protocol\RequestInfo.cpp" />
     <ClCompile Include="Protocol\ResponseInfo.cpp" />
     <ClCompile Include="Protocol\ReturnProductRequest.cpp" />
-    <ClCompile Include="Storages\IStorage.cpp" />
     <ClCompile Include="Storages\RamStorage.cpp" />
     <ClCompile Include="Storages\RegistryStorage.cpp" />
     <ClCompile Include="WinUtils.cpp" />

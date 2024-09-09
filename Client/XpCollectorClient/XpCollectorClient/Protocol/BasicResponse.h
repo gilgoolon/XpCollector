@@ -1,6 +1,7 @@
 #pragma once
 #include "IResponse.h"
 
+namespace xp_collector {
 
 struct ResponseHeader {
 	ResponseType request_type;
@@ -15,3 +16,5 @@ public:
 protected:
 	ResponseHeader m_header;
 };
+
+}

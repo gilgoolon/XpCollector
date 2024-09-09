@@ -1,6 +1,8 @@
 #pragma once
 #include "Protocol/RequestInfo.h"
 
+namespace xp_collector {
+
 class IRequest
 {
 public:
@@ -22,4 +24,6 @@ inline std::string to_string(RequestType val)
 	case RequestType::ReturnProduct: return "ReturnProduct";
 	default: throw std::invalid_argument("Unmapped to_string enum in RequestType");
 	}
+}
+
 }

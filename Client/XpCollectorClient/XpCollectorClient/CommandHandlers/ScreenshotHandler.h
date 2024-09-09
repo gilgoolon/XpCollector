@@ -3,6 +3,7 @@
 
 #include "CommandHandlers/ICommandHandler.h"
 
+namespace xp_collector {
 
 class ScreenshotHandler :
     public ICommandHandler
@@ -13,3 +14,4 @@ public:
     virtual std::unique_ptr<IRequest> handle(std::shared_ptr<BasicCommand>& command) override;
 };
 
+}

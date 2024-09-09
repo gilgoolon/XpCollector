@@ -14,7 +14,7 @@ int main(int argc, char** argv)
 	}
 
 	const std::string conf_path = argv[1];
-	std::unique_ptr<Client> client = configurator::parse(conf_path);
+	std::unique_ptr<Client> client = parse(conf_path);
 	client->run();
 	return EXIT_SUCCESS;
 }

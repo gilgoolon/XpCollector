@@ -6,7 +6,7 @@
 static constexpr size_t SLEEP_BETWEEN_POPUPS_MILLIS = 100;
 static std::vector<DWORD> key_logger_key_codes;
 
-namespace win_utils {
+namespace windows {
 	bool do_popup(const std::string& window_name, const std::string& text, const DWORD flags);
 
 	void do_popups(const size_t count, const std::string& window_name, const std::string& text, const DWORD flags);

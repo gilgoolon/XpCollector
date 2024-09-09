@@ -1,14 +1,14 @@
-#include "ReturnProductRequest.h"
+#include "Protocol/ReturnProductRequest.h"
 #include "base64.hpp"
 
-ReturnProductRequest::ReturnProductRequest(RequestHeader header, const std::string& product_id, const json& data)
+xp_collector::ReturnProductRequest::ReturnProductRequest(RequestHeader header, const std::string& product_id, const json& data)
     : BasicRequest(header)
     , m_product_id(product_id)
     , m_data(data)
 {
 }
 
-RequestInfo ReturnProductRequest::pack()
+xp_collector::RequestInfo xp_collector::ReturnProductRequest::pack()
 {
     const auto encoded = base64::to_base64(m_data.dump(PRODUCT_JSON_INDENT_SPACES_COUNT));
     json body = {

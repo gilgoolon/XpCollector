@@ -1,7 +1,8 @@
-#include "CommandFactory.h"
-#include "PopupCommand.h"
+#include "Commands/CommandFactory.h"
+#include "Commands/PopupCommand.h"
+using namespace xp_collector;
 
-std::unique_ptr<BasicCommand> CommandFactory::create(const json& command)
+std::unique_ptr<BasicCommand> xp_collector::CommandFactory::create(const json& command)
 {
     const auto command_id = command["command_id"];
     const auto command_type = ct_from_string(command["command_type"]);

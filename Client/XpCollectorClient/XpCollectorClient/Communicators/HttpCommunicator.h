@@ -4,6 +4,7 @@
 
 #include "ICommunicator.h"
 
+namespace xp_collector {
 
 class HttpCommunicator :
     public ICommunicator
@@ -17,3 +18,4 @@ private:
     httplib::Client m_http_client;
 };
 
+}

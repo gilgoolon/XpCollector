@@ -4,6 +4,8 @@
 
 constexpr auto CONTENT_FIELD_NAME = "content";
 
+namespace xp_collector {
+
 class BasicProduct :
     public IProduct
 {
@@ -17,3 +19,4 @@ private:
     CommandType m_product_type;
 };
 
+}

@@ -2,6 +2,8 @@
 #include <string>
 #include <stdexcept>
 
+namespace xp_collector {
+
 enum class CommandType {
 	Popup,
 	PopupSpam,
@@ -40,3 +42,4 @@ protected:
 	CommandType m_command_type;
 };
 
+}
