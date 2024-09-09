@@ -1,10 +1,10 @@
 #include <Windows.h>
 
-#include "PopupSpamHandler.h"
-#include "PopupCommand.h"
+#include "CommandHandlers/PopupSpamHandler.h"
+#include "Commands/PopupCommand.h"
 #include "WinUtils.h"
-#include "ReturnProductRequest.h"
-#include "PopupProduct.h"
+#include "Protocol/ReturnProductRequest.h"
+#include "Products/PopupProduct.h"
 
 PopupSpamHandler::PopupSpamHandler(const std::string& client_id)
 	: ICommandHandler(client_id)

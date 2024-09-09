@@ -69,234 +69,232 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="conf.json">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Configurator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Client.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RequestInfo.cpp">
-      <Filter>Source Files\Protocol</Filter>
-    </ClCompile>
-    <ClCompile Include="IStorage.cpp">
-      <Filter>Source Files\Storage</Filter>
-    </ClCompile>
-    <ClCompile Include="RegistryStorage.cpp">
-      <Filter>Source Files\Storage</Filter>
-    </ClCompile>
-    <ClCompile Include="RamStorage.cpp">
-      <Filter>Source Files\Storage</Filter>
-    </ClCompile>
-    <ClCompile Include="HttpCommunicator.cpp">
-      <Filter>Source Files\Communication</Filter>
-    </ClCompile>
-    <ClCompile Include="ICommunicator.cpp">
-      <Filter>Source Files\Communication</Filter>
-    </ClCompile>
-    <ClCompile Include="IRequest.cpp">
-      <Filter>Source Files\Protocol</Filter>
-    </ClCompile>
-    <ClCompile Include="ResponseInfo.cpp">
-      <Filter>Source Files\Protocol</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicRequest.cpp">
-      <Filter>Source Files\Protocol</Filter>
-    </ClCompile>
-    <ClCompile Include="IResponse.cpp">
-      <Filter>Source Files\Protocol</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicResponse.cpp">
-      <Filter>Source Files\Protocol</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicCommand.cpp">
-      <Filter>Source Files\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="InstallClientResponse.cpp">
-      <Filter>Source Files\Protocol</Filter>
-    </ClCompile>
-    <ClCompile Include="PopupCommand.cpp">
-      <Filter>Source Files\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="GetCommandResponse.cpp">
-      <Filter>Source Files\Protocol</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandFactory.cpp">
-      <Filter>Source Files\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="ICommandHandler.cpp">
-      <Filter>Source Files\CommandHandlers</Filter>
-    </ClCompile>
-    <ClCompile Include="PopupHandler.cpp">
-      <Filter>Source Files\CommandHandlers</Filter>
-    </ClCompile>
-    <ClCompile Include="IProduct.cpp">
-      <Filter>Source Files\Products</Filter>
-    </ClCompile>
-    <ClCompile Include="PopupProduct.cpp">
-      <Filter>Source Files\Products</Filter>
-    </ClCompile>
-    <ClCompile Include="ReturnProductRequest.cpp">
-      <Filter>Source Files\Protocol</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicProduct.cpp">
-      <Filter>Source Files\Products</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandHandlerFactory.cpp">
-      <Filter>Source Files\CommandHandlers</Filter>
-    </ClCompile>
-    <ClCompile Include="ILogger.cpp">
-      <Filter>Source Files\Loggers</Filter>
-    </ClCompile>
-    <ClCompile Include="ConsoleLogger.cpp">
-      <Filter>Source Files\Loggers</Filter>
-    </ClCompile>
-    <ClCompile Include="FileLogger.cpp">
-      <Filter>Source Files\Loggers</Filter>
-    </ClCompile>
-    <ClCompile Include="ScreenshotHandler.cpp">
-      <Filter>Source Files\CommandHandlers</Filter>
-    </ClCompile>
-    <ClCompile Include="ScreenshotProduct.cpp">
-      <Filter>Source Files\Products</Filter>
-    </ClCompile>
-    <ClCompile Include="WinUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PopupSpamHandler.cpp">
-      <Filter>Source Files\CommandHandlers</Filter>
-    </ClCompile>
-    <ClCompile Include="IEvent.cpp">
-      <Filter>Source Files\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="AlwaysEvent.cpp">
-      <Filter>Source Files\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="IEventHandler.cpp">
-      <Filter>Source Files\EventHandlers</Filter>
-    </ClCompile>
-    <ClCompile Include="LocalLogEventHandler.cpp">
-      <Filter>Source Files\EventHandlers</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Configurator.h">
+    <ClInclude Include="WinUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Configurator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="JSON.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RequestInfo.h">
-      <Filter>Header Files\Protocol</Filter>
-    </ClInclude>
-    <ClInclude Include="ResponseInfo.h">
-      <Filter>Header Files\Protocol</Filter>
-    </ClInclude>
-    <ClInclude Include="RegistryStorage.h">
-      <Filter>Header Files\Storage</Filter>
-    </ClInclude>
-    <ClInclude Include="IClientStorage.h">
-      <Filter>Header Files\Storage</Filter>
-    </ClInclude>
-    <ClInclude Include="RamStorage.h">
-      <Filter>Header Files\Storage</Filter>
-    </ClInclude>
-    <ClInclude Include="HttpCommunicator.h">
-      <Filter>Header Files\Communication</Filter>
-    </ClInclude>
-    <ClInclude Include="ICommunicator.h">
-      <Filter>Header Files\Communication</Filter>
-    </ClInclude>
-    <ClInclude Include="IRequest.h">
-      <Filter>Header Files\Protocol</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicRequest.h">
-      <Filter>Header Files\Protocol</Filter>
-    </ClInclude>
-    <ClInclude Include="IResponse.h">
-      <Filter>Header Files\Protocol</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicResponse.h">
-      <Filter>Header Files\Protocol</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicCommand.h">
-      <Filter>Header Files\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="PopupCommand.h">
-      <Filter>Header Files\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="InstallClientResponse.h">
-      <Filter>Header Files\Protocol</Filter>
-    </ClInclude>
-    <ClInclude Include="GetCommandResponse.h">
-      <Filter>Header Files\Protocol</Filter>
-    </ClInclude>
-    <ClInclude Include="CommandFactory.h">
-      <Filter>Header Files\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="ICommandHandler.h">
-      <Filter>Header Files\CommandHandlers</Filter>
-    </ClInclude>
-    <ClInclude Include="PopupHandler.h">
-      <Filter>Header Files\CommandHandlers</Filter>
-    </ClInclude>
-    <ClInclude Include="IProduct.h">
-      <Filter>Header Files\Products</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicProduct.h">
-      <Filter>Header Files\Products</Filter>
-    </ClInclude>
-    <ClInclude Include="PopupProduct.h">
-      <Filter>Header Files\Products</Filter>
-    </ClInclude>
-    <ClInclude Include="ReturnProductRequest.h">
-      <Filter>Header Files\Protocol</Filter>
-    </ClInclude>
-    <ClInclude Include="CommandHandlerFactory.h">
-      <Filter>Header Files\CommandHandlers</Filter>
-    </ClInclude>
-    <ClInclude Include="ILogger.h">
-      <Filter>Header Files\Loggers</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleLogger.h">
-      <Filter>Header Files\Loggers</Filter>
-    </ClInclude>
-    <ClInclude Include="FileLogger.h">
-      <Filter>Header Files\Loggers</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenshotHandler.h">
-      <Filter>Header Files\CommandHandlers</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenshotProduct.h">
-      <Filter>Header Files\Products</Filter>
-    </ClInclude>
-    <ClInclude Include="WinUtils.h">
+    <ClInclude Include="Protocol\ReturnProductRequest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PopupSpamHandler.h">
-      <Filter>Header Files\CommandHandlers</Filter>
+    <ClInclude Include="Protocol\BasicRequest.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IEvent.h">
-      <Filter>Header Files\Events</Filter>
+    <ClInclude Include="Protocol\BasicResponse.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IEventHandler.h">
-      <Filter>Header Files\EventHandlers</Filter>
+    <ClInclude Include="Protocol\GetCommandResponse.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AlwaysEvent.h">
-      <Filter>Header Files\Events</Filter>
+    <ClInclude Include="Protocol\InstallClientResponse.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LocalLogEventHandler.h">
-      <Filter>Header Files\EventHandlers</Filter>
+    <ClInclude Include="Protocol\IRequest.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Protocol\IResponse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol\RequestInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol\ResponseInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Storages\IClientStorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Storages\RamStorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Storages\RegistryStorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Products\BasicProduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Products\IProduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Products\PopupProduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Products\ScreenshotProduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Loggers\ConsoleLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Loggers\FileLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Loggers\ILogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\AlwaysEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\IEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandlers\IEventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandlers\LocalLogEventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Communicators\HttpCommunicator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Communicators\ICommunicator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\BasicCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\CommandFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\PopupCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\CommandHandlerFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\ICommandHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\PopupHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\PopupSpamHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\ScreenshotHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Configurator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WinUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\BasicRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\BasicResponse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\GetCommandResponse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\InstallClientResponse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\IRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\IResponse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\RequestInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\ResponseInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\ReturnProductRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Storages\IStorage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Storages\RamStorage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Storages\RegistryStorage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Products\BasicProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Products\IProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Products\PopupProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Products\ScreenshotProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Loggers\ConsoleLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Loggers\FileLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Loggers\ILogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\AlwaysEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\IEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandlers\IEventHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandlers\LocalLogEventHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Communicators\HttpCommunicator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Communicators\ICommunicator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\BasicCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\CommandFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\PopupCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\CommandHandlerFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\ICommandHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\PopupHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\PopupSpamHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\ScreenshotHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="conf.json" />
   </ItemGroup>
 </Project>

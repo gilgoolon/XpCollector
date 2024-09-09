@@ -2,13 +2,13 @@
 
 #include "Configurator.h"
 #include "nlohmann/json.hpp"
-#include "HttpCommunicator.h"
-#include "RamStorage.h"
-#include "ConsoleLogger.h"
-#include "FileLogger.h"
-#include "RegistryStorage.h"
-#include "AlwaysEvent.h"
-#include "LocalLogEventHandler.h"
+#include "Communicators/HttpCommunicator.h"
+#include "Storages/RamStorage.h"
+#include "Loggers/ConsoleLogger.h"
+#include "Loggers/FileLogger.h"
+#include "Storages/RegistryStorage.h"
+#include "Events/AlwaysEvent.h"
+#include "EventHandlers/LocalLogEventHandler.h"
 
 using json = nlohmann::json;
 

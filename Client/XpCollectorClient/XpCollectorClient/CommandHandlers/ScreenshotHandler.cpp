@@ -1,10 +1,9 @@
 #include <base64.hpp>
 
-#include "ScreenshotHandler.h"
-#include "ReturnProductRequest.h"
-
-#include "CommandFactory.h"
-#include "ScreenshotProduct.h"
+#include "CommandHandlers/ScreenshotHandler.h"
+#include "Protocol/ReturnProductRequest.h"
+#include "Commands/CommandFactory.h"
+#include "Products/ScreenshotProduct.h"
 #include "WinUtils.h"
 
 

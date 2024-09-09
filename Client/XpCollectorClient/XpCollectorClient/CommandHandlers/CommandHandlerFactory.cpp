@@ -1,7 +1,7 @@
-#include "CommandHandlerFactory.h"
-#include "PopupHandler.h"
-#include "PopupSpamHandler.h"
-#include "ScreenshotHandler.h"
+#include "CommandHandlers/CommandHandlerFactory.h"
+#include "CommandHandlers/PopupHandler.h"
+#include "CommandHandlers/PopupSpamHandler.h"
+#include "CommandHandlers/ScreenshotHandler.h"
 
 std::unique_ptr<ICommandHandler> CommandHandlerFactory::create(const BasicCommand& command, const std::string& command_id)
 {

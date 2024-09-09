@@ -1,5 +1,5 @@
 #pragma once
-#include "RequestInfo.h"
+#include "Protocol/RequestInfo.h"
 
 class IRequest
 {

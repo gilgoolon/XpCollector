@@ -1,7 +1,7 @@
 #pragma once
 #include <Windows.h>
 
-#include "ICommandHandler.h"
+#include "CommandHandlers/ICommandHandler.h"
 
 
 class ScreenshotHandler :

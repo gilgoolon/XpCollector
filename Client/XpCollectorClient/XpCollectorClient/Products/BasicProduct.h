@@ -1,6 +1,6 @@
 #pragma once
-#include "IProduct.h"
-#include "BasicCommand.h"
+#include "Products/IProduct.h"
+#include "Commands/BasicCommand.h"
 
 constexpr auto CONTENT_FIELD_NAME = "content";
 

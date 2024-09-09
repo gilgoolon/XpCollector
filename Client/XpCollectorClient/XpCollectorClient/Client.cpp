@@ -7,11 +7,11 @@
 #include <httplib.h>
 
 #include "Client.h"
-#include "BasicRequest.h"
-#include "InstallClientResponse.h"
-#include "GetCommandResponse.h"
-#include "PopupCommand.h"
-#include "CommandHandlerFactory.h"
+#include "Protocol/BasicRequest.h"
+#include "Protocol/InstallClientResponse.h"
+#include "Protocol/GetCommandResponse.h"
+#include "Commands/PopupCommand.h"
+#include "CommandHandlers/CommandHandlerFactory.h"
 #include "WinUtils.h"
 
 Client::Client(

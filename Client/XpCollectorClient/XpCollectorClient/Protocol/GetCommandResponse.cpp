@@ -1,5 +1,5 @@
-#include "GetCommandResponse.h"
-#include "CommandFactory.h"
+#include "Protocol/GetCommandResponse.h"
+#include "Commands/CommandFactory.h"
 
 GetCommandResponse& GetCommandResponse::unpack(const ResponseInfo& response)
 {

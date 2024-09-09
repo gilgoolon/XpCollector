@@ -1,5 +1,5 @@
 #pragma once
-#include "BasicCommand.h"
+#include "Commands/BasicCommand.h"
 
 class PopupCommand :
     public BasicCommand

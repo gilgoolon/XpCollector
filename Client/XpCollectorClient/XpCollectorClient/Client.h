@@ -1,10 +1,10 @@
 #pragma once
-#include "ICommunicator.h"
-#include "IClientStorage.h"
-#include "BasicCommand.h"
-#include "ILogger.h"
-#include "IEvent.h"
-#include "IEventHandler.h"
+#include "Communicators/ICommunicator.h"
+#include "Storages/IClientStorage.h"
+#include "Commands/BasicCommand.h"
+#include "Loggers/ILogger.h"
+#include "Events/IEvent.h"
+#include "EventHandlers/IEventHandler.h"
 
 constexpr auto CLIENT_ID_STORAGE_NAME = "client_id";
 constexpr size_t EXECUTE_COMMANDS_SLEEP_DURATION = 10;  // Seconds

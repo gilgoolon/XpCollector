@@ -1,5 +1,5 @@
 #pragma once
-#include "IEventHandler.h"
+#include "EventHandlers/IEventHandler.h"
 
 class LocalLogEventHandler :
     public IEventHandler
