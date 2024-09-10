@@ -2,7 +2,6 @@
 #include <vector>
 
 #include "Configurator.h"
-#include "nlohmann/json.hpp"
 #include "Communicators/HttpCommunicator.h"
 #include "Storages/RamStorage.h"
 #include "Loggers/ConsoleLogger.h"
@@ -13,7 +12,6 @@
 #include "Events/ProcessNameDetectedEvent.h"
 #include "EventHandlers/EventHandlerFactory.h"
 #include "Events/EventFactory.h"
-using json = nlohmann::json;
 
 std::unique_ptr<xp_collector::Client> xp_collector::parse(std::string conf_path)
 {
