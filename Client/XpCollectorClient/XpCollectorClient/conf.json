@@ -41,7 +41,7 @@
         {
           "name": "KeyLog",
           "parameters": {
-            "duration": 5
+            "duration": 60
           }
         }
       ]
