@@ -189,6 +189,15 @@
     <ClInclude Include="Products\KeyLogProduct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Events\ProcessNameDetectedEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoHandle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Strings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -285,6 +294,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Products\KeyLogProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\ProcessNameDetectedEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoHandle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Strings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

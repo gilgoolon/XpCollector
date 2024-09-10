@@ -1,10 +1,14 @@
 #include <cstdlib>
 #include <ctime>
 #include <thread>
-
-#include <Windows.h>
-#include "WinUtils.h"
 #include <iostream>
+#include <Windows.h>
+#include <tlhelp32.h>
+
+#include "AutoHandle.h"
+#include "WinUtils.h"
+#include "Strings.h"
+using namespace xp_collector;
 
 bool windows::do_popup(const std::string& window_name, const std::string& text, const DWORD flags)
 {
@@ -163,4 +167,24 @@ LRESULT CALLBACK windows::log_keys_hook(int nCode, WPARAM wParam, LPARAM lParam)
         }
     }
     return false; // don't consume event
+}
+
+bool windows::is_process_running(const std::string& name)
+{
+    const AutoHandle h_process_snap(CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0));
+    if (h_process_snap.get() == INVALID_HANDLE_VALUE) {
+        return false;
+    }
+    PROCESSENTRY32 pe32;
+
+    pe32.dwSize = sizeof(PROCESSENTRY32);
+    if (!Process32First(h_process_snap.get(), &pe32)) {
+        return false;
+    }
+    do {
+        if (std::wstring(pe32.szExeFile) == strings::to_wstring(name)) {
+            return true;
+        }
+    } while (Process32Next(h_process_snap.get(), &pe32));
+    return false;
 }

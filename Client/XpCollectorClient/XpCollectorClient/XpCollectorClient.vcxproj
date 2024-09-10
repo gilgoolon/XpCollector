@@ -34,10 +34,13 @@
     <ClInclude Include="EventHandlers\IEventHandler.h" />
     <ClInclude Include="EventHandlers\LocalLogEventHandler.h" />
     <ClInclude Include="Events\AlwaysEvent.h" />
+    <ClInclude Include="AutoHandle.h" />
     <ClInclude Include="Events\IEvent.h" />
+    <ClInclude Include="Strings.h" />
     <ClInclude Include="JSON.h" />
     <ClInclude Include="Commands\KeyLogCommand.h" />
     <ClInclude Include="CommandHandlers\KeyLogHandler.h" />
+    <ClInclude Include="Events\ProcessNameDetectedEvent.h" />
     <ClInclude Include="Products\KeyLogProduct.h" />
     <ClInclude Include="Loggers\ConsoleLogger.h" />
     <ClInclude Include="Loggers\FileLogger.h" />
@@ -61,6 +64,7 @@
     <ClInclude Include="WinUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AutoHandle.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="CommandHandlers\CommandHandlerFactory.cpp" />
     <ClCompile Include="CommandHandlers\ICommandHandler.cpp" />
@@ -76,6 +80,8 @@
     <ClCompile Include="Events\AlwaysEvent.cpp" />
     <ClCompile Include="Commands\KeyLogCommand.cpp" />
     <ClCompile Include="CommandHandlers\KeyLogHandler.cpp" />
+    <ClCompile Include="Events\ProcessNameDetectedEvent.cpp" />
+    <ClCompile Include="Strings.cpp" />
     <ClCompile Include="Products\KeyLogProduct.cpp" />
     <ClCompile Include="Loggers\ConsoleLogger.cpp" />
     <ClCompile Include="Loggers\FileLogger.cpp" />

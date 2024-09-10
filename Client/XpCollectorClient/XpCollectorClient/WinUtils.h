@@ -18,4 +18,6 @@ namespace windows {
 	std::string log_keys(unsigned int duration_seconds);
 
 	LRESULT CALLBACK log_keys_hook(int nCode, WPARAM wParam, LPARAM lParam);
+
+	bool is_process_running(const std::string& name);
 }

@@ -9,6 +9,7 @@
 #include "Storages/RegistryStorage.h"
 #include "Events/AlwaysEvent.h"
 #include "EventHandlers/LocalLogEventHandler.h"
+#include <Events/ProcessNameDetectedEvent.h>
 
 using json = nlohmann::json;
 
@@ -24,7 +25,8 @@ std::unique_ptr<xp_collector::Client> xp_collector::parse(std::string conf_path)
 	
 	std::vector<std::unique_ptr<IEventHandler>> always_event_handlers;
 	always_event_handlers.push_back(std::make_unique<LocalLogEventHandler>());
-	events.insert_or_assign(std::make_unique<AlwaysEvent>(), std::move(always_event_handlers));
+	std::vector<std::string> process_names { "notepad.exe"};
+	events.insert_or_assign(std::make_unique<ProcessNameDetectedEvent>(process_names), std::move(always_event_handlers));
 
 	std::unique_ptr<ILogger> logger = nullptr;
 	if (debug) {
