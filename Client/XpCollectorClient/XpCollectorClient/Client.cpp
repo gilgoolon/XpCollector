@@ -78,7 +78,13 @@ void xp_collector::Client::event_detection_loop(const std::unique_ptr<IEvent>& e
 			for (const auto& handler : handlers) {
 				const auto& request = handler->handle(det, m_client_id);
 				if (nullptr != request) {
-					m_communicator->send_request(request->pack());
+					try {
+						m_communicator->send_request(request->pack());
+					}
+					catch (const std::exception& ex) {
+						m_logger->log(std::string("Couldn't send event handler pruduct request. Error: ") + ex.what());
+						continue;
+					}
 				}
 			}
 		}

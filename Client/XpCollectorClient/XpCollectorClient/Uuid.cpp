@@ -9,7 +9,7 @@ std::string uuid::generate_uuid(size_t length)
 {
     std::string result(length, '\0');
     for (size_t i = 0; i < length; i++) {
-        result += hex_chars[std::rand() % hex_chars.length()];
+        result[i] = hex_chars[std::rand() % hex_chars.length()];
     }
     return result;
 }
