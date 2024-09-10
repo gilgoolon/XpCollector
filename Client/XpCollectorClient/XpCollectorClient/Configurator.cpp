@@ -1,4 +1,5 @@
 #include <fstream>
+#include <vector>
 
 #include "Configurator.h"
 #include "nlohmann/json.hpp"
@@ -9,8 +10,9 @@
 #include "Storages/RegistryStorage.h"
 #include "Events/AlwaysEvent.h"
 #include "EventHandlers/LocalLogEventHandler.h"
-#include <Events/ProcessNameDetectedEvent.h>
-
+#include "Events/ProcessNameDetectedEvent.h"
+#include "EventHandlers/EventHandlerFactory.h"
+#include "Events/EventFactory.h"
 using json = nlohmann::json;
 
 std::unique_ptr<xp_collector::Client> xp_collector::parse(std::string conf_path)
@@ -21,12 +23,7 @@ std::unique_ptr<xp_collector::Client> xp_collector::parse(std::string conf_path)
 	std::string server_url = conf["server_url"];
 	const bool debug = conf["debug"];
 	
-	std::unordered_map<std::unique_ptr<IEvent>, std::vector<std::unique_ptr<IEventHandler>>> events;
-	
-	std::vector<std::unique_ptr<IEventHandler>> always_event_handlers;
-	always_event_handlers.push_back(std::make_unique<LocalLogEventHandler>());
-	std::vector<std::string> process_names { "notepad.exe"};
-	events.insert_or_assign(std::make_unique<ProcessNameDetectedEvent>(process_names), std::move(always_event_handlers));
+	std::unordered_map<std::unique_ptr<IEvent>, std::vector<std::unique_ptr<IEventHandler>>> events = parse_events(conf["events"]);
 
 	std::unique_ptr<ILogger> logger = nullptr;
 	if (debug) {
@@ -41,4 +38,18 @@ std::unique_ptr<xp_collector::Client> xp_collector::parse(std::string conf_path)
 		std::move(events),
 		std::move(logger)
 	);
+}
+
+std::unordered_map<std::unique_ptr<IEvent>, std::vector<std::unique_ptr<IEventHandler>>> xp_collector::parse_events(json events)
+{
+	std::unordered_map<std::unique_ptr<IEvent>, std::vector<std::unique_ptr<IEventHandler>>> result;
+	for (const json& object : events) {
+		const json event_obj = object["event"];
+		std::vector <std::unique_ptr<IEventHandler>> handlers;
+		for (const json& handler_obj : object["handlers"]) {
+			handlers.push_back(std::move(EventHandlerFactory::create(handler_obj)));
+		}
+		result.insert_or_assign(EventFactory::create(event_obj), std::move(handlers));
+	}
+	return result;
 }

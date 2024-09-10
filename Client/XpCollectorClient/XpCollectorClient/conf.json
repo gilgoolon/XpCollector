@@ -2,5 +2,25 @@
   "server_url": "http://localhost:9000",
   "debug": true,
   "log_folder": "C:\\Users\\alper\\OneDrive\\Documents\\XpCollector\\logs",
-  "registry_storage_key": "SOFTWARE\\XpCollector"
+  "registry_storage_key": "SOFTWARE\\XpCollector",
+  "events": [
+    {
+      "event": {
+        "name": "ProcessNameDetectedEvent",
+        "parameters": {
+          "names": [
+            "notepad.exe"
+          ]
+        }
+      },
+      "handlers": [
+        {
+          "name": "LocalLog",
+          "parameters": {
+
+          }
+        }
+      ]
+    }
+  ]
 }
