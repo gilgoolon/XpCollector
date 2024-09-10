@@ -108,7 +108,7 @@
     <ClInclude Include="Protocol\ResponseInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Storages\IClientStorage.h">
+    <ClInclude Include="Storages\IStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Storages\RamStorage.h">
@@ -204,12 +204,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Protocol\InstallClientResponse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Protocol\IRequest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Protocol\IResponse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Protocol\RequestInfo.cpp">

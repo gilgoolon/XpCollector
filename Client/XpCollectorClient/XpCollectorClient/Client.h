@@ -1,6 +1,6 @@
 #pragma once
 #include "Communicators/ICommunicator.h"
-#include "Storages/IClientStorage.h"
+#include "Storages/IStorage.h"
 #include "Commands/BasicCommand.h"
 #include "Loggers/ILogger.h"
 #include "Events/IEvent.h"

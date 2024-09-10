@@ -1,5 +1,5 @@
 #pragma once
-#include "IClientStorage.h"
+#include "IStorage.h"
 
 constexpr size_t MAX_FIELD_SIZE = 255;
 

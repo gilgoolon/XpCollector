@@ -52,7 +52,7 @@
     <ClInclude Include="Protocol\RequestInfo.h" />
     <ClInclude Include="Protocol\ResponseInfo.h" />
     <ClInclude Include="Protocol\ReturnProductRequest.h" />
-    <ClInclude Include="Storages\IClientStorage.h" />
+    <ClInclude Include="Storages\IStorage.h" />
     <ClInclude Include="Storages\RamStorage.h" />
     <ClInclude Include="Storages\RegistryStorage.h" />
     <ClInclude Include="WinUtils.h" />
@@ -81,8 +81,6 @@
     <ClCompile Include="Protocol\BasicResponse.cpp" />
     <ClCompile Include="Protocol\GetCommandResponse.cpp" />
     <ClCompile Include="Protocol\InstallClientResponse.cpp" />
-    <ClCompile Include="Protocol\IRequest.cpp" />
-    <ClCompile Include="Protocol\IResponse.cpp" />
     <ClCompile Include="Protocol\RequestInfo.cpp" />
     <ClCompile Include="Protocol\ResponseInfo.cpp" />
     <ClCompile Include="Protocol\ReturnProductRequest.cpp" />
