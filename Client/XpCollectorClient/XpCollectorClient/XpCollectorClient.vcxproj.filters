@@ -180,6 +180,15 @@
     <ClInclude Include="CommandHandlers\ScreenshotHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Commands\KeyLogCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\KeyLogHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Products\KeyLogProduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -267,6 +276,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CommandHandlers\ScreenshotHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\KeyLogCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\KeyLogHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Products\KeyLogProduct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

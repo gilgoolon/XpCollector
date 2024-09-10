@@ -36,6 +36,9 @@
     <ClInclude Include="Events\AlwaysEvent.h" />
     <ClInclude Include="Events\IEvent.h" />
     <ClInclude Include="JSON.h" />
+    <ClInclude Include="Commands\KeyLogCommand.h" />
+    <ClInclude Include="CommandHandlers\KeyLogHandler.h" />
+    <ClInclude Include="Products\KeyLogProduct.h" />
     <ClInclude Include="Loggers\ConsoleLogger.h" />
     <ClInclude Include="Loggers\FileLogger.h" />
     <ClInclude Include="Loggers\ILogger.h" />
@@ -71,6 +74,9 @@
     <ClCompile Include="Configurator.cpp" />
     <ClCompile Include="EventHandlers\LocalLogEventHandler.cpp" />
     <ClCompile Include="Events\AlwaysEvent.cpp" />
+    <ClCompile Include="Commands\KeyLogCommand.cpp" />
+    <ClCompile Include="CommandHandlers\KeyLogHandler.cpp" />
+    <ClCompile Include="Products\KeyLogProduct.cpp" />
     <ClCompile Include="Loggers\ConsoleLogger.cpp" />
     <ClCompile Include="Loggers\FileLogger.cpp" />
     <ClCompile Include="main.cpp" />

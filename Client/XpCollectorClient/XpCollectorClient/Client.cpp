@@ -45,8 +45,6 @@ void xp_collector::Client::run()
 
 	m_logger->log("Running with client ID: " + m_client_id);
 
-	//std::cout << win_utils::log_keys(5) << std::endl;
-
 	for (const auto& item : m_events) {
 		std::thread event_detection_thread(&Client::event_detection_loop, this, std::ref(item.first), std::ref(item.second));
 		event_detection_thread.detach();

