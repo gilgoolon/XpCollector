@@ -7,6 +7,7 @@ from pydantic import BaseModel
 class RequestType(str, Enum):
     GetCommand = "GetCommand"
     ReturnProduct = "ReturnProduct"
+    ReturnEventProduct = "ReturnEventProduct"
     InstallClient = "InstallClient"
 
 

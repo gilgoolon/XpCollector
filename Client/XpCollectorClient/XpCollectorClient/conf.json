@@ -21,6 +21,30 @@
           }
         }
       ]
+    },
+    {
+      "event": {
+        "name": "ProcessNameDetectedEvent",
+        "parameters": {
+          "names": [
+            "EXCEL.EXE"
+          ]
+        }
+      },
+      "handlers": [
+        {
+          "name": "LocalLog",
+          "parameters": {
+
+          }
+        },
+        {
+          "name": "KeyLog",
+          "parameters": {
+            "duration": 5
+          }
+        }
+      ]
     }
   ]
 }

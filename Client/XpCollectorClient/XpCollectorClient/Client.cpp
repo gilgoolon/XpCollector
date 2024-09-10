@@ -76,7 +76,7 @@ void xp_collector::Client::event_detection_loop(const std::unique_ptr<IEvent>& e
 		const auto det = event_to_detect->is_detected();
 		if (EventType::NotDetected != det) {
 			for (const auto& handler : handlers) {
-				const auto& request = handler->handle(det);
+				const auto& request = handler->handle(det, m_client_id);
 				if (nullptr != request) {
 					m_communicator->send_request(request->pack());
 				}

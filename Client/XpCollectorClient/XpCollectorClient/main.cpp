@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include "Configurator.h"
+using namespace xp_collector;
 
 constexpr size_t EXPECTED_ARGUMENTS = 2;
 

@@ -12,6 +12,7 @@
 #include "Events/ProcessNameDetectedEvent.h"
 #include "EventHandlers/EventHandlerFactory.h"
 #include "Events/EventFactory.h"
+using namespace xp_collector;
 
 std::unique_ptr<xp_collector::Client> xp_collector::parse(std::string conf_path)
 {

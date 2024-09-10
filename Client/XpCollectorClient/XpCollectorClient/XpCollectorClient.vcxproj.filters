@@ -204,6 +204,15 @@
     <ClInclude Include="EventHandlers\EventHandlerFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EventHandlers\KeyLogEventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol\ReturnEventProductRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Uuid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -315,6 +324,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EventHandlers\EventHandlerFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandlers\KeyLogEventHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol\ReturnEventProductRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Uuid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

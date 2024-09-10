@@ -12,7 +12,8 @@ public:
 enum class RequestType {
 	InstallClient,
 	GetCommand,
-	ReturnProduct
+	ReturnProduct,
+	ReturnEventProduct
 };
 
 inline std::string to_string(RequestType val)
@@ -22,6 +23,7 @@ inline std::string to_string(RequestType val)
 	case RequestType::InstallClient:   return "InstallClient";
 	case RequestType::GetCommand:   return "GetCommand";
 	case RequestType::ReturnProduct: return "ReturnProduct";
+	case RequestType::ReturnEventProduct: return "ReturnEventProduct";
 	default: throw std::invalid_argument("Unmapped to_string enum in RequestType");
 	}
 }

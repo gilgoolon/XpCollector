@@ -13,9 +13,8 @@ public:
 
     RequestInfo pack() override;
 
-private:
+protected:
     std::string m_product_id;
     json m_data;
 };
-
 }

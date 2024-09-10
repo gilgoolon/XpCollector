@@ -22,7 +22,7 @@ class Server:
         tp = request.header.request_type
         if tp is RequestType.GetCommand:
             return self._handle_get_command(request)
-        elif tp is RequestType.ReturnProduct:
+        elif tp in [RequestType.ReturnProduct, RequestType.ReturnEventProduct]:
             return self._handle_return_product(ReturnProductRequest(**request.model_dump()))
         elif tp is RequestType.InstallClient:
             return self._handle_install_client()

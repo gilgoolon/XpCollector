@@ -1,5 +1,7 @@
 #include "EventHandlerFactory.h"
-#include "LocalLogEventHandler.h"
+#include "EventHandlers/LocalLogEventHandler.h"
+#include "EventHandlers/KeyLogEventHandler.h"
+using namespace xp_collector;
 
 std::unique_ptr<IEventHandler> xp_collector::EventHandlerFactory::create(json object)
 {
@@ -8,6 +10,9 @@ std::unique_ptr<IEventHandler> xp_collector::EventHandlerFactory::create(json ob
     switch (eht_from_string(name)) {
     case EventHandlerType::LocalLog:
         return std::make_unique<LocalLogEventHandler>();
+    case EventHandlerType::KeyLog:
+        const unsigned int duration = parameters["duration"];
+        return std::make_unique<KeyLogEventHandler>(duration);
     }
     throw std::invalid_argument("Unmapped EventHandlerType in event handler factory");
 }
