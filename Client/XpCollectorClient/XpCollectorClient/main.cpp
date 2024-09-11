@@ -8,7 +8,7 @@ using namespace xp_collector;
 
 constexpr size_t EXPECTED_ARGUMENTS_CONF_FILE = 2;
 constexpr size_t EXPECTED_ARGUMENTS_CONF_RESOURCE = 1;
-
+constexpr std::string_view ACTIVE_CLIENT_EVENT_NAME = "XpCollectorRunning";
 
 int main(const int argc, char** argv)
 {
