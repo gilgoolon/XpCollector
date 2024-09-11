@@ -36,7 +36,7 @@ private:
 
 	void handle_command(std::shared_ptr<BasicCommand> command) const;
 
-	std::shared_ptr<BasicCommand> get_command() const;
+	[[nodiscard]] std::shared_ptr<BasicCommand> get_command() const;
 
 	std::unique_ptr<ICommunicator> m_communicator;
 	std::unique_ptr<IClientStorage> m_storage;
