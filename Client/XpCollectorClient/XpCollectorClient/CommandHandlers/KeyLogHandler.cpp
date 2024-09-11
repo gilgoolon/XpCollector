@@ -1,9 +1,8 @@
 #include "KeyLogHandler.h"
 #include <Commands/KeyLogCommand.h>
-#include <WinUtils.h>
+#include <Windows/WinUtils.h>
 #include <Protocol/ReturnProductRequest.h>
 #include <Products/KeyLogProduct.h>
-#include <iostream>
 #include <base64.hpp>
 using namespace xp_collector;
 

@@ -36,13 +36,13 @@
     <ClInclude Include="EventHandlers\IEventHandler.h" />
     <ClInclude Include="EventHandlers\LocalLogEventHandler.h" />
     <ClInclude Include="Events\AlwaysEvent.h" />
-    <ClInclude Include="AutoHandle.h" />
+    <ClInclude Include="Windows\AutoHandle.h" />
     <ClInclude Include="Events\IEvent.h" />
     <ClInclude Include="EventHandlers\KeyLogEventHandler.h" />
     <ClInclude Include="Products\ReturnEventProduct.h" />
-    <ClInclude Include="Uuid.h" />
-    <ClInclude Include="Strings.h" />
-    <ClInclude Include="JSON.h" />
+    <ClInclude Include="Utils\Uuid.h" />
+    <ClInclude Include="Utils\Strings.h" />
+    <ClInclude Include="Utils\JSON.h" />
     <ClInclude Include="Commands\KeyLogCommand.h" />
     <ClInclude Include="CommandHandlers\KeyLogHandler.h" />
     <ClInclude Include="Events\ProcessNameDetectedEvent.h" />
@@ -66,10 +66,10 @@
     <ClInclude Include="Storages\IStorage.h" />
     <ClInclude Include="Storages\RamStorage.h" />
     <ClInclude Include="Storages\RegistryStorage.h" />
-    <ClInclude Include="WinUtils.h" />
+    <ClInclude Include="Windows\WinUtils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AutoHandle.cpp" />
+    <ClCompile Include="Windows\AutoHandle.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="CommandHandlers\CommandHandlerFactory.cpp" />
     <ClCompile Include="CommandHandlers\ICommandHandler.cpp" />
@@ -91,8 +91,8 @@
     <ClCompile Include="Events\ProcessNameDetectedEvent.cpp" />
     <ClCompile Include="EventHandlers\KeyLogEventHandler.cpp" />
     <ClCompile Include="Products\ReturnEventProduct.cpp" />
-    <ClCompile Include="Uuid.cpp" />
-    <ClCompile Include="Strings.cpp" />
+    <ClCompile Include="Utils\Uuid.cpp" />
+    <ClCompile Include="Utils\Strings.cpp" />
     <ClCompile Include="Products\KeyLogProduct.cpp" />
     <ClCompile Include="Loggers\ConsoleLogger.cpp" />
     <ClCompile Include="Loggers\FileLogger.cpp" />
@@ -109,7 +109,7 @@
     <ClCompile Include="Protocol\ReturnProductRequest.cpp" />
     <ClCompile Include="Storages\RamStorage.cpp" />
     <ClCompile Include="Storages\RegistryStorage.cpp" />
-    <ClCompile Include="WinUtils.cpp" />
+    <ClCompile Include="Windows\WinUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="conf.json" />

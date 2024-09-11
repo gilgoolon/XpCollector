@@ -2,7 +2,7 @@
 
 #include "CommandHandlers/PopupSpamHandler.h"
 #include "Commands/PopupCommand.h"
-#include "WinUtils.h"
+#include "Windows/WinUtils.h"
 #include "Protocol/ReturnProductRequest.h"
 #include "Products/PopupProduct.h"
 using namespace xp_collector;

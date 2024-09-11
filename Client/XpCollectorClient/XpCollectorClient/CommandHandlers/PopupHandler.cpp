@@ -4,7 +4,7 @@
 #include "Protocol/ReturnProductRequest.h"
 #include "Products/PopupProduct.h"
 #include "Commands/PopupCommand.h"
-#include "WinUtils.h"
+#include "Windows/WinUtils.h"
 using namespace xp_collector;
 
 PopupHandler::PopupHandler(std::string client_id)

@@ -1,8 +1,8 @@
 #include "KeyLogEventHandler.h"
-#include "WinUtils.h"
+#include "Windows/WinUtils.h"
 #include "base64.hpp"
 #include "Products/KeyLogProduct.h"
-#include "Uuid.h"
+#include "Utils/Uuid.h"
 
 #include "Products/ReturnEventProduct.h"
 #include "Protocol/ReturnProductRequest.h"

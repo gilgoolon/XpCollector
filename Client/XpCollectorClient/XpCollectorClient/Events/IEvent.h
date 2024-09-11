@@ -3,7 +3,7 @@
 #include <string>
 #include <stdexcept>
 #include <memory>
-#include <JSON.h>
+#include <Utils/JSON.h>
 
 namespace xp_collector
 {

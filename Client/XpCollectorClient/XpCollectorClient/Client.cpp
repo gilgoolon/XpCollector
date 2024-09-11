@@ -9,7 +9,7 @@
 #include "Protocol/InstallClientResponse.h"
 #include "Protocol/GetCommandResponse.h"
 #include "CommandHandlers/CommandHandlerFactory.h"
-#include "WinUtils.h"
+#include "Windows/WinUtils.h"
 using namespace xp_collector;
 
 Client::Client(

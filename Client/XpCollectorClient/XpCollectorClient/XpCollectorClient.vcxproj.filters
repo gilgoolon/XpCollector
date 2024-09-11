@@ -69,7 +69,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WinUtils.h">
+    <ClInclude Include="Windows\WinUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Client.h">
@@ -78,7 +78,7 @@
     <ClInclude Include="Configurator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="JSON.h">
+    <ClInclude Include="Utils\JSON.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Protocol\ReturnProductRequest.h">
@@ -192,10 +192,10 @@
     <ClInclude Include="Events\ProcessNameDetectedEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AutoHandle.h">
+    <ClInclude Include="Windows\AutoHandle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Strings.h">
+    <ClInclude Include="Utils\Strings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Events\EventFactory.h">
@@ -207,7 +207,7 @@
     <ClInclude Include="EventHandlers\KeyLogEventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Uuid.h">
+    <ClInclude Include="Utils\Uuid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Products\ReturnEventProduct.h">
@@ -224,7 +224,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WinUtils.cpp">
+    <ClCompile Include="Windows\WinUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Protocol\BasicRequest.cpp">
@@ -314,10 +314,10 @@
     <ClCompile Include="Events\ProcessNameDetectedEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AutoHandle.cpp">
+    <ClCompile Include="Windows\AutoHandle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Strings.cpp">
+    <ClCompile Include="Utils\Strings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Events\EventFactory.cpp">
@@ -329,7 +329,7 @@
     <ClCompile Include="EventHandlers\KeyLogEventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Uuid.cpp">
+    <ClCompile Include="Utils\Uuid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Events\IEvent.cpp">

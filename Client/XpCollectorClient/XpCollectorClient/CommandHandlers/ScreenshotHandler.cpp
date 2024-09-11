@@ -4,7 +4,7 @@
 #include "Protocol/ReturnProductRequest.h"
 #include "Commands/CommandFactory.h"
 #include "Products/ScreenshotProduct.h"
-#include "WinUtils.h"
+#include "Windows/WinUtils.h"
 using namespace xp_collector;
 
 

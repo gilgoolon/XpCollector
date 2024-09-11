@@ -1,5 +1,5 @@
 #include "ProcessNameDetectedEvent.h"
-#include <WinUtils.h>
+#include "Windows/WinUtils.h"
 using namespace xp_collector;
 
 ProcessNameDetectedEvent::ProcessNameDetectedEvent(std::vector<std::string> names)
