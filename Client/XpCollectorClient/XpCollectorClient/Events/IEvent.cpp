@@ -6,6 +6,11 @@ EventInfo::EventInfo(const EventType type)
 {
 }
 
+EventInfo::EventInfo(const EventInfo& other)
+	: m_type(other.m_type)
+{
+}
+
 EventType EventInfo::get_type() const
 {
 	return m_type;

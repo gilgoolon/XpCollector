@@ -77,7 +77,7 @@ void Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect
 	while (true) {
 		if (const auto event_info = event_to_detect->is_detected(); EventType::NotDetected != event_info->get_type()) {
 			for (const auto& handler : handlers) {
-				if (const auto& request = handler->handle(*event_info, m_client_id); nullptr != request) {
+				if (const auto& request = handler->handle(event_info, m_client_id); nullptr != request) {
 					try {
 						m_communicator->send_request(request->pack());
 					}

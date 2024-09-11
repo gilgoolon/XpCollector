@@ -39,7 +39,7 @@
     <ClInclude Include="AutoHandle.h" />
     <ClInclude Include="Events\IEvent.h" />
     <ClInclude Include="EventHandlers\KeyLogEventHandler.h" />
-    <ClInclude Include="Protocol\ReturnEventProductRequest.h" />
+    <ClInclude Include="Products\ReturnEventProduct.h" />
     <ClInclude Include="Uuid.h" />
     <ClInclude Include="Strings.h" />
     <ClInclude Include="JSON.h" />
@@ -90,7 +90,7 @@
     <ClCompile Include="Events\IEvent.cpp" />
     <ClCompile Include="Events\ProcessNameDetectedEvent.cpp" />
     <ClCompile Include="EventHandlers\KeyLogEventHandler.cpp" />
-    <ClCompile Include="Protocol\ReturnEventProductRequest.cpp" />
+    <ClCompile Include="Products\ReturnEventProduct.cpp" />
     <ClCompile Include="Uuid.cpp" />
     <ClCompile Include="Strings.cpp" />
     <ClCompile Include="Products\KeyLogProduct.cpp" />

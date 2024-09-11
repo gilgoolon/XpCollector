@@ -40,7 +40,7 @@ inline EventHandlerType eht_from_string(const std::string& value)
 class IEventHandler
 {
 public:
-	virtual std::unique_ptr<IRequest> handle(const EventInfo& event_info, const std::string& client_id) = 0;
+	virtual std::unique_ptr<IRequest> handle(std::shared_ptr<EventInfo> event_info, const std::string& client_id) = 0;
 
 	virtual ~IEventHandler() = default;
 };

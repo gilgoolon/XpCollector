@@ -16,8 +16,7 @@ enum class EventType
 
 inline std::string to_string(const EventType val)
 {
-	switch (val)
-	{
+	switch (val) {
 	case EventType::NotDetected: return "NotDetected";
 	case EventType::AlwaysEvent: return "AlwaysEvent";
 	case EventType::ProcessNameDetectedEvent: return "ProcessNameDetectedEvent";
@@ -39,20 +38,53 @@ class EventInfo
 public:
 	explicit EventInfo(EventType type);
 
+	EventInfo(const EventInfo& other);
+
 	virtual ~EventInfo() = default;
 
-	EventType get_type() const;
+	[[nodiscard]] EventType get_type() const;
 
-	virtual json pack() const;
+	[[nodiscard]] virtual json pack() const;
 
 private:
 	EventType m_type;
 };
 
+template <typename ValueType>
+class NamedFieldEventInfo
+	: public EventInfo
+{
+public:
+	explicit NamedFieldEventInfo(const EventType type, std::string name, const ValueType& value)
+		: EventInfo(type)
+		  , m_name(std::move(name))
+		  , m_value(std::move(value))
+	{
+	}
+
+	NamedFieldEventInfo(const NamedFieldEventInfo& other)
+		: EventInfo(other)
+	,m_name(other.m_name)
+		  , m_value(other.m_value)
+	{
+	}
+
+	[[nodiscard]] json pack() const override
+	{
+		json result = EventInfo::pack();
+		result[m_name] = m_value;
+		return result;
+	}
+
+private:
+	std::string m_name;
+	ValueType m_value;
+};
+
 class IEvent
 {
 public:
-	virtual std::unique_ptr<EventInfo> is_detected() = 0;
+	virtual std::shared_ptr<EventInfo> is_detected() = 0;
 
 	virtual ~IEvent() = default;
 };

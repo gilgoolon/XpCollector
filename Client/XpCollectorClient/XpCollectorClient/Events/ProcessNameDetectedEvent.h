@@ -5,13 +5,14 @@
 
 namespace xp_collector
 {
+
 class ProcessNameDetectedEvent
 	: public IEvent
 {
 public:
 	explicit ProcessNameDetectedEvent(std::vector<std::string> names);
 
-	std::unique_ptr<EventInfo> is_detected() override;
+	std::shared_ptr<EventInfo> is_detected() override;
 
 private:
 	std::vector<std::string> m_names;

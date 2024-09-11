@@ -7,6 +7,6 @@ namespace xp_collector
 class AlwaysEvent :
 	public IEvent
 {
-	std::unique_ptr<EventInfo> is_detected() override;
+	std::shared_ptr<EventInfo> is_detected() override;
 };
 }
