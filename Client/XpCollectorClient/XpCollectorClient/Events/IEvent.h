@@ -64,7 +64,7 @@ public:
 
 	NamedFieldEventInfo(const NamedFieldEventInfo& other)
 		: EventInfo(other)
-	,m_name(other.m_name)
+		  , m_name(other.m_name)
 		  , m_value(other.m_value)
 	{
 	}
@@ -75,6 +75,8 @@ public:
 		result[m_name] = m_value;
 		return result;
 	}
+
+	~NamedFieldEventInfo() override = default;
 
 private:
 	std::string m_name;

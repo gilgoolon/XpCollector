@@ -2,9 +2,10 @@
 #include <string>
 #include <stdexcept>
 
-namespace xp_collector {
-
-enum class CommandType {
+namespace xp_collector
+{
+enum class CommandType
+{
 	Popup,
 	PopupSpam,
 	Screenshot,
@@ -44,5 +45,4 @@ protected:
 	std::string m_command_id;
 	CommandType m_command_type;
 };
-
 }

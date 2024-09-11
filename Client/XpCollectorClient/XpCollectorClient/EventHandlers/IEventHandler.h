@@ -13,8 +13,7 @@ enum class EventHandlerType
 
 inline std::string to_string(const EventHandlerType type)
 {
-	switch (type)
-	{
+	switch (type) {
 	case EventHandlerType::LocalLog:
 		return "LocalLog";
 	case EventHandlerType::KeyLog:
@@ -26,12 +25,10 @@ inline std::string to_string(const EventHandlerType type)
 
 inline EventHandlerType eht_from_string(const std::string& value)
 {
-	if (value == "LocalLog")
-	{
+	if (value == "LocalLog") {
 		return EventHandlerType::LocalLog;
 	}
-	if (value == "KeyLog")
-	{
+	if (value == "KeyLog") {
 		return EventHandlerType::KeyLog;
 	}
 	throw std::invalid_argument("Unmapped EventHandlerType in factory");

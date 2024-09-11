@@ -1,10 +1,10 @@
 #pragma once
 #include "Commands/BasicCommand.h"
 
-namespace xp_collector {
-
+namespace xp_collector
+{
 class PopupCommand :
-    public BasicCommand
+	public BasicCommand
 {
 public:
 	PopupCommand(std::string command_id, CommandType command_type, std::string message);
@@ -14,5 +14,4 @@ public:
 private:
 	std::string m_message;
 };
-
 }

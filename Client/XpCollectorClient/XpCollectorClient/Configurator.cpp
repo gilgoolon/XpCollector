@@ -25,12 +25,10 @@ std::unique_ptr<Client> xp_collector::parse(std::string conf_path)
 		conf["events"]);
 
 	std::unique_ptr<ILogger> logger = nullptr;
-	if (debug)
-	{
+	if (debug) {
 		logger = std::make_unique<ConsoleLogger>();
 	}
-	else
-	{
+	else {
 		logger = std::make_unique<FileLogger>(conf["log_folder"]);
 	}
 	return std::make_unique<Client>(
@@ -45,12 +43,10 @@ std::unordered_map<std::unique_ptr<IEvent>, std::vector<std::unique_ptr<IEventHa
 xp_collector::parse_events(json events)
 {
 	std::unordered_map<std::unique_ptr<IEvent>, std::vector<std::unique_ptr<IEventHandler>>> result;
-	for (const json& object : events)
-	{
+	for (const json& object : events) {
 		const json event_obj = object["event"];
 		std::vector<std::unique_ptr<IEventHandler>> handlers;
-		for (const json& handler_obj : object["handlers"])
-		{
+		for (const json& handler_obj : object["handlers"]) {
 			handlers.push_back(std::move(EventHandlerFactory::create(handler_obj)));
 		}
 		result.insert_or_assign(EventFactory::create(event_obj), std::move(handlers));

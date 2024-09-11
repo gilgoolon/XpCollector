@@ -11,7 +11,8 @@ std::shared_ptr<EventInfo> ProcessNameDetectedEvent::is_detected()
 {
 	for (const auto& name : m_names) {
 		if (windows::is_process_running(name)) {
-			return std::make_shared<NamedFieldEventInfo<std::string>>(EventType::ProcessNameDetectedEvent, "name", name);
+			return std::make_shared<NamedFieldEventInfo<
+				std::string>>(EventType::ProcessNameDetectedEvent, "name", name);
 		}
 	}
 	return std::make_shared<EventInfo>(EventType::NotDetected);

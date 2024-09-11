@@ -5,7 +5,6 @@
 
 namespace xp_collector
 {
-
 class ProcessNameDetectedEvent
 	: public IEvent
 {

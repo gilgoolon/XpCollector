@@ -1,8 +1,8 @@
 #pragma once
 #include "JSON.h"
 
-namespace xp_collector {
-
+namespace xp_collector
+{
 class IProduct
 {
 public:
@@ -10,5 +10,4 @@ public:
 
 	virtual json serialize() = 0;
 };
-
 }

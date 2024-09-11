@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 
-namespace xp_collector {
-
+namespace xp_collector
+{
 class IClientStorage
 {
 public:
@@ -12,5 +12,4 @@ public:
 
 	virtual std::string fetch(std::string name) = 0;
 };
-
 }

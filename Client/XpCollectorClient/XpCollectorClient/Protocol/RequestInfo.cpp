@@ -2,7 +2,7 @@
 
 xp_collector::RequestInfo::RequestInfo(std::string resource, json body)
 	: m_resource(std::move(resource))
-	, m_body(body)
+	  , m_body(body)
 {
 }
 

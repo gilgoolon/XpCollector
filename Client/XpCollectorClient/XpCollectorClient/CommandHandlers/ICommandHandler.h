@@ -3,8 +3,8 @@
 #include "Protocol/IRequest.h"
 #include "Commands/BasicCommand.h"
 
-namespace xp_collector {
-
+namespace xp_collector
+{
 class ICommandHandler
 {
 public:
@@ -15,5 +15,4 @@ public:
 protected:
 	std::string m_client_id;
 };
-
 }

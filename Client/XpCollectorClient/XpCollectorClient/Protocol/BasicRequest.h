@@ -1,9 +1,10 @@
 #pragma once
 #include "IRequest.h"
 
-namespace xp_collector {
-
-struct RequestHeader {
+namespace xp_collector
+{
+struct RequestHeader
+{
 	RequestType request_type;
 	std::string client_id;
 };
@@ -20,5 +21,4 @@ public:
 protected:
 	RequestHeader m_header;
 };
-
 }

@@ -3,8 +3,8 @@
 
 constexpr size_t MAX_FIELD_SIZE = 255;
 
-namespace xp_collector {
-
+namespace xp_collector
+{
 class RegistryStorage
 	: public IClientStorage
 {
@@ -20,5 +20,4 @@ public:
 private:
 	std::string m_key;
 };
-
 }

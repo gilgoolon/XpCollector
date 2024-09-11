@@ -1,18 +1,17 @@
 #pragma once
 #include "Products/BasicProduct.h"
 
-namespace xp_collector {
-
+namespace xp_collector
+{
 class PopupProduct :
-    public BasicProduct
+	public BasicProduct
 {
 public:
-    explicit PopupProduct(std::string product_id, bool is_success);
+	explicit PopupProduct(std::string product_id, bool is_success);
 
-    json serialize() override;
+	json serialize() override;
 
 private:
-    bool m_is_success;
+	bool m_is_success;
 };
-
 }

@@ -3,7 +3,7 @@
 
 xp_collector::KeyLogCommand::KeyLogCommand(std::string command_id, CommandType command_type, unsigned int duration)
 	: BasicCommand(command_id, command_type)
-	, m_duration(duration)
+	  , m_duration(duration)
 {
 }
 
