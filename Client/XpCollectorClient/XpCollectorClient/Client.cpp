@@ -83,7 +83,6 @@ void xp_collector::Client::event_detection_loop(const std::unique_ptr<IEvent>& e
 					}
 					catch (const std::exception& ex) {
 						m_logger->log(std::string("Couldn't send event handler pruduct request. Error: ") + ex.what());
-						continue;
 					}
 				}
 			}
