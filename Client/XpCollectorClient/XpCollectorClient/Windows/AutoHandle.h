@@ -1,8 +1,7 @@
 #pragma once
 #include <Windows.h>
-#include <memory>
 
-namespace xp_collector
+namespace windows
 {
 class AutoHandle
 {
@@ -11,7 +10,7 @@ public:
 
 	~AutoHandle();
 
-	HANDLE get() const;
+	[[nodiscard]] HANDLE get() const;
 
 private:
 	HANDLE m_handle;

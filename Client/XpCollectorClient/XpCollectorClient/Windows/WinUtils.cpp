@@ -12,7 +12,6 @@
 
 #include "Utils/Strings.h"
 #include "Utils/Uuid.h"
-using namespace xp_collector;
 
 bool windows::do_popup(const std::string& window_name, const std::string& text, const DWORD flags)
 {
@@ -212,4 +211,29 @@ std::string windows::get_textual_resource(const DWORD resource_id)
 	const auto conf_resource = get_binary_resource(resource_id);
 	std::string resource_text(conf_resource.data(), conf_resource.data() + conf_resource.size());
 	return resource_text;
+}
+
+bool windows::exists_event(const std::string_view& event_name)
+{
+	const AutoHandle h_event(OpenEventA(READ_CONTROL, false, event_name.data()));
+	const DWORD error = GetLastError();
+	return nullptr != h_event.get();
+}
+
+std::unique_ptr<windows::AutoHandle> windows::create_event(const std::string_view& event_name, const bool manual_reset)
+{
+	auto h_event = std::make_unique<AutoHandle>(CreateEventA(nullptr, manual_reset, true, event_name.data()));
+	if (nullptr == h_event->get()) {
+		const auto error = GetLastError();
+		throw std::runtime_error("Failed to create event. Error: " + std::to_string(error));
+	}
+	return std::move(h_event);
+}
+
+void windows::signal_event(const HANDLE h_event)
+{
+	if (!SetEvent(h_event)) {
+		const auto error = GetLastError();
+		throw std::runtime_error("Failed to signal event. Error: " + std::to_string(error));
+	}
 }
