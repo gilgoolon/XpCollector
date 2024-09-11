@@ -36,6 +36,7 @@
     <ClInclude Include="EventHandlers\IEventHandler.h" />
     <ClInclude Include="EventHandlers\LocalLogEventHandler.h" />
     <ClInclude Include="Events\AlwaysEvent.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Windows\AutoHandle.h" />
     <ClInclude Include="Events\IEvent.h" />
     <ClInclude Include="EventHandlers\KeyLogEventHandler.h" />
@@ -113,6 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="conf.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="XpCollectorClient.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -203,7 +207,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2;$(SolutionDir)/XpCollectorClient</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2;C:\Users\alper\.sdks\exe_resource;$(SolutionDir)/XpCollectorClient</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>

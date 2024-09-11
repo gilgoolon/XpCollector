@@ -7,6 +7,9 @@
 
 #include "AutoHandle.h"
 #include "WinUtils.h"
+
+#include <fstream>
+
 #include "Utils/Strings.h"
 #include "Utils/Uuid.h"
 using namespace xp_collector;
@@ -186,4 +189,27 @@ bool windows::is_process_running(const std::string& name)
 	}
 	while (Process32Next(h_process_snap.get(), &pe32));
 	return false;
+}
+
+std::string windows::read_file(const std::filesystem::path& path)
+{
+	const std::ifstream f(path);
+	if (!f) {
+		throw std::runtime_error("Couldn't open file " + path.string());
+	}
+	std::ostringstream ss;
+	ss << f.rdbuf(); // reading data
+	return ss.str();
+}
+
+ResourceBinaryView windows::get_binary_resource(const DWORD resource_id)
+{
+	return ResourceBinaryView(MAKEINTRESOURCE(resource_id));
+}
+
+std::string windows::get_textual_resource(const DWORD resource_id)
+{
+	const auto conf_resource = get_binary_resource(resource_id);
+	std::string resource_text(conf_resource.data(), conf_resource.data() + conf_resource.size());
+	return resource_text;
 }

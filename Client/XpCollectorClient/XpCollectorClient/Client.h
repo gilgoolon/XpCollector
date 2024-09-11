@@ -22,7 +22,7 @@ public:
 		std::unordered_map<std::unique_ptr<IEvent>, std::vector<std::unique_ptr<IEventHandler>>>&& events,
 		std::unique_ptr<ILogger> logger);
 
-	void run();
+	[[noreturn]] void run();
 
 private:
 	void install() const;

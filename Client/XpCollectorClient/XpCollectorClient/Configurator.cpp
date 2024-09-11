@@ -13,11 +13,8 @@
 #include "Storages/RegistryStorage.h"
 using namespace xp_collector;
 
-std::unique_ptr<Client> xp_collector::parse(std::string conf_path)
+std::unique_ptr<Client> xp_collector::parse(const json& conf)
 {
-	std::ifstream conf_file(conf_path);
-	std::string contents;
-	json conf = json::parse(conf_file);
 	std::string server_url = conf["server_url"];
 	const bool debug = conf["debug"];
 
