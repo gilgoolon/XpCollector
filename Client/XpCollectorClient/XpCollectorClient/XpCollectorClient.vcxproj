@@ -87,6 +87,7 @@
     <ClCompile Include="Events\AlwaysEvent.cpp" />
     <ClCompile Include="Commands\KeyLogCommand.cpp" />
     <ClCompile Include="CommandHandlers\KeyLogHandler.cpp" />
+    <ClCompile Include="Events\IEvent.cpp" />
     <ClCompile Include="Events\ProcessNameDetectedEvent.cpp" />
     <ClCompile Include="EventHandlers\KeyLogEventHandler.cpp" />
     <ClCompile Include="Protocol\ReturnEventProductRequest.cpp" />

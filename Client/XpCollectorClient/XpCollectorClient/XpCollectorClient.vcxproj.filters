@@ -335,6 +335,9 @@
     <ClCompile Include="Uuid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Events\IEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="conf.json" />

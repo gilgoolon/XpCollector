@@ -7,12 +7,12 @@ xp_collector::ProcessNameDetectedEvent::ProcessNameDetectedEvent(std::vector<std
 {
 }
 
-EventType xp_collector::ProcessNameDetectedEvent::is_detected()
+std::unique_ptr<EventInfo> xp_collector::ProcessNameDetectedEvent::is_detected()
 {
     for (const auto& name : m_names) {
         if (windows::is_process_running(name)) {
-            return EventType::ProcessNameDetectedEvent;
+            return std::make_unique<EventInfo>(EventType::ProcessNameDetectedEvent);
         }
     }
-    return EventType::NotDetected;
+    return std::make_unique<EventInfo>(EventType::NotDetected);
 }

@@ -9,11 +9,11 @@ class ReturnEventProductRequest :
     public ReturnProductRequest
 {
 public:
-    ReturnEventProductRequest(RequestHeader header, const std::string& product_id, EventType event_type, const json& data);
+    ReturnEventProductRequest(RequestHeader header, const std::string& product_id, EventInfo event_info, const json& data);
 
     RequestInfo pack() override;
 
 private:
-    EventType m_event_type;
+    EventInfo m_event_info;
 };
 }

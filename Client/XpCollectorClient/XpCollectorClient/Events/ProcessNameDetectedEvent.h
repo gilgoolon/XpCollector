@@ -1,19 +1,19 @@
 #pragma once
 #include "Events/IEvent.h"
 #include <vector>
+#include <memory>
 
-namespace xp_collector {
-
+namespace xp_collector
+{
 class ProcessNameDetectedEvent
 	: public IEvent
 {
 public:
 	explicit ProcessNameDetectedEvent(std::vector<std::string> names);
 
-	virtual EventType is_detected() override;
+	std::unique_ptr<EventInfo> is_detected() override;
 
 private:
 	std::vector<std::string> m_names;
 };
-
 }

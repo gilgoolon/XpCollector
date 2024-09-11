@@ -1,7 +1,7 @@
 #include "AlwaysEvent.h"
 using namespace xp_collector;
 
-EventType xp_collector::AlwaysEvent::is_detected()
+std::unique_ptr<EventInfo> xp_collector::AlwaysEvent::is_detected()
 {
-    return EventType::AlwaysEvent;
+    return std::make_unique<EventInfo>(EventType::AlwaysEvent);
 }
