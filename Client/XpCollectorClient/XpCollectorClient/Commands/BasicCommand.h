@@ -12,7 +12,7 @@ enum class CommandType
 	KeyLog
 };
 
-inline std::string to_string(CommandType val)
+inline std::string to_string(const CommandType val)
 {
 	switch (val) {
 	case CommandType::Popup: return "Popup";
@@ -37,9 +37,9 @@ class BasicCommand
 public:
 	BasicCommand(std::string command_id, CommandType command_type);
 
-	std::string get_command_id() const;
+	[[nodiscard]] std::string get_command_id() const;
 
-	CommandType get_command_type() const;
+	[[nodiscard]] CommandType get_command_type() const;
 
 protected:
 	std::string m_command_id;
