@@ -7,7 +7,7 @@
 using namespace xp_collector;
 
 KeyLogHandler::KeyLogHandler(std::string client_id)
-	: ICommandHandler(client_id)
+	: ICommandHandler(std::move(client_id))
 {
 }
 

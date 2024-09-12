@@ -7,8 +7,8 @@
 #include "Products/PopupProduct.h"
 using namespace xp_collector;
 
-PopupSpamHandler::PopupSpamHandler(const std::string& client_id)
-	: ICommandHandler(client_id)
+PopupSpamHandler::PopupSpamHandler(std::string client_id)
+	: ICommandHandler(std::move(client_id))
 {
 }
 
