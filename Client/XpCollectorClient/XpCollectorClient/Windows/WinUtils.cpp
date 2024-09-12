@@ -1,7 +1,5 @@
 #include <cstdlib>
-#include <ctime>
 #include <thread>
-#include <iostream>
 #include <Windows.h>
 #include <tlhelp32.h>
 
@@ -78,7 +76,7 @@ std::string windows::take_screenshot()
 	GetObject(h_bitmap, sizeof(BITMAP), &bmp);
 
 	// Calculate the stride (row size) of the bitmap
-	const int row_size = ((bmp.bmWidth * bmp.bmBitsPixel + 31) / 32) * 4;
+	const int row_size = (bmp.bmWidth * bmp.bmBitsPixel + 31) / 32 * 4;
 
 	// Bitmap file header
 	BITMAPFILEHEADER file_header;
@@ -108,9 +106,9 @@ std::string windows::take_screenshot()
 	std::string bmp_buffer(file_header.bfSize, '\0');
 
 	// Copy headers
-	std::copy_n(bmp_buffer.data(), sizeof(BITMAPFILEHEADER), reinterpret_cast<char*>(&file_header));
-	std::copy_n(bmp_buffer.data() + sizeof(BITMAPFILEHEADER), sizeof(BITMAPINFOHEADER),
-	            reinterpret_cast<char*>(&info_header));
+	std::copy_n(reinterpret_cast<char*>(&file_header), sizeof(BITMAPFILEHEADER), bmp_buffer.data());
+	std::copy_n(reinterpret_cast<char*>(&info_header), sizeof(BITMAPINFOHEADER),
+	            bmp_buffer.data() + sizeof(BITMAPFILEHEADER));
 
 	// Copy bitmap data
 	GetDIBits(h_memory_dc, h_bitmap, 0, bmp.bmHeight, bmp_buffer.data() + file_header.bfOffBits,
@@ -216,7 +214,6 @@ std::string windows::get_textual_resource(const DWORD resource_id)
 bool windows::exists_event(const std::string_view& event_name)
 {
 	const AutoHandle h_event(OpenEventA(READ_CONTROL, false, event_name.data()));
-	const DWORD error = GetLastError();
 	return nullptr != h_event.get();
 }
 
