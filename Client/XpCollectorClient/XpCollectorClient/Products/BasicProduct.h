@@ -3,6 +3,7 @@
 #include "Commands/BasicCommand.h"
 
 constexpr auto CONTENT_FIELD_NAME = "content";
+constexpr auto STATUS_FIELD_NAME = "status";
 
 namespace xp_collector
 {

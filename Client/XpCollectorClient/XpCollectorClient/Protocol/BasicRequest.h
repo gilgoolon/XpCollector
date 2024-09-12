@@ -14,7 +14,7 @@ class BasicRequest
 	: public IRequest
 {
 public:
-	BasicRequest(RequestHeader header);
+	explicit BasicRequest(RequestHeader header);
 
 	RequestInfo pack() override;
 

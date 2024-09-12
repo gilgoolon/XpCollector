@@ -37,6 +37,7 @@
     <ClInclude Include="EventHandlers\IEventHandler.h" />
     <ClInclude Include="EventHandlers\LocalLogEventHandler.h" />
     <ClInclude Include="Events\AlwaysEvent.h" />
+    <ClInclude Include="Products\ErrorProduct.h" />
     <ClInclude Include="Products\SystemInfoProduct.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Windows\AutoHandle.h" />
@@ -75,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandHandlers\GetSystemInfoHandler.cpp" />
+    <ClCompile Include="Products\ErrorProduct.cpp" />
     <ClCompile Include="Products\SystemInfoProduct.cpp" />
     <ClCompile Include="Windows\AutoHandle.cpp" />
     <ClCompile Include="Client.cpp" />

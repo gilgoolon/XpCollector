@@ -1,7 +1,7 @@
 #include "PopupProduct.h"
 
-xp_collector::PopupProduct::PopupProduct(std::string product_id, bool is_success)
-	: BasicProduct(product_id, CommandType::Popup)
+xp_collector::PopupProduct::PopupProduct(std::string product_id, const bool is_success)
+	: BasicProduct(std::move(product_id), CommandType::Popup)
 	  , m_is_success(is_success)
 {
 }

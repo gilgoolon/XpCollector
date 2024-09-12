@@ -9,6 +9,9 @@
 #include "Protocol/InstallClientResponse.h"
 #include "Protocol/GetCommandResponse.h"
 #include "CommandHandlers/CommandHandlerFactory.h"
+#include "Products/ErrorProduct.h"
+#include "Protocol/ReturnProductRequest.h"
+#include "Utils/Uuid.h"
 #include "Windows/WinUtils.h"
 using namespace xp_collector;
 
@@ -77,15 +80,28 @@ void Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect
 	while (true) {
 		if (const auto event_info = event_to_detect->is_detected(); EventType::NotDetected != event_info->get_type()) {
 			for (const auto& handler : handlers) {
+				std::unique_ptr<IRequest> callback_request = nullptr;
 				try {
-					if (const auto& request = handler->handle(event_info, m_client_id); nullptr != request) {
-						m_communicator->send_request(request->pack());
+					callback_request = handler->handle(event_info, m_client_id);
+				}
+				catch (const std::exception& ex) {
+					m_logger->log(
+						std::string("Failed to handle event " + event_info->pack().dump() + ". Error: ") + ex.what());
+					m_communicator->send_request(ReturnProductRequest(
+						{RequestType::ReturnProduct, m_client_id},
+						std::make_unique<ErrorProduct>(uuid::generate_uuid(), CommandType::Unknown, ex.what())
+					).pack());
+				}
+				try {
+					if (nullptr != callback_request) {
+						m_communicator->send_request(callback_request->pack());
 					}
 				}
-				catch
-				(const std::exception& ex
-				) {
-					m_logger->log(std::string("Failed to handle event or send request. Error: ") + ex.what());
+				catch (const std::exception& ex) {
+					m_logger->log(
+						std::string(
+							"Failed to send callback request for event " + event_info->pack().dump() + ". Error: ") + ex
+						.what());
 				}
 			}
 		}
@@ -125,10 +141,26 @@ void Client::handle_command(std::shared_ptr<BasicCommand> command) const
 		" in a different thread!");
 
 	const auto handler = CommandHandlerFactory::create(*command, m_client_id);
-	const auto request_to_make = handler->handle(command); // should usually be a ReturnProduct request
-	if (const auto res = m_communicator->send_request(request_to_make->pack()); httplib::OK_200 != res.get_status()) {
-		m_logger->log("Error sending ReturnProduct. Response: " + res.get_body());
-		throw std::runtime_error("Couldn't ReturnProduct. Status code: " + std::to_string(res.get_status()));
+	std::unique_ptr<IRequest> callback_request = nullptr;
+	try {
+		callback_request = handler->handle(command); // should usually be a ReturnProduct request
+	}
+	catch (const std::exception& ex) {
+		// send error response
+		m_communicator->send_request(ReturnProductRequest(
+			{RequestType::ReturnProduct, m_client_id},
+			std::make_unique<ErrorProduct>(command->get_command_id(), CommandType::Unknown, ex.what())
+		).pack());
+		return;
+	}
+	try {
+		if (const auto res = m_communicator->send_request(callback_request->pack()); httplib::OK_200 != res.
+			get_status()) {
+			m_logger->log("Error sending ReturnProduct. Response: " + res.get_body().dump());
+		}
+	}
+	catch (const std::exception& ex) {
+		m_logger->log(std::string("Error in client while sending a ReturnProduct request. Error: ") + ex.what());
 	}
 }
 

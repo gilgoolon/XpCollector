@@ -6,6 +6,8 @@ namespace xp_collector
 class IRequest
 {
 public:
+	virtual ~IRequest() = default;
+
 	virtual RequestInfo pack() = 0;
 };
 
@@ -17,7 +19,7 @@ enum class RequestType
 	ReturnEventProduct
 };
 
-inline std::string to_string(RequestType val)
+inline std::string to_string(const RequestType val)
 {
 	switch (val) {
 	case RequestType::InstallClient: return "InstallClient";

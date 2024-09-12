@@ -2,7 +2,7 @@
 using namespace xp_collector;
 
 BasicRequest::BasicRequest(RequestHeader header)
-	: m_header(header)
+	: m_header(std::move(header))
 {
 }
 
