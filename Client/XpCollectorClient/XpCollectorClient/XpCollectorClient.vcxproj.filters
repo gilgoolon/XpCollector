@@ -222,6 +222,12 @@
     <ClInclude Include="Products\SystemInfoProduct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Windows\ComInitializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AutoWbemObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -351,6 +357,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Products\SystemInfoProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\ComInitializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

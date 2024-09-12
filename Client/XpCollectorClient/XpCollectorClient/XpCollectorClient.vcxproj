@@ -69,6 +69,8 @@
     <ClInclude Include="Storages\IStorage.h" />
     <ClInclude Include="Storages\RamStorage.h" />
     <ClInclude Include="Storages\RegistryStorage.h" />
+    <ClInclude Include="Windows\AutoWbemObject.h" />
+    <ClInclude Include="Windows\ComInitializer.h" />
     <ClInclude Include="Windows\WinUtils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +116,7 @@
     <ClCompile Include="Protocol\ReturnProductRequest.cpp" />
     <ClCompile Include="Storages\RamStorage.cpp" />
     <ClCompile Include="Storages\RegistryStorage.cpp" />
+    <ClCompile Include="Windows\ComInitializer.cpp" />
     <ClCompile Include="Windows\WinUtils.cpp" />
   </ItemGroup>
   <ItemGroup>

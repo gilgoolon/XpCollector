@@ -12,6 +12,8 @@
 #include <fstream>
 #include <iostream>
 
+#include "AutoWbemObject.h"
+#include "ComInitializer.h"
 #include "Utils/Strings.h"
 #include "Utils/Uuid.h"
 
@@ -239,23 +241,16 @@ void windows::signal_event(const HANDLE h_event)
 	}
 }
 
-json windows::query_wmi(const std::wstring& wmiClass, const std::vector<std::wstring>& properties)
+json windows::query_wmi(const std::wstring& wmi_class, const std::vector<std::wstring>& properties)
 {
 	nlohmann::json result;
 
-	HRESULT hres;
-	IWbemLocator* pLoc = nullptr;
-	IWbemServices* pSvc = nullptr;
-
-	// Initialize COM
-	hres = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
-	if (FAILED(hres)) {
-		std::cerr << "Failed to initialize COM library. Error code = 0x" << std::hex << hres << std::endl;
-		return result;
-	}
+	IWbemLocator* p_loc = nullptr;
+	IWbemServices* p_svc = nullptr;
+	const ComInitializer com(COINIT_MULTITHREADED);
 
 	// Set security levels
-	hres = CoInitializeSecurity(
+	HRESULT res = CoInitializeSecurity(
 		nullptr,
 		-1,
 		nullptr,
@@ -267,27 +262,23 @@ json windows::query_wmi(const std::wstring& wmiClass, const std::vector<std::wst
 		nullptr
 	);
 
-	if (FAILED(hres)) {
-		std::cerr << "Failed to initialize security. Error code = 0x" << std::hex << hres << std::endl;
-		CoUninitialize();
-		return result;
+	if (FAILED(res)) {
+		throw std::runtime_error("Failed to initialize security. Error: " + std::to_string(res));
 	}
 
 	// Create WMI locator
-	hres = CoCreateInstance(
+	res = CoCreateInstance(
 		CLSID_WbemLocator,
 		nullptr,
 		CLSCTX_INPROC_SERVER,
-		IID_IWbemLocator, reinterpret_cast<LPVOID*>(&pLoc));
+		IID_IWbemLocator, reinterpret_cast<LPVOID*>(&p_loc));
 
-	if (FAILED(hres)) {
-		std::cerr << "Failed to create IWbemLocator object. Error code = 0x" << std::hex << hres << std::endl;
-		CoUninitialize();
-		return result;
+	if (FAILED(res)) {
+		throw std::runtime_error("Failed to create IWbemLocator object. Error: " + std::to_string(res));
 	}
 
 	// Connect to WMI
-	hres = pLoc->ConnectServer(
+	res = p_loc->ConnectServer(
 		_bstr_t(L"ROOT\\CIMV2"),
 		nullptr,
 		nullptr,
@@ -295,19 +286,17 @@ json windows::query_wmi(const std::wstring& wmiClass, const std::vector<std::wst
 		0,
 		nullptr,
 		nullptr,
-		&pSvc
+		&p_svc
 	);
+	AutoWbemObject guard_p_loc(p_loc);
 
-	if (FAILED(hres)) {
-		std::cerr << "Could not connect. Error code = 0x" << std::hex << hres << std::endl;
-		pLoc->Release();
-		CoUninitialize();
-		return result;
+	if (FAILED(res)) {
+		throw std::runtime_error("Could not connect. Error: " + std::to_string(res));
 	}
 
 	// Set security levels on the proxy
-	hres = CoSetProxyBlanket(
-		pSvc,
+	res = CoSetProxyBlanket(
+		p_svc,
 		RPC_C_AUTHN_WINNT,
 		RPC_C_AUTHZ_NONE,
 		nullptr,
@@ -316,77 +305,63 @@ json windows::query_wmi(const std::wstring& wmiClass, const std::vector<std::wst
 		nullptr,
 		EOAC_NONE
 	);
+	AutoWbemObject guard_p_svc(p_svc);
 
-	if (FAILED(hres)) {
-		std::cerr << "Could not set proxy blanket. Error code = 0x" << std::hex << hres << std::endl;
-		pSvc->Release();
-		pLoc->Release();
-		CoUninitialize();
-		return result;
+	if (FAILED(res)) {
+		throw std::runtime_error("Could not set proxy blanket. Error: " + std::to_string(res));
 	}
 
 	// Query WMI
-	IEnumWbemClassObject* pEnumerator = nullptr;
-	hres = pSvc->ExecQuery(
+	IEnumWbemClassObject* p_enumerator = nullptr;
+	res = p_svc->ExecQuery(
 		bstr_t("WQL"),
-		bstr_t((L"SELECT * FROM " + wmiClass).c_str()),
+		bstr_t((L"SELECT * FROM " + wmi_class).c_str()),
 		WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
 		nullptr,
-		&pEnumerator
+		&p_enumerator
 	);
-
-	if (FAILED(hres)) {
-		std::wcerr << "Query for " << wmiClass << " failed. Error code = 0x" << std::hex << hres <<
-			std::endl;
-		pSvc->Release();
-		pLoc->Release();
-		CoUninitialize();
-		return result;
+	AutoWbemObject guard_p_enumerator(p_enumerator);
+	if (FAILED(res)) {
+		throw std::runtime_error(
+			"Query for " + strings::to_string(wmi_class) + " failed. Error: " + std::to_string(res));
 	}
 
 	// Get data from the query
-	IWbemClassObject* pclsObj = nullptr;
-	ULONG uReturn = 0;
+	IWbemClassObject* cur_wbem_obj = nullptr;
+	ULONG u_return = 0;
 
-	while (pEnumerator) {
-		HRESULT hr = pEnumerator->Next(WBEM_INFINITE, 1, &pclsObj, &uReturn);
-
-		if (uReturn == 0) {
+	while (p_enumerator) {
+		HRESULT hr = p_enumerator->Next(WBEM_INFINITE, 1, &cur_wbem_obj, &u_return);
+		if (u_return == 0) {
 			break;
 		}
+		AutoWbemObject guard_cur_wbem_obj(cur_wbem_obj);
 
 		// Extract properties
 		for (const auto& prop : properties) {
-			VARIANT vtProp;
-			hr = pclsObj->Get(prop.c_str(), 0, &vtProp, nullptr, nullptr);
-
+			VARIANT vt_prop;
+			hr = cur_wbem_obj->Get(prop.c_str(), 0, &vt_prop, nullptr, nullptr);
 			if (SUCCEEDED(hr)) {
 				// Ensure the property is valid and check the type before processing
-				if (vtProp.vt == VT_BSTR) {
-					result[std::string(prop.begin(), prop.end())] = _bstr_t(vtProp.bstrVal);
+				if (vt_prop.vt == VT_BSTR) {
+					result[std::string(prop.begin(), prop.end())] = _bstr_t(vt_prop.bstrVal);
 				}
-				else if (vtProp.vt == VT_I4) {
-					result[std::string(prop.begin(), prop.end())] = vtProp.intVal;
+				else if (vt_prop.vt == VT_I4) {
+					result[std::string(prop.begin(), prop.end())] = vt_prop.intVal;
 				}
-				else if (vtProp.vt == VT_UI4) {
-					result[std::string(prop.begin(), prop.end())] = vtProp.uintVal;
+				else if (vt_prop.vt == VT_UI4) {
+					result[std::string(prop.begin(), prop.end())] = vt_prop.uintVal;
 				}
-				else if (vtProp.vt == VT_R8) {
-					result[std::string(prop.begin(), prop.end())] = vtProp.dblVal;
+				else if (vt_prop.vt == VT_R8) {
+					result[std::string(prop.begin(), prop.end())] = vt_prop.dblVal;
 				}
 				// Add more cases for other data types as necessary
 			}
-			VariantClear(&vtProp);
+			res = VariantClear(&vt_prop);
+			if (FAILED(res)) {
+				throw std::runtime_error("Failed to clear property variant. Error: " + std::to_string(res));
+			}
 		}
-
-		pclsObj->Release();
 	}
-
-	// Cleanup
-	pSvc->Release();
-	pLoc->Release();
-	pEnumerator->Release();
-	CoUninitialize();
-
 	return result;
 }

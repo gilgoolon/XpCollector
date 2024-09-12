@@ -39,5 +39,5 @@ std::unique_ptr<AutoHandle> create_event(const std::string_view& event_name, boo
 
 void signal_event(HANDLE h_event);
 
-json query_wmi(const std::wstring& wmiClass, const std::vector<std::wstring>& properties);
+json query_wmi(const std::wstring& wmi_class, const std::vector<std::wstring>& properties);
 }
