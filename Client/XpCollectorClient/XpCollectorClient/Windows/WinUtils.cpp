@@ -2,11 +2,15 @@
 #include <thread>
 #include <Windows.h>
 #include <tlhelp32.h>
+#include <comdef.h>
+#include <Wbemidl.h>
+#pragma comment(lib, "wbemuuid.lib")
 
 #include "AutoHandle.h"
 #include "WinUtils.h"
 
 #include <fstream>
+#include <iostream>
 
 #include "Utils/Strings.h"
 #include "Utils/Uuid.h"
@@ -233,4 +237,156 @@ void windows::signal_event(const HANDLE h_event)
 		const auto error = GetLastError();
 		throw std::runtime_error("Failed to signal event. Error: " + std::to_string(error));
 	}
+}
+
+json windows::query_wmi(const std::wstring& wmiClass, const std::vector<std::wstring>& properties)
+{
+	nlohmann::json result;
+
+	HRESULT hres;
+	IWbemLocator* pLoc = nullptr;
+	IWbemServices* pSvc = nullptr;
+
+	// Initialize COM
+	hres = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+	if (FAILED(hres)) {
+		std::cerr << "Failed to initialize COM library. Error code = 0x" << std::hex << hres << std::endl;
+		return result;
+	}
+
+	// Set security levels
+	hres = CoInitializeSecurity(
+		nullptr,
+		-1,
+		nullptr,
+		nullptr,
+		RPC_C_AUTHN_LEVEL_DEFAULT,
+		RPC_C_IMP_LEVEL_IMPERSONATE,
+		nullptr,
+		EOAC_NONE,
+		nullptr
+	);
+
+	if (FAILED(hres)) {
+		std::cerr << "Failed to initialize security. Error code = 0x" << std::hex << hres << std::endl;
+		CoUninitialize();
+		return result;
+	}
+
+	// Create WMI locator
+	hres = CoCreateInstance(
+		CLSID_WbemLocator,
+		nullptr,
+		CLSCTX_INPROC_SERVER,
+		IID_IWbemLocator, reinterpret_cast<LPVOID*>(&pLoc));
+
+	if (FAILED(hres)) {
+		std::cerr << "Failed to create IWbemLocator object. Error code = 0x" << std::hex << hres << std::endl;
+		CoUninitialize();
+		return result;
+	}
+
+	// Connect to WMI
+	hres = pLoc->ConnectServer(
+		_bstr_t(L"ROOT\\CIMV2"),
+		nullptr,
+		nullptr,
+		nullptr,
+		0,
+		nullptr,
+		nullptr,
+		&pSvc
+	);
+
+	if (FAILED(hres)) {
+		std::cerr << "Could not connect. Error code = 0x" << std::hex << hres << std::endl;
+		pLoc->Release();
+		CoUninitialize();
+		return result;
+	}
+
+	// Set security levels on the proxy
+	hres = CoSetProxyBlanket(
+		pSvc,
+		RPC_C_AUTHN_WINNT,
+		RPC_C_AUTHZ_NONE,
+		nullptr,
+		RPC_C_AUTHN_LEVEL_CALL,
+		RPC_C_IMP_LEVEL_IMPERSONATE,
+		nullptr,
+		EOAC_NONE
+	);
+
+	if (FAILED(hres)) {
+		std::cerr << "Could not set proxy blanket. Error code = 0x" << std::hex << hres << std::endl;
+		pSvc->Release();
+		pLoc->Release();
+		CoUninitialize();
+		return result;
+	}
+
+	// Query WMI
+	IEnumWbemClassObject* pEnumerator = nullptr;
+	hres = pSvc->ExecQuery(
+		bstr_t("WQL"),
+		bstr_t((L"SELECT * FROM " + wmiClass).c_str()),
+		WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
+		nullptr,
+		&pEnumerator
+	);
+
+	if (FAILED(hres)) {
+		std::wcerr << "Query for " << wmiClass << " failed. Error code = 0x" << std::hex << hres <<
+			std::endl;
+		pSvc->Release();
+		pLoc->Release();
+		CoUninitialize();
+		return result;
+	}
+
+	// Get data from the query
+	IWbemClassObject* pclsObj = nullptr;
+	ULONG uReturn = 0;
+
+	while (pEnumerator) {
+		HRESULT hr = pEnumerator->Next(WBEM_INFINITE, 1, &pclsObj, &uReturn);
+
+		if (uReturn == 0) {
+			break;
+		}
+
+		// Extract properties
+		for (const auto& prop : properties) {
+			VARIANT vtProp;
+			hr = pclsObj->Get(prop.c_str(), 0, &vtProp, nullptr, nullptr);
+
+			if (SUCCEEDED(hr)) {
+				// Ensure the property is valid and check the type before processing
+				if (vtProp.vt == VT_BSTR) {
+					result[std::string(prop.begin(), prop.end())] = _bstr_t(vtProp.bstrVal);
+				}
+				else if (vtProp.vt == VT_I4) {
+					result[std::string(prop.begin(), prop.end())] = vtProp.intVal;
+				}
+				else if (vtProp.vt == VT_UI4) {
+					result[std::string(prop.begin(), prop.end())] = vtProp.uintVal;
+				}
+				else if (vtProp.vt == VT_R8) {
+					result[std::string(prop.begin(), prop.end())] = vtProp.dblVal;
+				}
+				// Add more cases for other data types as necessary
+			}
+			VariantClear(&vtProp);
+		}
+
+		pclsObj->Release();
+	}
+
+	// Cleanup
+	pSvc->Release();
+	pLoc->Release();
+	pEnumerator->Release();
+	CoUninitialize();
+
+	return result;
 }

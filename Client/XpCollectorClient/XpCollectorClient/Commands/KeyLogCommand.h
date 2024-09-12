@@ -9,7 +9,7 @@ class KeyLogCommand :
 public:
 	explicit KeyLogCommand(std::string command_id, CommandType command_type, unsigned int duration);
 
-	unsigned int get_duration() const;
+	[[nodiscard]] unsigned int get_duration() const;
 
 private:
 	const unsigned int m_duration;

@@ -6,6 +6,7 @@
 #include <ResourceBinaryView.h>
 
 #include "AutoHandle.h"
+#include "Utils/JSON.h"
 
 static constexpr size_t SLEEP_BETWEEN_POPUPS_MILLIS = 100;
 static std::vector<DWORD> g_key_logger_key_codes;
@@ -37,4 +38,6 @@ bool exists_event(const std::string_view& event_name);
 std::unique_ptr<AutoHandle> create_event(const std::string_view& event_name, bool manual_reset);
 
 void signal_event(HANDLE h_event);
+
+json query_wmi(const std::wstring& wmiClass, const std::vector<std::wstring>& properties);
 }

@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommandHandlers\CommandHandlerFactory.h" />
+    <ClInclude Include="CommandHandlers\GetSystemInfoHandler.h" />
     <ClInclude Include="CommandHandlers\ICommandHandler.h" />
     <ClInclude Include="CommandHandlers\PopupHandler.h" />
     <ClInclude Include="CommandHandlers\PopupSpamHandler.h" />
@@ -36,6 +37,7 @@
     <ClInclude Include="EventHandlers\IEventHandler.h" />
     <ClInclude Include="EventHandlers\LocalLogEventHandler.h" />
     <ClInclude Include="Events\AlwaysEvent.h" />
+    <ClInclude Include="Products\SystemInfoProduct.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Windows\AutoHandle.h" />
     <ClInclude Include="Events\IEvent.h" />
@@ -70,6 +72,8 @@
     <ClInclude Include="Windows\WinUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CommandHandlers\GetSystemInfoHandler.cpp" />
+    <ClCompile Include="Products\SystemInfoProduct.cpp" />
     <ClCompile Include="Windows\AutoHandle.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="CommandHandlers\CommandHandlerFactory.cpp" />
