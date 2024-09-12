@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommandHandlers\CommandHandlerFactory.h" />
+    <ClInclude Include="CommandHandlers\GetFileHandler.h" />
     <ClInclude Include="CommandHandlers\GetSystemInfoHandler.h" />
     <ClInclude Include="CommandHandlers\ICommandHandler.h" />
     <ClInclude Include="CommandHandlers\PopupHandler.h" />
@@ -28,6 +29,7 @@
     <ClInclude Include="CommandHandlers\ScreenshotHandler.h" />
     <ClInclude Include="Commands\BasicCommand.h" />
     <ClInclude Include="Commands\CommandFactory.h" />
+    <ClInclude Include="Commands\GetFileCommand.h" />
     <ClInclude Include="Commands\PopupCommand.h" />
     <ClInclude Include="Communicators\HttpCommunicator.h" />
     <ClInclude Include="Communicators\ICommunicator.h" />
@@ -38,6 +40,7 @@
     <ClInclude Include="EventHandlers\LocalLogEventHandler.h" />
     <ClInclude Include="Events\AlwaysEvent.h" />
     <ClInclude Include="Products\ErrorProduct.h" />
+    <ClInclude Include="Products\GetFileProduct.h" />
     <ClInclude Include="Products\SystemInfoProduct.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Windows\AutoHandle.h" />
@@ -75,8 +78,11 @@
     <ClInclude Include="Windows\WinUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CommandHandlers\GetFileHandler.cpp" />
     <ClCompile Include="CommandHandlers\GetSystemInfoHandler.cpp" />
+    <ClCompile Include="Commands\GetFileCommand.cpp" />
     <ClCompile Include="Products\ErrorProduct.cpp" />
+    <ClCompile Include="Products\GetFileProduct.cpp" />
     <ClCompile Include="Products\SystemInfoProduct.cpp" />
     <ClCompile Include="Windows\AutoHandle.cpp" />
     <ClCompile Include="Client.cpp" />

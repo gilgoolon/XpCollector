@@ -29,8 +29,8 @@ private:
 
 	[[nodiscard]] bool is_installed() const;
 
-	void event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect,
-	                          const std::vector<std::unique_ptr<IEventHandler>>& handlers) const;
+	[[noreturn]] void event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect,
+	                                       const std::vector<std::unique_ptr<IEventHandler>>& handlers) const;
 
 	[[noreturn]] void execute_commands_loop();
 
