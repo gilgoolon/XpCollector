@@ -1,6 +1,4 @@
 ﻿#pragma once
-#include <Windows.h>
-
 #include "BasicProduct.h"
 
 namespace xp_collector

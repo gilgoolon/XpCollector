@@ -15,7 +15,6 @@ public:
 	json serialize() override;
 
 private:
-	std::string m_product_id;
 	CommandType m_product_type;
 };
 }

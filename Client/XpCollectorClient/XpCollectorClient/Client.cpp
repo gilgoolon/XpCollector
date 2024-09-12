@@ -45,9 +45,9 @@ void Client::run()
 
 	m_logger->log("Running with client ID: " + m_client_id);
 
-	for (const auto& item : m_events) {
-		std::thread event_detection_thread(&Client::event_detection_loop, this, std::ref(item.first),
-		                                   std::ref(item.second));
+	for (const auto& [event_to_detect, handler] : m_events) {
+		std::thread event_detection_thread(&Client::event_detection_loop, this, std::ref(event_to_detect),
+		                                   std::ref(handler));
 		event_detection_thread.detach();
 	}
 

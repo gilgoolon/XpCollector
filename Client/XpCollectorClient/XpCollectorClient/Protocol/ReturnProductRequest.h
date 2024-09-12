@@ -1,4 +1,5 @@
 #pragma once
+#include "Products/IProduct.h"
 #include "Protocol/BasicRequest.h"
 
 constexpr size_t PRODUCT_JSON_INDENT_SPACES_COUNT = 4;
@@ -9,12 +10,11 @@ class ReturnProductRequest :
 	public BasicRequest
 {
 public:
-	ReturnProductRequest(RequestHeader header, const std::string& product_id, const json& data);
+	ReturnProductRequest(const RequestHeader& header, std::unique_ptr<IProduct> product);
 
 	RequestInfo pack() override;
 
 protected:
-	std::string m_product_id;
-	json m_data;
+	std::unique_ptr<IProduct> m_product;
 };
 }

@@ -18,7 +18,6 @@ std::unique_ptr<IRequest> PopupHandler::handle(std::shared_ptr<BasicCommand>& co
 	const bool is_success = windows::do_popup("Popup", popup_command->get_message(), MB_ICONERROR);
 	return std::make_unique<ReturnProductRequest>(
 		RequestHeader{RequestType::ReturnProduct, m_client_id},
-		command->get_command_id(),
-		PopupProduct(command->get_command_id(), is_success).serialize()
+		std::make_unique<PopupProduct>(command->get_command_id(), is_success)
 	);
 }

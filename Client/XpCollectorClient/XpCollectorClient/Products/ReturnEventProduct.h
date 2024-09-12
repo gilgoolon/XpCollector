@@ -5,7 +5,7 @@
 namespace xp_collector
 {
 class ReturnEventProduct
-	: IProduct
+	: public IProduct
 {
 public:
 	ReturnEventProduct(std::unique_ptr<IProduct> product, std::shared_ptr<EventInfo> event_info);
