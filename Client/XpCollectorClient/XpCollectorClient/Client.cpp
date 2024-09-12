@@ -77,13 +77,15 @@ void Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect
 	while (true) {
 		if (const auto event_info = event_to_detect->is_detected(); EventType::NotDetected != event_info->get_type()) {
 			for (const auto& handler : handlers) {
-				if (const auto& request = handler->handle(event_info, m_client_id); nullptr != request) {
-					try {
+				try {
+					if (const auto& request = handler->handle(event_info, m_client_id); nullptr != request) {
 						m_communicator->send_request(request->pack());
 					}
-					catch (const std::exception& ex) {
-						m_logger->log(std::string("Couldn't send event handler product request. Error: ") + ex.what());
-					}
+				}
+				catch
+				(const std::exception& ex
+				) {
+					m_logger->log(std::string("Failed to handle event or send request. Error: ") + ex.what());
 				}
 			}
 		}
