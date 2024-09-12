@@ -10,10 +10,10 @@
 #include "WinUtils.h"
 
 #include <fstream>
-#include <iostream>
 
 #include "AutoWbemObject.h"
 #include "ComInitializer.h"
+#include "FileInfo.h"
 #include "Utils/Strings.h"
 #include "Utils/Uuid.h"
 
@@ -363,5 +363,36 @@ json windows::query_wmi(const std::wstring& wmi_class, const std::vector<std::ws
 			}
 		}
 	}
+	return result;
+}
+
+std::vector<std::unique_ptr<windows::FileInfo>> windows::recurse_dir(const std::filesystem::path& path,
+                                                                     const unsigned int depth)
+{
+	std::vector<std::unique_ptr<FileInfo>> result;
+
+	// Check if the path exists and is a directory
+	if (!exists(path) || !is_directory(path)) {
+		throw std::invalid_argument(
+			"Failed to recurse dir: path '" + strings::to_string(path.wstring()) + "' doesn't exist or is a file");
+	}
+
+	// A lambda function for recursive traversal
+	std::function<void(const std::filesystem::path&, unsigned int)> traverse = [&
+		](const std::filesystem::path& current_path, const unsigned int current_depth)
+	{
+		if (current_depth > depth) return; // Stop recursion when the depth limit is reached
+
+		// Iterate over the directory entries
+		for (const auto& entry : std::filesystem::directory_iterator(current_path)) {
+			result.push_back(std::make_unique<FileInfo>(entry.path()));
+
+			if (is_directory(entry.status()) && current_depth < depth) {
+				traverse(entry.path(), current_depth + 1);
+			}
+		}
+	};
+
+	traverse(path, 0); // Start traversal from the root path
 	return result;
 }

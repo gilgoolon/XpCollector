@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommandHandlers\CommandHandlerFactory.h" />
+    <ClInclude Include="CommandHandlers\DirListHandler.h" />
     <ClInclude Include="CommandHandlers\GetFileHandler.h" />
     <ClInclude Include="CommandHandlers\GetSystemInfoHandler.h" />
     <ClInclude Include="CommandHandlers\ICommandHandler.h" />
@@ -29,6 +30,7 @@
     <ClInclude Include="CommandHandlers\ScreenshotHandler.h" />
     <ClInclude Include="Commands\BasicCommand.h" />
     <ClInclude Include="Commands\CommandFactory.h" />
+    <ClInclude Include="Commands\DirListCommand.h" />
     <ClInclude Include="Commands\GetFileCommand.h" />
     <ClInclude Include="Commands\PopupCommand.h" />
     <ClInclude Include="Communicators\HttpCommunicator.h" />
@@ -39,6 +41,7 @@
     <ClInclude Include="EventHandlers\IEventHandler.h" />
     <ClInclude Include="EventHandlers\LocalLogEventHandler.h" />
     <ClInclude Include="Events\AlwaysEvent.h" />
+    <ClInclude Include="Products\DirListProduct.h" />
     <ClInclude Include="Products\ErrorProduct.h" />
     <ClInclude Include="Products\GetFileProduct.h" />
     <ClInclude Include="Products\SystemInfoProduct.h" />
@@ -75,12 +78,16 @@
     <ClInclude Include="Storages\RegistryStorage.h" />
     <ClInclude Include="Windows\AutoWbemObject.h" />
     <ClInclude Include="Windows\ComInitializer.h" />
+    <ClInclude Include="Windows\FileInfo.h" />
     <ClInclude Include="Windows\WinUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CommandHandlers\DirListHandler.cpp" />
     <ClCompile Include="CommandHandlers\GetFileHandler.cpp" />
     <ClCompile Include="CommandHandlers\GetSystemInfoHandler.cpp" />
+    <ClCompile Include="Commands\DirListCommand.cpp" />
     <ClCompile Include="Commands\GetFileCommand.cpp" />
+    <ClCompile Include="Products\DirListProduct.cpp" />
     <ClCompile Include="Products\ErrorProduct.cpp" />
     <ClCompile Include="Products\GetFileProduct.cpp" />
     <ClCompile Include="Products\SystemInfoProduct.cpp" />
@@ -125,6 +132,7 @@
     <ClCompile Include="Storages\RamStorage.cpp" />
     <ClCompile Include="Storages\RegistryStorage.cpp" />
     <ClCompile Include="Windows\ComInitializer.cpp" />
+    <ClCompile Include="Windows\FileInfo.cpp" />
     <ClCompile Include="Windows\WinUtils.cpp" />
   </ItemGroup>
   <ItemGroup>

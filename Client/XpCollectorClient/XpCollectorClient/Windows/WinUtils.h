@@ -6,6 +6,7 @@
 #include <ResourceBinaryView.h>
 
 #include "AutoHandle.h"
+#include "FileInfo.h"
 #include "Utils/JSON.h"
 
 static constexpr size_t SLEEP_BETWEEN_POPUPS_MILLIS = 100;
@@ -40,4 +41,6 @@ std::unique_ptr<AutoHandle> create_event(const std::string_view& event_name, boo
 void signal_event(HANDLE h_event);
 
 json query_wmi(const std::wstring& wmi_class, const std::vector<std::wstring>& properties);
+
+std::vector<std::unique_ptr<FileInfo>> recurse_dir(const std::filesystem::path& path, unsigned int depth);
 }

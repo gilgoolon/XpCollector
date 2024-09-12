@@ -171,7 +171,7 @@ std::shared_ptr<BasicCommand> Client::get_command() const
 	BasicRequest request({RequestType::GetCommand, m_client_id});
 	const auto res = m_communicator->send_request(request.pack());
 	if (httplib::OK_200 != res.get_status()) {
-		m_logger->log("Error sending GetCommand. Response: " + res.get_body());
+		m_logger->log("Error sending GetCommand. Response: " + res.get_body().dump());
 		throw std::runtime_error("Couldn't GetCommand. Status code: " + std::to_string(res.get_status()));
 	}
 	auto response = GetCommandResponse().unpack(res);

