@@ -22,7 +22,9 @@ std::unique_ptr<BasicCommand> CommandFactory::create(const json& command)
 		return std::make_unique<DirListCommand>(command_id, command_type, command["parameters"]["path"],
 		                                        command["parameters"].contains("depth")
 			                                        ? static_cast<unsigned int>(command["parameters"]["depth"])
-			                                        : 1);
+			                                        : 1,
+		                                        command["parameters"]["tree"]
+		);
 
 	// Commands with the BasicCommand structure go here, I.E. commands that receive no parameters
 	case CommandType::Screenshot:

@@ -10,6 +10,8 @@ class FileInfo
 public:
 	explicit FileInfo(std::filesystem::path path);
 
+	std::filesystem::path get_path() const;
+
 	[[nodiscard]] json pack() const;
 
 private:

@@ -37,7 +37,7 @@ class FolderWatcher(Reader):
         print(f"Searching for files in pattern: {full_pattern}")
         while True:
             for path in glob.glob(full_pattern):
-                text = Path(path).read_text()
+                text = Path(path).read_text(encoding="utf-8")
                 yield json.loads(text)
             time.sleep(self.TIMEOUT)
 

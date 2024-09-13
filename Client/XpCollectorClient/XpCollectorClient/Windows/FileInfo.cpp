@@ -17,6 +17,11 @@ windows::FileInfo::FileInfo(std::filesystem::path path)
 	m_last_write_time = std::chrono::system_clock::to_time_t(last_w_system_time);
 }
 
+std::filesystem::path windows::FileInfo::get_path() const
+{
+	return m_path;
+}
+
 json windows::FileInfo::pack() const
 {
 	std::tm local_time;

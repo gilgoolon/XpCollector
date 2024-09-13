@@ -49,6 +49,7 @@ class GetFileCommand(BasicCommand):
 
 class DirListParameters(BaseModel):
     path: str
+    tree: bool = True
     depth: Optional[int]
 
 

