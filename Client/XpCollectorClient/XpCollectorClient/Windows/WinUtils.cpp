@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <fstream>
 #include <thread>
 #include <Windows.h>
 #include <tlhelp32.h>
@@ -6,15 +7,13 @@
 #include <Wbemidl.h>
 #pragma comment(lib, "wbemuuid.lib")
 
-#define MINIMP3_IMPLEMENTATION
-#include <minimp3.h>
-#include <minimp3_ex.h>
 #include <SFML/Audio.hpp>
+
+// Needed when not compiling with static sfml audio, it contains minimp3 impl already - #define MINIMP3_IMPLEMENTATION
+#include <minimp3_ex.h>
 
 #include "AutoHandle.h"
 #include "WinUtils.h"
-
-#include <fstream>
 
 #include "AutoWbemObject.h"
 #include "ComInitializer.h"
