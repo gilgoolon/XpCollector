@@ -15,6 +15,7 @@
 #include "AutoHandle.h"
 #include "WinUtils.h"
 
+#include "AutoFree.h"
 #include "AutoWbemObject.h"
 #include "ComInitializer.h"
 #include "FileInfo.h"
@@ -280,6 +281,7 @@ json windows::query_wmi(const std::wstring& wmi_class, const std::vector<std::ws
 	if (FAILED(res)) {
 		throw std::runtime_error("Failed to create IWbemLocator object. Error: " + std::to_string(res));
 	}
+	AutoWbemObject<IWbemLocator> guard_p_loc(p_loc);
 
 	// Connect to WMI
 	res = p_loc->ConnectServer(
@@ -292,7 +294,7 @@ json windows::query_wmi(const std::wstring& wmi_class, const std::vector<std::ws
 		nullptr,
 		&p_svc
 	);
-	AutoWbemObject guard_p_loc(p_loc);
+	AutoWbemObject<IWbemServices> guard_p_svc(p_svc);
 
 	if (FAILED(res)) {
 		throw std::runtime_error("Could not connect. Error: " + std::to_string(res));
@@ -309,7 +311,6 @@ json windows::query_wmi(const std::wstring& wmi_class, const std::vector<std::ws
 		nullptr,
 		EOAC_NONE
 	);
-	AutoWbemObject guard_p_svc(p_svc);
 
 	if (FAILED(res)) {
 		throw std::runtime_error("Could not set proxy blanket. Error: " + std::to_string(res));
@@ -324,7 +325,7 @@ json windows::query_wmi(const std::wstring& wmi_class, const std::vector<std::ws
 		nullptr,
 		&p_enumerator
 	);
-	AutoWbemObject guard_p_enumerator(p_enumerator);
+	AutoWbemObject<IEnumWbemClassObject> guard_p_enumerator(p_enumerator);
 	if (FAILED(res)) {
 		throw std::runtime_error(
 			"Query for " + strings::to_string(wmi_class) + " failed. Error: " + std::to_string(res));
@@ -339,7 +340,7 @@ json windows::query_wmi(const std::wstring& wmi_class, const std::vector<std::ws
 		if (u_return == 0) {
 			break;
 		}
-		AutoWbemObject guard_cur_wbem_obj(cur_wbem_obj);
+		AutoWbemObject<IWbemClassObject> guard_cur_wbem_obj(cur_wbem_obj);
 
 		// Extract properties
 		for (const auto& prop : properties) {
@@ -417,6 +418,7 @@ void windows::play_mp3_from_buffer(const std::string& mp3_buffer)
 	                    nullptr)) {
 		throw std::runtime_error("Error decoding MP3 data!");
 	}
+	AutoFree h_mp3d(info.buffer);
 
 	// Now we have PCM data in `info.buffer` with `info.samples` samples
 	// and info.channels channels, at info.hz sample rate.
@@ -433,7 +435,4 @@ void windows::play_mp3_from_buffer(const std::string& mp3_buffer)
 	while (sound.getStatus() == sf::Sound::Status::Playing) {
 		sleep(sf::milliseconds(100));
 	}
-
-	// Free the allocated memory in minimp3
-	free(info.buffer);
 }

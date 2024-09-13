@@ -3,26 +3,15 @@
 #include <Windows.h>
 
 template <typename WbemObjectType, std::enable_if_t<std::is_base_of_v<IUnknown, WbemObjectType>>* = nullptr>
-class AutoWbemObject
+struct WbemObjectReleaser
 {
-public:
-	explicit AutoWbemObject(WbemObjectType* object_ptr)
-		: m_object_ptr(object_ptr)
+	void operator()(WbemObjectType* object)
 	{
-	}
-
-	~AutoWbemObject()
-	{
-		if (nullptr != m_object_ptr) {
-			m_object_ptr->Release();
+		if (nullptr != object) {
+			object->Release();
 		}
 	}
-
-	[[nodiscard]] WbemObjectType* get() const
-	{
-		return m_object_ptr;
-	}
-
-private:
-	WbemObjectType* m_object_ptr;
 };
+
+template <typename WbemObjectType, std::enable_if_t<std::is_base_of_v<IUnknown, WbemObjectType>>* = nullptr>
+using AutoWbemObject = std::unique_ptr<std::remove_pointer_t<WbemObjectType*>, WbemObjectReleaser<WbemObjectType>>;

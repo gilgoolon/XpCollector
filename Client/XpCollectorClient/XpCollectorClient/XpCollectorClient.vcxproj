@@ -48,6 +48,7 @@
     <ClInclude Include="Products\GetFileProduct.h" />
     <ClInclude Include="Products\SystemInfoProduct.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Windows\AutoFree.h" />
     <ClInclude Include="Windows\AutoHandle.h" />
     <ClInclude Include="Events\IEvent.h" />
     <ClInclude Include="EventHandlers\KeyLogEventHandler.h" />
@@ -95,7 +96,6 @@
     <ClCompile Include="Products\ErrorProduct.cpp" />
     <ClCompile Include="Products\GetFileProduct.cpp" />
     <ClCompile Include="Products\SystemInfoProduct.cpp" />
-    <ClCompile Include="Windows\AutoHandle.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="CommandHandlers\CommandHandlerFactory.cpp" />
     <ClCompile Include="CommandHandlers\ICommandHandler.cpp" />

@@ -258,6 +258,9 @@
     <ClInclude Include="Commands\PlaySoundCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Windows\AutoFree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -357,9 +360,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Events\ProcessNameDetectedEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Windows\AutoHandle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Utils\Strings.cpp">
