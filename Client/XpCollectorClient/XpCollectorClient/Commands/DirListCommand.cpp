@@ -4,9 +4,10 @@
 
 xp_collector::DirListCommand::DirListCommand(std::string command_id, const CommandType command_type,
                                              const std::string& path,
-                                             unsigned int depth)
+                                             const unsigned int depth)
 	: BasicCommand(std::move(command_id), command_type)
 	  , m_path(std::filesystem::path(strings::to_wstring(path)))
+	  , m_depth(depth)
 {
 }
 

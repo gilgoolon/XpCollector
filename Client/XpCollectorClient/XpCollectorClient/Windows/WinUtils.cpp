@@ -393,8 +393,8 @@ std::vector<std::unique_ptr<windows::FileInfo>> windows::recurse_dir(const std::
 				}
 			}
 		}
-		catch (const std::exception& ex) {
-			// Skip "Access is denied" error for files or directories we can't access, instead of crashing the entire function
+		catch (const std::exception&) {
+			// Skip "Access is denied" error for files or directories we can't access, instead of crashing the entire tree
 		}
 	};
 
