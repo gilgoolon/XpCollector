@@ -94,6 +94,8 @@ void Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect
 				}
 				try {
 					if (nullptr != callback_request) {
+						m_logger->log(
+							"Sending success callback request for event " + event_info->pack());
 						m_communicator->send_request(callback_request->pack());
 					}
 				}
@@ -147,6 +149,10 @@ void Client::handle_command(std::shared_ptr<BasicCommand> command) const
 	}
 	catch (const std::exception& ex) {
 		// send error response
+		m_logger->log(
+			"Failed to handle command " + command->get_command_id() + " with type " + to_string(
+				command->get_command_type()) +
+			", sending error product.");
 		m_communicator->send_request(ReturnProductRequest(
 			{RequestType::ReturnProduct, m_client_id},
 			std::make_unique<ErrorProduct>(command->get_command_id(), CommandType::Unknown, ex.what())
@@ -154,6 +160,9 @@ void Client::handle_command(std::shared_ptr<BasicCommand> command) const
 		return;
 	}
 	try {
+		m_logger->log(
+			"Sending success callback request for command " + to_string(command->get_command_type()) + " with id " +
+			command->get_command_id());
 		if (const auto res = m_communicator->send_request(callback_request->pack()); httplib::OK_200 != res.
 			get_status()) {
 			m_logger->log("Error sending ReturnProduct. Response: " + res.get_body().dump());

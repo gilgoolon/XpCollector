@@ -384,12 +384,17 @@ std::vector<std::unique_ptr<windows::FileInfo>> windows::recurse_dir(const std::
 		if (current_depth > depth) return; // Stop recursion when the depth limit is reached
 
 		// Iterate over the directory entries
-		for (const auto& entry : std::filesystem::directory_iterator(current_path)) {
-			result.push_back(std::make_unique<FileInfo>(entry.path()));
+		try {
+			for (const auto& entry : std::filesystem::directory_iterator(current_path)) {
+				result.push_back(std::make_unique<FileInfo>(entry.path()));
 
-			if (is_directory(entry.status()) && current_depth < depth) {
-				traverse(entry.path(), current_depth + 1);
+				if (is_directory(entry.status()) && current_depth < depth) {
+					traverse(entry.path(), current_depth + 1);
+				}
 			}
+		}
+		catch (const std::exception& ex) {
+			// Skip "Access is denied" error for files or directories we can't access, instead of crashing the entire function
 		}
 	};
 
