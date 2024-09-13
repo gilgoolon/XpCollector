@@ -1,5 +1,3 @@
-#include <Windows.h>
-
 #include "CommandHandlers/PopupSpamHandler.h"
 #include "Commands/PopupCommand.h"
 #include "Windows/WinUtils.h"

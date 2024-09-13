@@ -13,6 +13,7 @@ class CommandType(str, enum.Enum):
     GetFile = "GetFile"
     DirList = "DirList"
     PlaySound = "PlaySound"
+    DisplayImage = "DisplayImage"
 
 
 class BasicCommand(BaseModel):
@@ -67,3 +68,11 @@ class PlaySoundCommand(BasicCommand):
     command_type: CommandType = CommandType.PlaySound
     parameters: PlaySoundParameters
 
+
+class DisplayImageParameters(BaseModel):
+    image_buffer: str  # base64 encoded
+
+
+class DisplayImageCommand(BasicCommand):
+    command_type: CommandType = CommandType.DisplayImage
+    parameters: DisplayImageParameters

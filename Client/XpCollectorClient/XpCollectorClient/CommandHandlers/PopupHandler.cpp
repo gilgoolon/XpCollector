@@ -1,5 +1,3 @@
-#include <Windows.h>
-
 #include "CommandHandlers/PopupHandler.h"
 #include "Protocol/ReturnProductRequest.h"
 #include "Products/PopupProduct.h"

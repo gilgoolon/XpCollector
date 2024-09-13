@@ -1,6 +1,4 @@
 #pragma once
-#include <Windows.h>
-
 #include "CommandHandlers/ICommandHandler.h"
 
 namespace xp_collector

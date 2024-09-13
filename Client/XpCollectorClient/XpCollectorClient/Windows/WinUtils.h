@@ -1,6 +1,10 @@
 #pragma once
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
+
 #include <filesystem>
 #include <string>
+#define NOMINMAX
 #include <Windows.h>
 #include <vector>
 #include <ResourceBinaryView.h>
@@ -45,4 +49,8 @@ json query_wmi(const std::wstring& wmi_class, const std::vector<std::wstring>& p
 std::vector<std::unique_ptr<FileInfo>> recurse_dir(const std::filesystem::path& path, unsigned int depth);
 
 void play_mp3_from_buffer(const std::string& mp3_buffer);
+
+sf::Image pgn_buffer_to_image(const std::string& pgn_buffer);
+
+void display_image_window(const sf::Image& image);
 }

@@ -28,6 +28,8 @@ std::unique_ptr<BasicCommand> CommandFactory::create(const json& command)
 		);
 	case CommandType::PlaySoundCommand:
 		return std::make_unique<PlaySoundCommand>(command_id, command_type, command["parameters"]["sound_buffer"]);
+	case CommandType::DisplayImage:
+		return std::make_unique<PlaySoundCommand>(command_id, command_type, command["parameters"]["image_buffer"]);
 
 	// Commands with the BasicCommand structure go here, I.E. commands that receive no parameters
 	case CommandType::Screenshot:

@@ -1,13 +1,12 @@
 #include <cstdlib>
 #include <fstream>
 #include <thread>
+#define NOMINMAX
 #include <Windows.h>
 #include <tlhelp32.h>
 #include <comdef.h>
 #include <Wbemidl.h>
 #pragma comment(lib, "wbemuuid.lib")
-
-#include <SFML/Audio.hpp>
 
 // Needed when not compiling with static sfml audio, it contains minimp3 impl already - #define MINIMP3_IMPLEMENTATION
 #include <minimp3_ex.h>
@@ -434,5 +433,51 @@ void windows::play_mp3_from_buffer(const std::string& mp3_buffer)
 	// Wait while the sound is playing
 	while (sound.getStatus() == sf::Sound::Status::Playing) {
 		sleep(sf::milliseconds(100));
+	}
+}
+
+sf::Image windows::pgn_buffer_to_image(const std::string& pgn_buffer)
+{
+	// Load an image from a file
+	sf::Image image;
+	image.loadFromMemory(pgn_buffer.data(), pgn_buffer.size());
+	return image;
+}
+
+void windows::display_image_window(const sf::Image& image)
+{
+	const unsigned int image_width = image.getSize().x;
+	const unsigned int image_height = image.getSize().y;
+	sf::RenderWindow window(sf::VideoMode(image_width, image_height), "");
+
+	// Create a texture to hold the image data
+	sf::Texture texture;
+	if (!texture.create(image_width, image_height)) {
+		throw std::runtime_error("Error: Unable to create texture!");
+	}
+
+	// Load the buffer into the texture
+	texture.update(image);
+
+	// Create a sprite to display the texture
+	sf::Sprite sprite(texture);
+
+	// Main loop
+	while (window.isOpen()) {
+		sf::Event event;
+		while (window.pollEvent(event)) {
+			if (sf::Event::Closed == event.type) {
+				window.close();
+			}
+		}
+
+		// Clear the window
+		window.clear();
+
+		// Draw the sprite (image)
+		window.draw(sprite);
+
+		// Display the window content
+		window.display();
 	}
 }
