@@ -479,5 +479,7 @@ void windows::display_image_window(const sf::Image& image)
 
 		// Display the window content
 		window.display();
+
+		SetWindowPos(window.getSystemHandle(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 	}
 }
