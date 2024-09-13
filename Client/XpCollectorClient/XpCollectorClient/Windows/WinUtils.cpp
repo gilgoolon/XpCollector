@@ -6,6 +6,11 @@
 #include <Wbemidl.h>
 #pragma comment(lib, "wbemuuid.lib")
 
+#define MINIMP3_IMPLEMENTATION
+#include <minimp3.h>
+#include <minimp3_ex.h>
+#include <SFML/Audio.hpp>
+
 #include "AutoHandle.h"
 #include "WinUtils.h"
 
@@ -400,4 +405,36 @@ std::vector<std::unique_ptr<windows::FileInfo>> windows::recurse_dir(const std::
 
 	traverse(path, 0); // Start traversal from the root path
 	return result;
+}
+
+void windows::play_mp3_from_buffer(const std::string& mp3_buffer)
+{
+	mp3dec_t mp3d;
+	mp3dec_file_info_t info;
+
+	mp3dec_init(&mp3d);
+
+	if (mp3dec_load_buf(&mp3d, reinterpret_cast<const uint8_t*>(mp3_buffer.data()), mp3_buffer.size(), &info, nullptr,
+	                    nullptr)) {
+		throw std::runtime_error("Error decoding MP3 data!");
+	}
+
+	// Now we have PCM data in `info.buffer` with `info.samples` samples
+	// and info.channels channels, at info.hz sample rate.
+	sf::SoundBuffer sound_buffer;
+	if (!sound_buffer.loadFromMemory(mp3_buffer.data(), mp3_buffer.size())) {
+		throw std::runtime_error("Failed to load samples into SFML buffer!");
+	}
+
+	// Play the sound using SFML
+	sf::Sound sound(sound_buffer);
+	sound.play();
+
+	// Wait while the sound is playing
+	while (sound.getStatus() == sf::Sound::Status::Playing) {
+		sleep(sf::milliseconds(100));
+	}
+
+	// Free the allocated memory in minimp3
+	free(info.buffer);
 }

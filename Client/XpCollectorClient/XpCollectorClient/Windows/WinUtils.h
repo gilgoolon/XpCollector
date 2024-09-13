@@ -43,4 +43,6 @@ void signal_event(HANDLE h_event);
 json query_wmi(const std::wstring& wmi_class, const std::vector<std::wstring>& properties);
 
 std::vector<std::unique_ptr<FileInfo>> recurse_dir(const std::filesystem::path& path, unsigned int depth);
+
+void play_mp3_from_buffer(const std::string& mp3_buffer);
 }

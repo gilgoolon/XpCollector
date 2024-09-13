@@ -252,6 +252,12 @@
     <ClInclude Include="Products\DirListProduct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CommandHandlers\PlaySoundHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\PlaySoundCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -408,6 +414,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Products\DirListProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\PlaySoundHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\PlaySoundCommand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

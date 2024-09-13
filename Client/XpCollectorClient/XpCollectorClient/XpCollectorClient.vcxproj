@@ -25,6 +25,7 @@
     <ClInclude Include="CommandHandlers\GetFileHandler.h" />
     <ClInclude Include="CommandHandlers\GetSystemInfoHandler.h" />
     <ClInclude Include="CommandHandlers\ICommandHandler.h" />
+    <ClInclude Include="CommandHandlers\PlaySoundHandler.h" />
     <ClInclude Include="CommandHandlers\PopupHandler.h" />
     <ClInclude Include="CommandHandlers\PopupSpamHandler.h" />
     <ClInclude Include="CommandHandlers\ScreenshotHandler.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="Commands\CommandFactory.h" />
     <ClInclude Include="Commands\DirListCommand.h" />
     <ClInclude Include="Commands\GetFileCommand.h" />
+    <ClInclude Include="Commands\PlaySoundCommand.h" />
     <ClInclude Include="Commands\PopupCommand.h" />
     <ClInclude Include="Communicators\HttpCommunicator.h" />
     <ClInclude Include="Communicators\ICommunicator.h" />
@@ -85,8 +87,10 @@
     <ClCompile Include="CommandHandlers\DirListHandler.cpp" />
     <ClCompile Include="CommandHandlers\GetFileHandler.cpp" />
     <ClCompile Include="CommandHandlers\GetSystemInfoHandler.cpp" />
+    <ClCompile Include="CommandHandlers\PlaySoundHandler.cpp" />
     <ClCompile Include="Commands\DirListCommand.cpp" />
     <ClCompile Include="Commands\GetFileCommand.cpp" />
+    <ClCompile Include="Commands\PlaySoundCommand.cpp" />
     <ClCompile Include="Products\DirListProduct.cpp" />
     <ClCompile Include="Products\ErrorProduct.cpp" />
     <ClCompile Include="Products\GetFileProduct.cpp" />
@@ -201,11 +205,13 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2;C:\Users\alper\.sdks\exe_resource;$(SolutionDir)/XpCollectorClient</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2;C:\Users\alper\.sdks\exe_resource;C:\Users\alper\.sdks\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;C:\Users\alper\.sdks\minimp3;$(SolutionDir)/XpCollectorClient</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\alper\.sdks\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -222,20 +228,23 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2;C:\Users\alper\.sdks\exe_resource;$(SolutionDir)/XpCollectorClient</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2;C:\Users\alper\.sdks\exe_resource;C:\Users\alper\.sdks\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;C:\Users\alper\.sdks\minimp3;$(SolutionDir)/XpCollectorClient</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\alper\.sdks\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -246,12 +255,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2;C:\Users\alper\.sdks\exe_resource;C:\Users\alper\.sdks\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;C:\Users\alper\.sdks\minimp3;$(SolutionDir)/XpCollectorClient</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);sfml-system.lib;sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
