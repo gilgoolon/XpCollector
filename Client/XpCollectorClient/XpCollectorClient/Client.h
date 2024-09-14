@@ -14,11 +14,11 @@ constexpr size_t EXECUTE_COMMANDS_SLEEP_DURATION = 10; // Seconds
 constexpr size_t EVENT_DETECTION_SLEEP_DURATION = 5; // Seconds
 constexpr size_t INSTALLATION_RETRY_SLEEP_DURATION = 30; // Seconds
 
+
 // Have Two different variables to allow stopping but not uninstalling
 
-static bool g_is_running = true;
-
-static bool g_is_uninstalled = false;
+inline bool g_is_uninstalled = false;
+inline bool g_is_running = true;
 
 class Client
 {
@@ -30,7 +30,7 @@ public:
 		std::unordered_map<std::unique_ptr<IEvent>, std::vector<std::unique_ptr<IEventHandler>>>&& events,
 		std::unique_ptr<ILogger> logger);
 
-	[[noreturn]] void run();
+	void run();
 
 private:
 	void install() const;
@@ -54,6 +54,6 @@ private:
 	std::unordered_map<std::unique_ptr<IEvent>, std::vector<std::unique_ptr<IEventHandler>>> m_events;
 	std::string m_client_id;
 	std::wstring m_exe_path;
-	std::vector<std::thread> m_thread_pool;
+	std::vector<std::thread> m_threads;
 };
 }

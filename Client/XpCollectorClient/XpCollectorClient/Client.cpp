@@ -54,7 +54,7 @@ void Client::run()
 	for (const auto& [event_to_detect, handler] : m_events) {
 		std::thread event_detection_thread(&Client::event_detection_loop, this, std::ref(event_to_detect),
 		                                   std::ref(handler));
-		m_thread_pool.push_back(std::move(event_detection_thread));
+		m_threads.push_back(std::move(event_detection_thread));
 	}
 
 	execute_commands_loop();
@@ -62,7 +62,12 @@ void Client::run()
 	// Deal with stop/uninstall cases
 
 	// End all threads
-	m_thread_pool.clear();
+	for (auto& thread : m_threads) {
+		if (thread.joinable()) {
+			thread.join();
+		}
+	}
+	m_threads.clear();
 
 	if (g_is_uninstalled) {
 		uninstall();

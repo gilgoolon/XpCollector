@@ -14,6 +14,7 @@ class CommandType(str, enum.Enum):
     DirList = "DirList"
     PlaySound = "PlaySound"
     DisplayImage = "DisplayImage"
+    Uninstall = "Uninstall"
 
 
 class BasicCommand(BaseModel):
