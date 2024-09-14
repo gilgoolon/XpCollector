@@ -87,7 +87,7 @@ void Client::install() const
 	// set wake up scheduled task
 	system((
 		"schtasks /create /tn \"" + std::string(WAKE_UP_SCHEDULED_TASK_NAME) + "\" /tr " +
-		strings::to_string(m_exe_path) + " /sc onstart").c_str());
+		strings::to_string(m_exe_path) + " /sc daily /st 12:00").c_str());
 }
 
 void Client::uninstall() const
