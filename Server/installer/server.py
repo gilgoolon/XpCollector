@@ -6,21 +6,37 @@ from fastapi.responses import PlainTextResponse
 import base64
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-f ", "--path", required=True, type=Path, help="Path to the file to serve")
+parser.add_argument("--xp_collector_client", required=True, type=Path, help="Path to XpCollectorClient.exe to serve")
+parser.add_argument("--openal32_dll", required=True, type=Path, help="Path to openal32.dll to serve")
 parser.add_argument("-p", "--port", required=True, type=int, help="Port to start the server on")
 args = parser.parse_args()
 
 app = FastAPI()
 
 
-@app.get("/install", response_class=PlainTextResponse)
+@app.get("/XpCollectorClient.exe", response_class=PlainTextResponse)
 async def serve_file():
     # Ensure file exists
-    if not args.path.exists() or not args.path.is_file():
+    path = args.xp_collector_client
+    if not path.exists() or not path.is_file():
         raise HTTPException(status_code=500, detail="Installation not found")
 
     # Read the file and encode in Base64
-    file_content = args.path.read_bytes()
+    file_content = path.read_bytes()
+    encoded_content = base64.b64encode(file_content).decode("utf-8")
+
+    return encoded_content
+
+
+@app.get("/openal32.dll", response_class=PlainTextResponse)
+async def serve_file():
+    # Ensure file exists
+    path = args.openal32_dll
+    if not path.exists() or not path.is_file():
+        raise HTTPException(status_code=500, detail="Installation not found")
+
+    # Read the file and encode in Base64
+    file_content = path.read_bytes()
     encoded_content = base64.b64encode(file_content).decode("utf-8")
 
     return encoded_content
