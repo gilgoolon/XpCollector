@@ -29,6 +29,6 @@ std::unique_ptr<xp_collector::IRequest> xp_collector::GetSystemInfoHandler::hand
 	                                                   });
 	return std::make_unique<ReturnProductRequest>(
 		RequestHeader{RequestType::ReturnProduct, m_client_id},
-		std::make_unique<SystemInfoProduct>(command->get_command_id(), CommandType::GetSystemInfo, system_info)
+		std::make_unique<SystemInfoProduct>(command->get_command_id(), command->get_command_type(), system_info)
 	);
 }

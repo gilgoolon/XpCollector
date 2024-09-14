@@ -7,7 +7,7 @@ class KeyLogProduct :
 	public BasicProduct
 {
 public:
-	explicit KeyLogProduct(std::string product_id, std::string result);
+	explicit KeyLogProduct(std::string product_id, CommandType product_type, std::string result);
 
 	json serialize() override;
 

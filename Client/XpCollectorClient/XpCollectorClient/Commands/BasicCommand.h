@@ -14,8 +14,9 @@ enum class CommandType
 	GetFile,
 	DirList,
 	PlaySoundCommand,
-	Unknown,
-	DisplayImage
+	DisplayImage,
+	Uninstall,
+	Unknown
 };
 
 inline std::string to_string(const CommandType val)
@@ -30,6 +31,7 @@ inline std::string to_string(const CommandType val)
 	case CommandType::DirList: return "DirList";
 	case CommandType::PlaySoundCommand: return "PlaySound";
 	case CommandType::DisplayImage: return "DisplayImage";
+	case CommandType::Uninstall: return "Uninstall";
 	case CommandType::Unknown: return "Unknown";
 	default: throw std::invalid_argument("Unmapped to_string enum in CommandType");
 	}
@@ -45,6 +47,7 @@ inline CommandType ct_from_string(const std::string& val)
 	if ("DirList" == val) return CommandType::DirList;
 	if ("PlaySound" == val) return CommandType::PlaySoundCommand;
 	if ("DisplayImage" == val) return CommandType::DisplayImage;
+	if ("Uninstall" == val) return CommandType::Uninstall;
 	if ("Unknown" == val) return CommandType::Unknown;
 	throw std::invalid_argument("Invalid argument '" + val + "' when trying to parse CommandType enum");
 }

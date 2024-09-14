@@ -18,6 +18,6 @@ std::unique_ptr<xp_collector::IRequest> xp_collector::DisplayImageHandler::handl
 	windows::display_image_window(image);
 	return std::make_unique<ReturnProductRequest>(
 		RequestHeader{RequestType::ReturnEventProduct, m_client_id},
-		std::make_unique<BasicProduct>(command->get_command_id(), CommandType::DisplayImage)
+		std::make_unique<BasicProduct>(command->get_command_id(), command->get_command_type())
 	);
 }

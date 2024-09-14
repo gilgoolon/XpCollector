@@ -123,9 +123,6 @@
     <ClInclude Include="Products\IProduct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Products\PopupProduct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Products\ScreenshotProduct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -267,6 +264,9 @@
     <ClInclude Include="CommandHandlers\DisplayImageHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CommandHandlers\UninstallHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -309,9 +309,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Products\BasicProduct.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Products\PopupProduct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Products\ScreenshotProduct.cpp">
@@ -432,6 +429,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CommandHandlers\DisplayImageHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\UninstallHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

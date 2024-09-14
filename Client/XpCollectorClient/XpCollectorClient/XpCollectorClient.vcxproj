@@ -30,6 +30,7 @@
     <ClInclude Include="CommandHandlers\PopupHandler.h" />
     <ClInclude Include="CommandHandlers\PopupSpamHandler.h" />
     <ClInclude Include="CommandHandlers\ScreenshotHandler.h" />
+    <ClInclude Include="CommandHandlers\UninstallHandler.h" />
     <ClInclude Include="Commands\BasicCommand.h" />
     <ClInclude Include="Commands\CommandFactory.h" />
     <ClInclude Include="Commands\DirListCommand.h" />
@@ -67,7 +68,6 @@
     <ClInclude Include="Loggers\ILogger.h" />
     <ClInclude Include="Products\BasicProduct.h" />
     <ClInclude Include="Products\IProduct.h" />
-    <ClInclude Include="Products\PopupProduct.h" />
     <ClInclude Include="Products\ScreenshotProduct.h" />
     <ClInclude Include="Protocol\BasicRequest.h" />
     <ClInclude Include="Protocol\BasicResponse.h" />
@@ -92,6 +92,7 @@
     <ClCompile Include="CommandHandlers\GetFileHandler.cpp" />
     <ClCompile Include="CommandHandlers\GetSystemInfoHandler.cpp" />
     <ClCompile Include="CommandHandlers\PlaySoundHandler.cpp" />
+    <ClCompile Include="CommandHandlers\UninstallHandler.cpp" />
     <ClCompile Include="Commands\DirListCommand.cpp" />
     <ClCompile Include="Commands\DisplayImageCommand.cpp" />
     <ClCompile Include="Commands\GetFileCommand.cpp" />
@@ -128,7 +129,6 @@
     <ClCompile Include="Loggers\FileLogger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Products\BasicProduct.cpp" />
-    <ClCompile Include="Products\PopupProduct.cpp" />
     <ClCompile Include="Products\ScreenshotProduct.cpp" />
     <ClCompile Include="Protocol\BasicRequest.cpp" />
     <ClCompile Include="Protocol\BasicResponse.cpp" />

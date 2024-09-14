@@ -2,9 +2,9 @@
 
 #include "ScreenshotProduct.h"
 
-xp_collector::ScreenshotProduct::ScreenshotProduct(std::string product_id, CommandType product_type,
+xp_collector::ScreenshotProduct::ScreenshotProduct(std::string product_id, const CommandType product_type,
                                                    std::string&& bitmap_data)
-	: BasicProduct(product_id, product_type)
+	: BasicProduct(std::move(product_id), product_type)
 	  , m_bitmap_data(std::move(bitmap_data))
 {
 }

