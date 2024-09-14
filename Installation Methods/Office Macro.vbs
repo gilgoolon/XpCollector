@@ -41,7 +41,6 @@ Sub CreateFolderIfNotExists(folderPath As String)
     If Not fso.FolderExists(folderPath) Then
         ' If the folder doesn't exist, create it
         fso.CreateFolder folderPath
-        MsgBox "Folder created at: " & folderPath
     End If
 End Sub
 
