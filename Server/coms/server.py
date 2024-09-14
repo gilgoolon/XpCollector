@@ -1,4 +1,5 @@
 import base64
+import logging
 import uuid
 
 from commands import BasicCommand
@@ -25,7 +26,9 @@ class Server:
         elif tp in [RequestType.ReturnProduct, RequestType.ReturnEventProduct]:
             return self._handle_return_product(ReturnProductRequest(**request.model_dump()))
         elif tp is RequestType.InstallClient:
-            return self._handle_install_client()
+            response = self._handle_install_client()
+            print(f"Installed new client with id: '{response.content.client_id}'")
+            return response
         raise ValueError(f"Unhandled request type: {tp}")
 
     def _handle_get_command(self, request: BasicRequest) -> GetCommandResponse:
