@@ -1,8 +1,6 @@
-#include "Configurator.h"
-
-#include <fstream>
 #include <vector>
 
+#include "Configurator.h"
 #include "Communicators/HttpCommunicator.h"
 #include "EventHandlers/EventHandlerFactory.h"
 #include "Events/AlwaysEvent.h"
@@ -13,7 +11,7 @@
 #include "Storages/RegistryStorage.h"
 using namespace xp_collector;
 
-std::unique_ptr<Client> xp_collector::parse(const json& conf)
+std::unique_ptr<Client> xp_collector::parse(const json& conf, const std::wstring& exe_path)
 {
 	std::string server_url = conf["server_url"];
 	const bool debug = conf["debug"];
@@ -29,6 +27,7 @@ std::unique_ptr<Client> xp_collector::parse(const json& conf)
 		logger = std::make_unique<FileLogger>(conf["log_folder"]);
 	}
 	return std::make_unique<Client>(
+		exe_path,
 		std::make_unique<HttpCommunicator>(server_url),
 		std::make_unique<RegistryStorage>(conf["registry_storage_key"]),
 		std::move(events),

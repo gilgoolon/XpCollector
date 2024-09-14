@@ -11,11 +11,13 @@
 #include "CommandHandlers/CommandHandlerFactory.h"
 #include "Products/ErrorProduct.h"
 #include "Protocol/ReturnProductRequest.h"
+#include "Utils/Strings.h"
 #include "Utils/Uuid.h"
 #include "Windows/WinUtils.h"
 using namespace xp_collector;
 
 Client::Client(
+	std::wstring exe_path,
 	std::unique_ptr<ICommunicator> communicator,
 	std::unique_ptr<IClientStorage> storage,
 	std::unordered_map<std::unique_ptr<IEvent>, std::vector<std::unique_ptr<IEventHandler>>>&& events,
@@ -24,6 +26,7 @@ Client::Client(
 	  , m_storage(std::move(storage))
 	  , m_logger(std::move(logger))
 	  , m_events(std::move(events))
+	  , m_exe_path(std::move(exe_path))
 {
 }
 
@@ -51,10 +54,19 @@ void Client::run()
 	for (const auto& [event_to_detect, handler] : m_events) {
 		std::thread event_detection_thread(&Client::event_detection_loop, this, std::ref(event_to_detect),
 		                                   std::ref(handler));
-		event_detection_thread.detach();
+		m_thread_pool.push_back(std::move(event_detection_thread));
 	}
 
 	execute_commands_loop();
+
+	// Deal with stop/uninstall cases
+
+	// End all threads
+	m_thread_pool.clear();
+
+	if (g_is_uninstalled) {
+		uninstall();
+	}
 }
 
 void Client::install() const
@@ -67,6 +79,17 @@ void Client::install() const
 		throw std::runtime_error("Couldn't InstallClient properly. Status code: " + std::to_string(res.get_status()));
 	}
 	m_storage->store(CLIENT_ID_STORAGE_NAME, InstallClientResponse().unpack(res).get_client_id());
+	// set wake up scheduled task
+	system((
+		"schtasks /create /tn \"" + std::string(WAKE_UP_SCHEDULED_TASK_NAME) + "\" /tr " +
+		strings::to_string(m_exe_path) + " /sc onstart").c_str());
+}
+
+void Client::uninstall() const
+{
+	// delete wake up scheduled task
+	system(("schtasks /delete /tn \"" + std::string(WAKE_UP_SCHEDULED_TASK_NAME) + "\" /f").c_str());
+	m_storage->clear();
 }
 
 bool Client::is_installed() const
@@ -77,7 +100,7 @@ bool Client::is_installed() const
 void Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect,
                                   const std::vector<std::unique_ptr<IEventHandler>>& handlers) const
 {
-	while (true) {
+	while (g_is_running) {
 		if (const auto event_info = event_to_detect->is_detected(); EventType::NotDetected != event_info->get_type()) {
 			for (const auto& handler : handlers) {
 				std::unique_ptr<IRequest> callback_request = nullptr;
@@ -114,7 +137,7 @@ void Client::event_detection_loop(const std::unique_ptr<IEvent>& event_to_detect
 void Client::execute_commands_loop()
 {
 	m_logger->log("Starting main loop of command fetching");
-	while (true) {
+	while (g_is_running) {
 		std::shared_ptr<BasicCommand> command = nullptr;
 		try {
 			command = get_command();

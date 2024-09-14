@@ -26,7 +26,7 @@ bool signal_running_event()
 	return true;
 }
 
-int main(const int argc, char** argv)
+int main(const int argc, wchar_t** argv)
 {
 	if (!signal_running_event()) {
 		std::cout << "XpCollector is already running on this machine! Exiting..." << std::endl;
@@ -45,7 +45,7 @@ int main(const int argc, char** argv)
 		return EXIT_FAILURE;
 	}
 
-	const std::unique_ptr<Client> client = parse(conf);
+	const std::unique_ptr<Client> client = parse(conf, argv[0]);
 	client->run();
 	return EXIT_SUCCESS;
 }

@@ -11,11 +11,13 @@ class RegistryStorage
 public:
 	explicit RegistryStorage(std::string key);
 
-	void store(std::string name, std::string value) override;
+	void store(const std::string& name, const std::string& value) override;
 
-	bool has_field(std::string name) override;
+	bool has_field(const std::string& name) override;
 
-	std::string fetch(std::string name) override;
+	std::string fetch(const std::string& name) override;
+
+	void clear() override;
 
 private:
 	std::string m_key;

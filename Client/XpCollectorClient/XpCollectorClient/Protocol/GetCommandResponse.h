@@ -10,7 +10,7 @@ class GetCommandResponse :
 public:
 	GetCommandResponse& unpack(const ResponseInfo& response) override;
 
-	bool has_command() const;
+	[[nodiscard]] bool has_command() const;
 
 	std::shared_ptr<BasicCommand> get_command();
 
