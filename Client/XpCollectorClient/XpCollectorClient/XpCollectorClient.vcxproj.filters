@@ -69,7 +69,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WinUtils.h">
+    <ClInclude Include="Windows\WinUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Client.h">
@@ -78,7 +78,7 @@
     <ClInclude Include="Configurator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="JSON.h">
+    <ClInclude Include="Utils\JSON.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Protocol\ReturnProductRequest.h">
@@ -108,7 +108,7 @@
     <ClInclude Include="Protocol\ResponseInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Storages\IClientStorage.h">
+    <ClInclude Include="Storages\IStorage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Storages\RamStorage.h">
@@ -121,9 +121,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Products\IProduct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Products\PopupProduct.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Products\ScreenshotProduct.h">
@@ -180,6 +177,96 @@
     <ClInclude Include="CommandHandlers\ScreenshotHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Commands\KeyLogCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\KeyLogHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Products\KeyLogProduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\ProcessNameDetectedEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AutoHandle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Strings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EventFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandlers\EventHandlerFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandlers\KeyLogEventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Uuid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Products\ReturnEventProduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\GetSystemInfoHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Products\SystemInfoProduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\ComInitializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AutoWbemObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Products\ErrorProduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\GetFileCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\GetFileHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Products\GetFileProduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\DirListHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\DirListCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\FileInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Products\DirListProduct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\PlaySoundHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\PlaySoundCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\AutoFree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\DisplayImageCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\DisplayImageHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHandlers\UninstallHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -191,7 +278,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WinUtils.cpp">
+    <ClCompile Include="Windows\WinUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Protocol\BasicRequest.cpp">
@@ -206,12 +293,6 @@
     <ClCompile Include="Protocol\InstallClientResponse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Protocol\IRequest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Protocol\IResponse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Protocol\RequestInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -219,9 +300,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Protocol\ReturnProductRequest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Storages\IStorage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Storages\RamStorage.cpp">
@@ -233,12 +311,6 @@
     <ClCompile Include="Products\BasicProduct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Products\IProduct.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Products\PopupProduct.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Products\ScreenshotProduct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -248,25 +320,13 @@
     <ClCompile Include="Loggers\FileLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Loggers\ILogger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Events\AlwaysEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Events\IEvent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EventHandlers\IEventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EventHandlers\LocalLogEventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Communicators\HttpCommunicator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Communicators\ICommunicator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Commands\BasicCommand.cpp">
@@ -293,8 +353,94 @@
     <ClCompile Include="CommandHandlers\ScreenshotHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Commands\KeyLogCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\KeyLogHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Products\KeyLogProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\ProcessNameDetectedEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Strings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\EventFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandlers\EventHandlerFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventHandlers\KeyLogEventHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Uuid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Events\IEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Products\ReturnEventProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\GetSystemInfoHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Products\SystemInfoProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\ComInitializer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Products\ErrorProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\GetFileCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\GetFileHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Products\GetFileProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\DirListHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\DirListCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\FileInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Products\DirListProduct.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\PlaySoundHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\PlaySoundCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\DisplayImageCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\DisplayImageHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHandlers\UninstallHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="conf.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="XpCollectorClient.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

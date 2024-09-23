@@ -1,6 +1,7 @@
 #include <httplib.h>
 
 #include "HttpCommunicator.h"
+using namespace xp_collector;
 
 HttpCommunicator::HttpCommunicator(std::string server_url)
 	: m_http_client(server_url)

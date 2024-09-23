@@ -1,5 +1,6 @@
 #include "Protocol/GetCommandResponse.h"
 #include "Commands/CommandFactory.h"
+using namespace xp_collector;
 
 GetCommandResponse& GetCommandResponse::unpack(const ResponseInfo& response)
 {

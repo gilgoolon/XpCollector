@@ -1,6 +1,6 @@
 {
-  "products_path": "C:\\Users\\alper\\OneDrive\\Documents\\TheFriendlyTroll\\products",
-  "commands_path": "C:\\Users\\alper\\OneDrive\\Documents\\TheFriendlyTroll\\commands",
-  "done_commands_path": "C:\\Users\\alper\\OneDrive\\Documents\\TheFriendlyTroll\\executed_commands",
+  "products_path": "C:\\Users\\alper\\OneDrive\\Documents\\XpCollector\\products",
+  "commands_path": "C:\\Users\\alper\\OneDrive\\Documents\\XpCollector\\commands",
+  "done_commands_path": "C:\\Users\\alper\\OneDrive\\Documents\\XpCollector\\executed_commands",
   "clients_db_url": "http://localhost:5000"
 }

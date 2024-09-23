@@ -1,8 +1,10 @@
 #pragma once
 #include "IResponse.h"
 
-
-struct ResponseHeader {
+namespace xp_collector
+{
+struct ResponseHeader
+{
 	ResponseType request_type;
 };
 
@@ -12,6 +14,8 @@ class BasicResponse :
 {
 public:
 	BasicResponse& unpack(const ResponseInfo& response) override;
+
 protected:
 	ResponseHeader m_header;
 };
+}

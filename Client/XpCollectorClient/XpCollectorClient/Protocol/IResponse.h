@@ -1,7 +1,10 @@
 #pragma once
 #include "ResponseInfo.h"
 
-enum class ResponseType {
+namespace xp_collector
+{
+enum class ResponseType
+{
 	Success, Error
 };
 
@@ -17,3 +20,4 @@ class IResponse
 public:
 	virtual IResponse& unpack(const ResponseInfo& response) = 0;
 };
+}

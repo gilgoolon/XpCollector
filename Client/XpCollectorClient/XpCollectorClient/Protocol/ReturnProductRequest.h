@@ -1,18 +1,20 @@
 #pragma once
+#include "Products/IProduct.h"
 #include "Protocol/BasicRequest.h"
 
 constexpr size_t PRODUCT_JSON_INDENT_SPACES_COUNT = 4;
 
+namespace xp_collector
+{
 class ReturnProductRequest :
-    public BasicRequest
+	public BasicRequest
 {
 public:
-    ReturnProductRequest(RequestHeader header, const std::string& product_id, const json& data);
+	ReturnProductRequest(const RequestHeader& header, std::unique_ptr<IProduct> product);
 
-    RequestInfo pack() override;
+	RequestInfo pack() override;
 
-private:
-    std::string m_product_id;
-    json m_data;
+protected:
+	std::unique_ptr<IProduct> m_product;
 };
-
+}

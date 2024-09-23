@@ -4,16 +4,17 @@
 
 #include "ICommunicator.h"
 
-
+namespace xp_collector
+{
 class HttpCommunicator :
-    public ICommunicator
+	public ICommunicator
 {
 public:
-    explicit HttpCommunicator(std::string server_url);
+	explicit HttpCommunicator(std::string server_url);
 
-    ResponseInfo send_request(const RequestInfo& request) override;
+	ResponseInfo send_request(const RequestInfo& request) override;
 
 private:
-    httplib::Client m_http_client;
+	httplib::Client m_http_client;
 };
-
+}

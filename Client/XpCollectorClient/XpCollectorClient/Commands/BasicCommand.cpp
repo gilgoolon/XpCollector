@@ -1,8 +1,9 @@
-#include "BasicCommand.h"
+#include "Commands/BasicCommand.h"
+using namespace xp_collector;
 
-BasicCommand::BasicCommand(std::string command_id, CommandType command_type)
-	: m_command_id(command_id)
-	, m_command_type(command_type)
+BasicCommand::BasicCommand(std::string command_id, const CommandType command_type)
+	: m_command_id(std::move(command_id))
+	  , m_command_type(command_type)
 {
 }
 

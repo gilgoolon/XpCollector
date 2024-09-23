@@ -1,23 +1,21 @@
-#include <Windows.h>
-
 #include "CommandHandlers/PopupSpamHandler.h"
 #include "Commands/PopupCommand.h"
-#include "WinUtils.h"
+#include "Products/BasicProduct.h"
+#include "Windows/WinUtils.h"
 #include "Protocol/ReturnProductRequest.h"
-#include "Products/PopupProduct.h"
+using namespace xp_collector;
 
-PopupSpamHandler::PopupSpamHandler(const std::string& client_id)
-	: ICommandHandler(client_id)
+PopupSpamHandler::PopupSpamHandler(std::string client_id)
+	: ICommandHandler(std::move(client_id))
 {
 }
 
 std::unique_ptr<IRequest> PopupSpamHandler::handle(std::shared_ptr<BasicCommand>& command)
 {
-    std::shared_ptr<PopupCommand> popup_command = std::static_pointer_cast<PopupCommand>(command);
-    win_utils::do_popups(POPUPS_COUNT, "Popup", popup_command->get_message(), MB_ICONERROR);
-    return std::make_unique<ReturnProductRequest>(
-        RequestHeader{ RequestType::ReturnProduct, m_client_id },
-        command->get_command_id(),
-        PopupProduct(command->get_command_id(), true).serialize()
-    );
+	const std::shared_ptr<PopupCommand> popup_command = std::static_pointer_cast<PopupCommand>(command);
+	windows::do_popups(POPUPS_COUNT, "Popup", popup_command->get_message(), MB_ICONERROR);
+	return std::make_unique<ReturnProductRequest>(
+		RequestHeader{RequestType::ReturnProduct, m_client_id},
+		std::make_unique<BasicProduct>(command->get_command_id(), command->get_command_type())
+	);
 }

@@ -1,4 +1,5 @@
 #include "InstallClientResponse.h"
+using namespace xp_collector;
 
 InstallClientResponse& InstallClientResponse::unpack(const ResponseInfo& response)
 {
