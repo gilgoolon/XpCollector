@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 
-path = Path(r"C:\Users\alper\OneDrive\Documents\TheFriendlyTroll\products\b6f1a68c8e79462f89d179f86ec8e033\a935bf2d2b704641be98648ed325b419")
+path = Path(r"C:\Users\alper\OneDrive\Documents\XpCollector\products\8c7a23402c1f4731b48d80fe0b74502b\13d8a8e5d99846dab16d10666ec7704a")
 
 data = path.read_text()
 data = json.loads(data)

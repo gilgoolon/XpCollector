@@ -14,7 +14,7 @@ args = parser.parse_args()
 app = FastAPI()
 
 
-@app.get("/XpCollectorClient.exe", response_class=PlainTextResponse)
+@app.get("/XpCollectorClient.txt", response_class=PlainTextResponse)
 async def serve_file():
     # Ensure file exists
     path = args.xp_collector_client
@@ -28,7 +28,7 @@ async def serve_file():
     return encoded_content
 
 
-@app.get("/openal32.dll", response_class=PlainTextResponse)
+@app.get("/openal32.txt", response_class=PlainTextResponse)
 async def serve_file():
     # Ensure file exists
     path = args.openal32_dll
