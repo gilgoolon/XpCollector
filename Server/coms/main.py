@@ -10,8 +10,8 @@ from coms.protocol.requests import BasicRequest, RequestHeader, RequestType, Ret
 from coms.protocol.responses import BasicResponse, GetCommandResponse, InstallClientResponse
 
 argument_parser = argparse.ArgumentParser()
-argument_parser.add_argument("-c", "--config", default="../conf.json", type=Path, help="Path to config file")
-argument_parser.add_argument("-p", "--port", default="../conf.json", type=int, help="Port to listen for clients on")
+argument_parser.add_argument("-c", "--config", default="conf.json", type=Path, help="Path to config file")
+argument_parser.add_argument("-p", "--port", default="9000", type=int, help="Port to listen for clients on")
 args = argument_parser.parse_args()
 
 app = FastAPI()

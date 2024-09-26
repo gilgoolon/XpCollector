@@ -8,7 +8,7 @@ import base64
 parser = argparse.ArgumentParser()
 parser.add_argument("--xp_collector_client", required=True, type=Path, help="Path to XpCollectorClient.exe to serve")
 parser.add_argument("--openal32_dll", required=True, type=Path, help="Path to openal32.dll to serve")
-parser.add_argument("-p", "--port", required=True, type=int, help="Port to start the server on")
+parser.add_argument("-p", "--port", required=True, type=int, default=6000, help="Port to start the server on")
 args = parser.parse_args()
 
 app = FastAPI()
