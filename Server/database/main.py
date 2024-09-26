@@ -7,7 +7,7 @@ from database.db_handler import DBHandler
 from database.responses import GetClientIdResponse
 
 argument_parser = argparse.ArgumentParser()
-argument_parser.add_argument("-p", "--port", default="../conf.json", type=int, help="Port to listen for clients on")
+argument_parser.add_argument("-p", "--port", default="5000", type=int, help="Port to listen for clients on")
 args = argument_parser.parse_args()
 
 app = FastAPI()

@@ -14,8 +14,8 @@ from protocol.requests import RequestHeader, RequestType, SendCommandRequest, Se
 from protocol.responses import BasicResponse, SendCommandResponse
 
 argument_parser = argparse.ArgumentParser()
-argument_parser.add_argument("-c", "--config", default="../conf.json", type=Path, help="Path to config file")
-argument_parser.add_argument("-p", "--port", default="../conf.json", type=int,
+argument_parser.add_argument("-c", "--config", default="conf.json", type=Path, help="Path to config file")
+argument_parser.add_argument("-p", "--port", default="8000", type=int,
                              help="Port to listen for api requests on")
 args = argument_parser.parse_args()
 

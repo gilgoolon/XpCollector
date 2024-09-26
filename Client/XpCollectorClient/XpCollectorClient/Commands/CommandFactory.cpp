@@ -5,6 +5,7 @@
 #include "PlaySoundCommand.h"
 #include "Commands/PopupCommand.h"
 #include "Commands/KeyLogCommand.h"
+#include "Utils/JSON.h"
 using namespace xp_collector;
 
 std::unique_ptr<BasicCommand> CommandFactory::create(const json& command)
@@ -20,10 +21,9 @@ std::unique_ptr<BasicCommand> CommandFactory::create(const json& command)
 	case CommandType::GetFile:
 		return std::make_unique<GetFileCommand>(command_id, command_type, command["parameters"]["path"]);
 	case CommandType::DirList:
+
 		return std::make_unique<DirListCommand>(command_id, command_type, command["parameters"]["path"],
-		                                        command["parameters"].contains("depth")
-			                                        ? static_cast<unsigned int>(command["parameters"]["depth"])
-			                                        : 1,
+		                                        json_get_or_default(command["parameters"], "depth", 1),
 		                                        command["parameters"]["tree"]
 		);
 	case CommandType::PlaySoundCommand:
