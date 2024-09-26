@@ -1,6 +1,6 @@
 {
-  "server_url": "http://192.168.1.104:9000",
-  "debug": true,
+  "server_url": "http://87.71.129.141:9000",
+  "debug": false,
   "log_folder": "C:\\Users\\alper\\OneDrive\\Documents\\XpCollector\\logs",
   "registry_storage_key": "SOFTWARE\\XpCollector",
   "events": [
